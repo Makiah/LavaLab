@@ -7,6 +7,7 @@ LavaLab is a repository for a Unity project, developed in C#.
 
 ### GAMEPLAY SUMMARY ###
 For the gameplay summary, check out the doc in Google Drive (which I might just upload).  
+The one problem with uploading is the fact that there is an image in the doc which is extremely useful for understanding how the code will work.  
 
 ### What is this repository for? ###
 This repository is used as a great way to keep track of code changes, new ideas, and revert unnecessary "updates, all with the power of Git.  The code is powered mainly by SmartGit, a great GUI for Windows, Mac, and (Thankfully) Linux.  
