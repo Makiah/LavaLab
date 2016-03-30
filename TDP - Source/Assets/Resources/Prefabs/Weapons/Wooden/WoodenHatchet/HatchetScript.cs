@@ -52,9 +52,9 @@ public class HatchetScript : ItemBase {
 
 		if (linecastResult.collider != null) {
 			Debug.Log ("Hatchet hit collider with name of " + linecastResult.collider.gameObject.name + ".");
-			if (linecastResult.collider.gameObject.GetComponent <TreeScript> () != null) {
-				linecastResult.collider.gameObject.GetComponent <TreeScript> ().TreeChopped();
-			}
+//			if (linecastResult.collider.gameObject.GetComponent <TreeScript> () != null) {
+//				linecastResult.collider.gameObject.GetComponent <TreeScript> ().TreeChopped();
+//			}
 		} else {
 			Debug.Log("Hatchet did not hit a collider.");
 		}

@@ -50,9 +50,9 @@ public class PickaxeScript : ItemBase {
 
 		if (linecastResult.collider != null) {
 			Debug.Log ("Pickaxe hit collider with name of " + linecastResult.collider.gameObject.name + ".");
-			if (linecastResult.collider.gameObject.GetComponent <OreScript> () != null) {
-				linecastResult.collider.gameObject.GetComponent <OreScript> ().OnOreChipped();
-			}
+//			if (linecastResult.collider.gameObject.GetComponent <OreScript> () != null) {
+//				linecastResult.collider.gameObject.GetComponent <OreScript> ().OnOreChipped();
+//			}
 		} else {
 			Debug.Log("Hatchet did not hit a collider.");
 		}
