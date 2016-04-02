@@ -4,11 +4,11 @@ using System.Collections;
 public class NPCPanelController : MonoBehaviour {
 
 	void OnEnable() {
-		LevelEventManager.InitializeNPCPanelControllers += InitializeNPCPanelController;
+		InitializationSequence.InitializeNPCPanelControllers += InitializeNPCPanelController;
 	}
 
 	void OnDisable() {
-		LevelEventManager.InitializeNPCPanelControllers -= InitializeNPCPanelController;
+		InitializationSequence.InitializeNPCPanelControllers -= InitializeNPCPanelController;
 	}
 
 	//Class properties

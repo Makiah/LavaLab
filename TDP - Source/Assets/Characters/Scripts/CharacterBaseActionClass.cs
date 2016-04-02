@@ -24,11 +24,11 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	/********************************************** INITIALIZATION ******************************************************/
 	
 	protected virtual void OnEnable() {
-		LevelEventManager.InitializePlayer += SetReferences;
+		InitializationSequence.InitializePlayer += SetReferences;
 	}
 	
 	protected virtual void OnDisable() {
-		LevelEventManager.InitializePlayer -= SetReferences;
+		InitializationSequence.InitializePlayer -= SetReferences;
 	}
 	
 	

@@ -54,7 +54,7 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 			if (grounded == false && jumpInEffect == 0) {
 				//No force should be added, so this is done manually. 
 				jumpInEffect = 1;
-				anim.SetInteger ("JumpInEffect", 1);
+				anim.SetInteger ("Jump", 1);
 			}
 
 			//When the player wants to jump.  
@@ -77,7 +77,7 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 
 	protected override void InitializeJump(int jumpStyle) {
 		//Jumping parameters
-		anim.SetInteger("JumpInEffect", jumpStyle);
+		anim.SetInteger("Jump", jumpStyle);
 		jumpInEffect = jumpStyle;
 
 		//Add forces based on the jump style.  
@@ -117,7 +117,10 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 		while (true) {
 			//This gets the current state of the pressed keys.  
 			h = Input.GetAxis ("Horizontal");
-			anim.SetFloat ("Speed", Mathf.Abs (h));
+			if (Mathf.Abs (h) > 0)
+				anim.SetBool ("Running", true);
+			else
+				anim.SetBool ("Running", false);
 
 			rb2d.AddForce (Vector2.right * moveForce * h * 1 / (2f * jumpInEffect + 1));
 
@@ -206,7 +209,7 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 			StopCoroutine (arrowMovementCoroutine);
 			StopCoroutine (weaponInputCoroutine);
 			playerCoroutinesCurrentlyActive = false;
-			anim.SetFloat ("Speed", 0);
+			anim.SetBool ("Running", false);
 		} else {
 			Debug.Log ("Cannot disable coroutines: Coroutines are already disabled");
 		}

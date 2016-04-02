@@ -15,11 +15,11 @@ using System.Collections;
 public class CameraControl : MonoBehaviour {
 
 	void OnEnable() {
-		LevelEventManager.InitializeCameraFunctions += EnableCameraFunctions;
+		InitializationSequence.InitializeCameraFunctions += EnableCameraFunctions;
 	}
 
 	void OnDisable() {
-		LevelEventManager.InitializeCameraFunctions -= EnableCameraFunctions;
+		InitializationSequence.InitializeCameraFunctions -= EnableCameraFunctions;
 	}
 
 	bool enable = false;

@@ -24,18 +24,12 @@ public class CurrentLevelVariableManagement : MonoBehaviour {
 	static GameObject levelUI;
 	static GameObject inventory;
 	static float levelLengthX;
-	static ObjectiveManager mainObjectiveManager;
 
 	public static void SetLevelReferences() {
-		playerObject = GameObject.Find ("PlayerReferenceObject(Clone)");
+		playerObject = GameObject.Find ("Player");
 		mainCamera = playerObject.transform.FindChild ("Main Camera").gameObject;
 		levelUI = GameObject.Find ("UI");
-		mainObjectiveManager = GetLevelUIReference ().transform.FindChild ("Player Objectives").GetComponent <ObjectiveManager> ();
 		inventory = levelUI.transform.FindChild ("Inventory").gameObject;
-	}
-
-	public static ObjectiveManager GetMainObjectiveManager() {
-		return mainObjectiveManager;
 	}
 
 	public static GameObject GetPlayerReference() {

@@ -22,11 +22,11 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	/************************* INITIALIZATION *************************/
 
 	protected virtual void OnEnable() {
-		LevelEventManager.InitializeEnemyHealthControllers += InitializeHealthBar;
+		InitializationSequence.InitializeEnemyHealthControllers += InitializeHealthBar;
 	}
 
 	protected virtual void OnDisable() {
-		LevelEventManager.InitializeEnemyHealthControllers -= InitializeHealthBar;
+		InitializationSequence.InitializeEnemyHealthControllers -= InitializeHealthBar;
 	}
 
 	/************************* HEALTH MANAGER *************************/

@@ -19,11 +19,11 @@ public class MerchantSlotScript : MonoBehaviour, IPointerClickHandler, IPointerE
 	/******************************* INITIALIZATION *******************************/
 
 	protected void OnEnable() {
-		LevelEventManager.InitializeSlots += ReferenceChildren;
+		InitializationSequence.InitializeSlots += ReferenceChildren;
 	}
 
 	protected void OnDisable() {
-		LevelEventManager.InitializeSlots -= ReferenceChildren;
+		InitializationSequence.InitializeSlots -= ReferenceChildren;
 	}
 
 
@@ -42,7 +42,6 @@ public class MerchantSlotScript : MonoBehaviour, IPointerClickHandler, IPointerE
 	private InventoryFunctions playerInventory;
 
 	public void ReferenceChildren() {
-		Debug.Log ("Initialized merchant inventory " + gameObject.name);
 		childIcon = transform.FindChild ("Icon").GetComponent <Image> ();
 		childIcon.enabled = false;
 		tooltip = transform.FindChild ("Tooltip");

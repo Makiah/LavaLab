@@ -20,11 +20,11 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass, ICombatan
 	/******************************************** INITIALIZATION *******************************************/
 	
 	protected override void OnEnable() {
-		LevelEventManager.InitializeEnemies += SetReferences;
+		InitializationSequence.InitializeEnemies += SetReferences;
 	}
 	
 	protected override void OnDisable() {
-		LevelEventManager.InitializeEnemies -= SetReferences;
+		InitializationSequence.InitializeEnemies -= SetReferences;
 	}
 
 	//The maximum distance that the player can be away from the enemy for it to activate.  

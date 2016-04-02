@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class InteractablePanelReference : MonoBehaviour {
 
 	void OnEnable() {
-		LevelEventManager.InitializeInteractablePanels += InitializeInteractablePanel;
+		InitializationSequence.InitializeInteractablePanels += InitializeInteractablePanel;
 	}
 
 	void OnDisable() {
-		LevelEventManager.InitializeInteractablePanels -= InitializeInteractablePanel;
+		InitializationSequence.InitializeInteractablePanels -= InitializeInteractablePanel;
 	}
 
 	GameObject panel;

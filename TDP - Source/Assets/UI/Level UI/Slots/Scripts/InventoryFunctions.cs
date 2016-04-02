@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class InventoryFunctions : MonoBehaviour {
 
+	//Required instance data.  
 	private SlotScript[,] slotArray = new SlotScript[0,0];
 	private bool initialized = false;
 
@@ -56,7 +57,6 @@ public class InventoryFunctions : MonoBehaviour {
 				bestAvailableSlot.ModifyCurrentItemStack (item.stack);
 				Debug.Log ("Assigned " + item.uiSlotContent.itemScreenName + " to slot with items of same type.");
 				//Check whether an objective has been completed
-				CurrentLevelVariableManagement.GetMainObjectiveManager().OnNewItemAddedToPlayerInventory();
 			} else {
 				Debug.Log ("Could not stack item: Attempting to add to an empty slot");
 				bestAvailableSlot = FindBestAvailableNullSlot ();
@@ -66,7 +66,6 @@ public class InventoryFunctions : MonoBehaviour {
 					//Update the hotbar item.
 					CurrentLevelVariableManagement.GetLevelUIReference ().transform.FindChild ("Hotbar").GetComponent <HotbarManager> ().UpdateSelectedItem ();
 					//Check whether an objective has been completed
-					CurrentLevelVariableManagement.GetMainObjectiveManager().OnNewItemAddedToPlayerInventory();
 				} else {
 					Debug.LogError("No slots are empty!");
 				}

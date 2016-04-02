@@ -16,11 +16,11 @@ using System.Collections;
 public class PanelLayout : MonoBehaviour {
 
 	protected virtual void OnEnable () {
-		LevelEventManager.CreateInventorySlots += AddSlotsToSystem;
+		InitializationSequence.CreateInventorySlots += AddSlotsToSystem;
 	}
 
 	protected virtual void OnDisable () {
-		LevelEventManager.CreateInventorySlots -= AddSlotsToSystem;
+		InitializationSequence.CreateInventorySlots -= AddSlotsToSystem;
 	}
 
 	public GameObject slotPrefab;

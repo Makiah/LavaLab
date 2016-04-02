@@ -19,11 +19,11 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	/******************************* INITIALIZATION *******************************/
 
 	protected void OnEnable() {
-		LevelEventManager.InitializeSlots += ReferenceChildren;
+		InitializationSequence.InitializeSlots += ReferenceChildren;
 	}
 
 	protected void OnDisable() {
-		LevelEventManager.InitializeSlots -= ReferenceChildren;
+		InitializationSequence.InitializeSlots -= ReferenceChildren;
 	}
 
 
@@ -43,7 +43,6 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	protected SlotMouseInputControl mainSlotManager;
 
 	public virtual void ReferenceChildren() {
-		Debug.Log ("Initialized inventory " + gameObject.name);
 		mainSlotManager = transform.parent.parent.GetComponent <SlotMouseInputControl> ();
 		childIcon = transform.FindChild ("Icon").GetComponent <Image> ();
 		childIcon.enabled = false;

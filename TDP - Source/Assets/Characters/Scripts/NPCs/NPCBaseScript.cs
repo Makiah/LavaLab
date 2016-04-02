@@ -5,11 +5,11 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 
 	//Initialization.  
 	protected override void OnEnable() {
-		LevelEventManager.InitializeNPCs += SetReferences;
+		InitializationSequence.InitializeNPCs += SetReferences;
 	}
 
 	protected override void OnDisable() {
-		LevelEventManager.InitializeNPCs -= SetReferences;
+		InitializationSequence.InitializeNPCs -= SetReferences;
 	}
 
 	//Required for the NPCPanelController.  
