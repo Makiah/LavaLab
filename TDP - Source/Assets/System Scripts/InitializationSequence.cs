@@ -43,6 +43,7 @@ public class InitializationSequence : MonoBehaviour {
 
 	//Camera
 	public static event BaseInitialization InitializeCameraFunctions;
+	public static event BaseInitialization InitializeCameras;
 
 	//Enemies
 	public static event BaseInitialization InitializeEnemyHealthControllers;
@@ -99,6 +100,8 @@ public class InitializationSequence : MonoBehaviour {
 		if (InitializePlayer != null) InitializePlayer (); else Debug.LogError("InitializePlayer was null!"); //Used for initializing the HumanoidBaseReferenceClass.  
 
 		if (InitializeCameraFunctions != null) InitializeCameraFunctions (); else Debug.LogError("InitializeCameraFunctions was null!"); // Used for camera controller.  
+
+		if (InitializeCameras != null) InitializeCameras(); else Debug.LogError("InitializeCameras was null");
 
 		if (InitializeEnemyHealthControllers != null) InitializeEnemyHealthControllers (); else Debug.LogError("InitializeEnemyHealthControllers was null!"); //Used for initializing CharacterHealthController.  
 		if (InitializeEnemies != null) InitializeEnemies(); else Debug.LogError("InitializeEnemies was null!"); //Used for all enemies (requires player being instantiated).  

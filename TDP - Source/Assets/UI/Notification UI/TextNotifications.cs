@@ -28,13 +28,20 @@ public class TextNotifications : MonoBehaviour {
 		initialized = true;
 	}
 
-	public static IEnumerator Create(NotificationTypes type, Color color, string message) {
+	public static IEnumerator Create(NotificationTypes type, Color color, int fontSize, string message) {
 		if (initialized) {
 			if (currentlyInUse) {
 				Debug.LogError ("Text is already in use error!");
 				Clear ();
 			}
 			currentlyInUse = true;
+
+			if (fontSize == -1) {
+				text.resizeTextMaxSize = 99999;
+				text.resizeTextForBestFit = true;
+			} else {
+				text.fontSize = fontSize;
+			}
 
 			switch (type) {
 			case NotificationTypes.OSCILLATING: 
@@ -59,8 +66,12 @@ public class TextNotifications : MonoBehaviour {
 	}
 
 	public static void Clear() {
+		//Reset the text values.  
 		text.text = "";
 		text.color = Color.black;
+		text.resizeTextForBestFit = false;
+		text.fontSize = 80;
+		//Make it so the class no longer thinks that the text is in use.  
 		currentlyInUse = false;
 	}
 

@@ -14,7 +14,7 @@ public class GateBehaviour : MonoBehaviour {
 
 	IEnumerator CloseGateAndSpeakToPlayer() {
 		GetComponent <Animator> ().SetTrigger ("MoveUp");
-		IEnumerator coroutine = TextNotifications.Create (TextNotifications.NotificationTypes.NORMAL, Color.green, "OH NO YOU DON'T!");
+		IEnumerator coroutine = TextNotifications.Create (TextNotifications.NotificationTypes.NORMAL, Color.red, 80, "OH NO YOU DON'T!");
 		StartCoroutine (coroutine);
 		yield return new WaitForSeconds (2);
 		StopCoroutine (coroutine);
