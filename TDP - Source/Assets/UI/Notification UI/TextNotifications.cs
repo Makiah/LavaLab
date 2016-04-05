@@ -19,17 +19,23 @@ public class TextNotifications : MonoBehaviour {
 	}
 
 	private static Text text = null;
-	private static bool initialized = false;
 	private static bool currentlyInUse = false;
-	private static IEnumerator coroutine;
+
+	private static TextNotifications instance = null;
+	private static IEnumerator coroutine = null;
 
 	public void Initialize() {
 		text = GetComponent <Text> ();
-		initialized = true;
+		instance = this;
 	}
 
-	public static IEnumerator Create(NotificationTypes type, Color color, int fontSize, string message) {
-		if (initialized) {
+	public static void Create(NotificationTypes type, Color color, int fontSize, string message) {
+		coroutine = CreateMessage (type, color, fontSize, message);
+		instance.StartCoroutine (coroutine);
+	}
+
+	public static IEnumerator CreateMessage(NotificationTypes type, Color color, int fontSize, string message) {
+		if (instance != null) {
 			if (currentlyInUse) {
 				Debug.LogError ("Text is already in use error!");
 				Clear ();
@@ -66,6 +72,7 @@ public class TextNotifications : MonoBehaviour {
 	}
 
 	public static void Clear() {
+		instance.StopCoroutine (coroutine);
 		//Reset the text values.  
 		text.text = "";
 		text.color = Color.black;
