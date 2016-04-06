@@ -43,7 +43,7 @@ public class GameControl : MonoBehaviour {
 		TextNotifications.Clear ();
 
 		//Show the player that the button has been pressed.  
-		GameObject.Find ("Start").transform.FindChild ("Button").GetComponent <UpdateButton> ().UpdateButtonState ();
+		//GameObject.Find ("Start").transform.FindChild ("Button").GetComponent <UpdateButton> ().UpdateButtonState ();
 
 		//Evil professor says "My lab!  My weapon!  NOOOO!"
 		//After the initialization is complete, tell the player to press the button.  

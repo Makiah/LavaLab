@@ -23,7 +23,9 @@ public class LevelGenerator : MonoBehaviour {
 	//Keep track of the current x location across all classes.  
 	private float currentXLocation = 0f;
 
-	public void CreateLevel(int levelID) {
+	public GameObject[] CreateLevel(int levelID) {
+		GameObject[] level = new GameObject[3 + levelID / 2];
+
 		if (levelID < 1) {
 			Debug.LogError ("Only levels 1 to infinity are valid level IDs");
 			levelID = 1;
@@ -35,12 +37,12 @@ public class LevelGenerator : MonoBehaviour {
 
 		if (levelID == 1) {
 			//Place the receiver left or right based on the level.  Remember than even levels move left to right and odd levels move right to left.  
-			PlaceTerrain (startRoom, new Vector2(currentXLocation, 0));
+			level[0] = PlaceTerrain (startRoom, new Vector2(currentXLocation, 0));
 			//Displace the x location by either a negative or a positive value based on the level ID.  
 			currentXLocation += GetSpriteSize (startRoom).x / 2f * direction;
 		} else {
 			//Place the receiver left or right based on the level.  Remember than even levels move left to right and odd levels move right to left.  
-			PlaceTerrain (levelID % 2 == 0 ? rightReceiverRoom : leftReceiverRoom, new Vector2(currentXLocation, 0));
+			level[0] = PlaceTerrain (levelID % 2 == 0 ? rightReceiverRoom : leftReceiverRoom, new Vector2(currentXLocation, 0));
 			//Displace the x location by either a negative or a positive value based on the level ID.  
 			currentXLocation += GetSpriteSize (rightReceiverRoom).x / 2f * direction;
 		}
@@ -50,7 +52,7 @@ public class LevelGenerator : MonoBehaviour {
 		//Level length increases by 1 every 2 levels.  
 		while (segmentsPlaced < 3 + levelID / 2 - 1) {
 			currentXLocation += GetSpriteSize (midRoom).x / 2f * direction;
-			PlaceTerrain (midRoom, new Vector3 (currentXLocation, 0, 0));
+			level[segmentsPlaced] = PlaceTerrain (midRoom, new Vector3 (currentXLocation, 0, 0));
 			currentXLocation += GetSpriteSize (midRoom).x / 2f * direction;
 
 			//Increment segmentsPlaced.  
@@ -58,10 +60,11 @@ public class LevelGenerator : MonoBehaviour {
 		}
 
 		//Place the receiver left or right based on the level.  Remember than even levels move left to right and odd levels move right to left.  
-		PlaceTerrain (levelID % 2 == 0 ? rightElevatorRoom : leftElevatorRoom, new Vector2(currentXLocation, 0));
+		level[segmentsPlaced] = PlaceTerrain (levelID % 2 == 0 ? rightElevatorRoom : leftElevatorRoom, new Vector2(currentXLocation, 0));
 		//Increment the number of segments placed by 1 (for the receiver).  
 		segmentsPlaced++;
 
+		return level;
 	}
 
 	//Used to get the size of a sprite from a GameObject without the irritation factor.  

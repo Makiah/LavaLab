@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1404601502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,9 +115,9 @@ MonoBehaviour:
   startRoom: {fileID: 168532, guid: 4c3f79c01444d47fcba6ad4b67c1160a, type: 2}
   midRoom: {fileID: 152582, guid: ba74d294f4a0c4b60ac760b873e5970d, type: 2}
   leftElevatorRoom: {fileID: 119886, guid: 756ac86075429457991665fcfa06886c, type: 2}
-  rightElevatorRoom: {fileID: 129956, guid: 5249a5a47f5db49f89ce90d094ec8dc6, type: 2}
-  leftReceiverRoom: {fileID: 121376, guid: 8a111f54ed1aa47beb0e3c57473604f1, type: 2}
-  rightReceiverRoom: {fileID: 154902, guid: 6132cad94247e42da935a46305a048aa, type: 2}
+  rightElevatorRoom: {fileID: 101562, guid: d8d5e6b73190243c697130f27181ed02, type: 2}
+  leftReceiverRoom: {fileID: 174592, guid: 819a1d58317b640ecb2cb9c02ad56bc1, type: 2}
+  rightReceiverRoom: {fileID: 174592, guid: 6132cad94247e42da935a46305a048aa, type: 2}
 --- !u!4 &1404601503
 Transform:
   m_ObjectHideFlags: 0
