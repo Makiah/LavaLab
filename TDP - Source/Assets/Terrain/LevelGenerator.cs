@@ -13,17 +13,26 @@ using System.Collections;
 
 public class LevelGenerator : MonoBehaviour {
 
+	public static LevelGenerator instance;
+	public int currentLevel = 1;
+
+	private GameObject[] currentActiveObjects;
+
 	//By right elevator room and left elevator room I mean the direction you have to walk to get into the elevator.  
 	[SerializeField] private GameObject startRoom = null, midRoom = null, leftElevatorRoom = null, rightElevatorRoom = null, leftReceiverRoom = null, rightReceiverRoom = null;
 
 	void Start() {
-		CreateLevel (15);
+		instance = this;
+		CreateLevel (1);
 	}
 
 	//Keep track of the current x location across all classes.  
 	private float currentXLocation = 0f;
 
-	public GameObject[] CreateLevel(int levelID) {
+	public void CreateLevel(int levelID) {
+		//The main level array.  
+		RemoveCurrentLevel();
+
 		GameObject[] level = new GameObject[3 + levelID / 2];
 
 		if (levelID < 1) {
@@ -64,7 +73,18 @@ public class LevelGenerator : MonoBehaviour {
 		//Increment the number of segments placed by 1 (for the receiver).  
 		segmentsPlaced++;
 
-		return level;
+		currentLevel = levelID;
+
+		currentActiveObjects = level;
+	}
+
+	private void RemoveCurrentLevel() {
+		if (currentActiveObjects != null && currentActiveObjects.Length > 0) {
+			foreach (GameObject obj in currentActiveObjects) {
+				Destroy (obj);
+			}
+			currentActiveObjects = null;
+		}
 	}
 
 	//Used to get the size of a sprite from a GameObject without the irritation factor.  
@@ -78,7 +98,9 @@ public class LevelGenerator : MonoBehaviour {
 	}
 
 	private GameObject PlaceTerrain(GameObject terrain, Vector2 location) {
-		return (GameObject) (Instantiate (terrain, location, Quaternion.identity));
+		GameObject createdTerrain = (GameObject)(Instantiate (terrain, location, Quaternion.identity));
+		createdTerrain.transform.localScale = terrain.transform.localScale;
+		return createdTerrain;
 	}
 
 }

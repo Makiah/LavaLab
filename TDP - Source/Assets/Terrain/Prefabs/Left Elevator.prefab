@@ -28,7 +28,7 @@ GameObject:
   - 212: {fileID: 21236306}
   - 68: {fileID: 6830852}
   - 68: {fileID: 6899552}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Elevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}

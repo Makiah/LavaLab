@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21264926}
   - 68: {fileID: 6803726}
   - 68: {fileID: 6866288}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Receiver
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -27,6 +27,7 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 	IEnumerator weaponInputCoroutine, arrowMovementCoroutine;
 
 	protected override void InitializeCharacter() {
+		Debug.Log ("Initialized");
 		//No other character has a wall check, so only the player uses this property.  
 		wallCheck = transform.FindChild("FlippingItem").FindChild ("WallCheck");
 

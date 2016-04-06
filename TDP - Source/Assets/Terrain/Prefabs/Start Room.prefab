@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 452134}
   - 212: {fileID: 21293608}
   - 68: {fileID: 6857094}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Start Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}

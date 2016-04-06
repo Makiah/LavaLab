@@ -11,8 +11,8 @@ GameObject:
   - 212: {fileID: 21252258}
   - 68: {fileID: 6866392}
   - 68: {fileID: 6802478}
-  m_Layer: 0
-  m_Name: Basic Room
+  m_Layer: 8
+  m_Name: Mid Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
