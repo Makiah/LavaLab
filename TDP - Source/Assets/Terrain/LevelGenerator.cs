@@ -68,6 +68,7 @@ public class LevelGenerator : MonoBehaviour {
 			segmentsPlaced++;
 		}
 
+		currentXLocation += GetSpriteSize (rightElevatorRoom).x / 2f * direction;
 		//Place the receiver left or right based on the level.  Remember than even levels move left to right and odd levels move right to left.  
 		level[segmentsPlaced] = PlaceTerrain (levelID % 2 == 0 ? rightElevatorRoom : leftElevatorRoom, new Vector2(currentXLocation, 0));
 		//Increment the number of segments placed by 1 (for the receiver).  

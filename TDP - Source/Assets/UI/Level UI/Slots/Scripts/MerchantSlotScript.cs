@@ -19,11 +19,11 @@ public class MerchantSlotScript : MonoBehaviour, IPointerClickHandler, IPointerE
 	/******************************* INITIALIZATION *******************************/
 
 	protected void OnEnable() {
-		InitializationSequence.InitializeSlots += ReferenceChildren;
+		UIInitializationSequence.InitializeSlots += ReferenceChildren;
 	}
 
 	protected void OnDisable() {
-		InitializationSequence.InitializeSlots -= ReferenceChildren;
+		UIInitializationSequence.InitializeSlots -= ReferenceChildren;
 	}
 
 
@@ -56,9 +56,9 @@ public class MerchantSlotScript : MonoBehaviour, IPointerClickHandler, IPointerE
 	public void OnPointerClick(PointerEventData data) {
 		if (data.button == PointerEventData.InputButton.Left) {
 			if (currentlyAssigned != null) {
-				if (CurrentLevelVariableManagement.GetPlayerReference ().GetComponent <PlayerHealthPanelManager> ().GiveMoneyToPlayer (-currentlyAssigned.price)) {
+				if (InstanceDatabase.GetPlayerReference ().GetComponent <PlayerHealthPanelManager> ().GiveMoneyToPlayer (-currentlyAssigned.price)) {
 					//Add the deassigned item to the player inventory and deduct the price of the item.  
-					CurrentLevelVariableManagement.GetMainInventoryReference ().GetComponent <InventoryFunctions> ().AssignNewItemToBestSlot (new ResourceReferenceWithStack (currentlyAssigned.mainContentReference.uiSlotContent, 1));
+					InstanceDatabase.GetMainInventoryReference ().GetComponent <InventoryFunctions> ().AssignNewItemToBestSlot (new ResourceReferenceWithStack (currentlyAssigned.mainContentReference.uiSlotContent, 1));
 					ModifyCurrentItemStack (-1);
 				}
 			}

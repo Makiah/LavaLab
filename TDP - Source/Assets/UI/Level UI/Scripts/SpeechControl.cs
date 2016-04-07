@@ -6,11 +6,11 @@ public class SpeechControl : MonoBehaviour {
 
 	/********************** INITIALIZATION **********************/
 	protected virtual void OnEnable() {
-		InitializationSequence.InitializeUISpeechControl += InitializeSpeechControl;
+		UIInitializationSequence.InitializeUISpeechControl += InitializeSpeechControl;
 	}
 
 	protected virtual void OnDisable() {
-		InitializationSequence.InitializeUISpeechControl -= InitializeSpeechControl;
+		UIInitializationSequence.InitializeUISpeechControl -= InitializeSpeechControl;
 	}
 
 	/********************** SCRIPT **********************/

@@ -19,11 +19,11 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	/******************************* INITIALIZATION *******************************/
 
 	protected void OnEnable() {
-		InitializationSequence.InitializeSlots += ReferenceChildren;
+		UIInitializationSequence.InitializeSlots += ReferenceChildren;
 	}
 
 	protected void OnDisable() {
-		InitializationSequence.InitializeSlots -= ReferenceChildren;
+		UIInitializationSequence.InitializeSlots -= ReferenceChildren;
 	}
 
 

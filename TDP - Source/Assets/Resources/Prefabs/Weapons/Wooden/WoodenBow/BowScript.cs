@@ -35,7 +35,7 @@ public class BowScript : ItemBase {
 
 	void ShootArrow() {
 
-		GameObject playerObject = CurrentLevelVariableManagement.GetPlayerReference ();
+		GameObject playerObject = InstanceDatabase.GetPlayerReference ();
 
 		float preHeading = attachedCharacterInput.GetActualClass().GetFacingDirection () == 1 ? 0 : 180;
 

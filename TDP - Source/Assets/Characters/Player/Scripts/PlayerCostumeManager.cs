@@ -39,7 +39,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 
 	void InitializeSpriteChildren() {
 		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <PlayerAction> ();
-		playerInventory = CurrentLevelVariableManagement.GetMainInventoryReference ().GetComponent <InventoryFunctions> ();
+		playerInventory = GameObject.Find("UI").GetComponent <InventoryFunctions> ();
 		//Just setting up the basic costume.  
 		body = transform.FindChild("Body").GetComponent <SpriteRenderer> ();
 		head = transform.FindChild ("Head").GetComponent <SpriteRenderer> ();

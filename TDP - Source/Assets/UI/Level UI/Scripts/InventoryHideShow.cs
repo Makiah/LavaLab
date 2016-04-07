@@ -18,11 +18,11 @@ public class InventoryHideShow : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 	
 	void OnEnable() {
-		InitializationSequence.EnableUIHideShow += CheckForHideShow;
+		UIInitializationSequence.EnableUIHideShow += CheckForHideShow;
 	}
 	
 	void OnDisable() {
-		InitializationSequence.EnableUIHideShow -= CheckForHideShow;
+		UIInitializationSequence.EnableUIHideShow -= CheckForHideShow;
 	}
 	
 	

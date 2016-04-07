@@ -34,7 +34,7 @@ public class ShamanStaffScript : ItemBase {
 
 	void ShootArrow() {
 		//Get the player object.  
-		GameObject playerObject = CurrentLevelVariableManagement.GetPlayerReference ();
+		GameObject playerObject = InstanceDatabase.GetPlayerReference ();
 
 		float preHeading = attachedCharacterInput.GetActualClass().GetFacingDirection () == 1 ? 0 : 180;
 

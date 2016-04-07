@@ -16,11 +16,11 @@ using System.Collections;
 public class MerchantPanelLayout : MonoBehaviour {
 
 	protected virtual void OnEnable () {
-		InitializationSequence.CreateInventorySlots += AddSlotsToSystem;
+		UIInitializationSequence.CreateInventorySlots += AddSlotsToSystem;
 	}
 
 	protected virtual void OnDisable () {
-		InitializationSequence.CreateInventorySlots -= AddSlotsToSystem;
+		UIInitializationSequence.CreateInventorySlots -= AddSlotsToSystem;
 	}
 
 	public GameObject slotPrefab;

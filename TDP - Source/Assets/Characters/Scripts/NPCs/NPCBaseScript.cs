@@ -26,8 +26,8 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	//Initializing the NPC
 	protected override void InitializeCharacter() {
 		//Get required components.  
-		playerTransform = CurrentLevelVariableManagement.GetPlayerReference ().transform;
-		playerInventory = CurrentLevelVariableManagement.GetMainInventoryReference().GetComponent <InventoryFunctions> ();
+		playerTransform = InstanceDatabase.GetPlayerReference ().transform;
+		playerInventory = InstanceDatabase.GetMainInventoryReference().GetComponent <InventoryFunctions> ();
 
 		//Initialize the NPC before starting to walk around.  
 		InitializeNPC ();

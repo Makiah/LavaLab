@@ -17,11 +17,11 @@ using UnityEngine.UI;
 public class HealthPanelReference : MonoBehaviour {
 
 	protected void OnEnable() {
-		InitializationSequence.InitializeHealthPanels += InitializeHealthPanelReference;
+		UIInitializationSequence.InitializeHealthPanels += InitializeHealthPanelReference;
 	}
 
 	protected void OnDisable() {
-		InitializationSequence.InitializeHealthPanels -= InitializeHealthPanelReference;
+		UIInitializationSequence.InitializeHealthPanels -= InitializeHealthPanelReference;
 	}
 
 	protected GameObject panel;

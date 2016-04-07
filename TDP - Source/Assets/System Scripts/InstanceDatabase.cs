@@ -1,23 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class CurrentLevelVariableManagement : MonoBehaviour {
-
-	//Initial screen
-	static GameData mainGameData;
-	static GameControl mainGameControl;
-
-	public static void SetGameUIReferences() {
-		mainGameControl = GameObject.Find ("Game Controller").GetComponent <GameControl> ();
-	}
-	
-	public static GameControl GetMainGameControl() {
-		if (mainGameControl == null) {
-			Debug.LogError("GameControl was null!");
-		}
-		return mainGameControl;
-	}
-
+public class InstanceDatabase : MonoBehaviour {
 	//Level
 	static GameObject playerObject;
 	static GameObject mainCamera;

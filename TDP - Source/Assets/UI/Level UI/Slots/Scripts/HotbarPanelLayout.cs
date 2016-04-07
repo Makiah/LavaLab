@@ -4,11 +4,11 @@ using System.Collections;
 public class HotbarPanelLayout : PanelLayout {
 
 	protected override void OnEnable() {
-		InitializationSequence.CreateHotbarSlots += AddSlotsToSystem;
+		UIInitializationSequence.CreateHotbarSlots += AddSlotsToSystem;
 	}
 
 	protected override void OnDisable() {
-		InitializationSequence.CreateHotbarSlots -= AddSlotsToSystem;
+		UIInitializationSequence.CreateHotbarSlots -= AddSlotsToSystem;
 	}
 
 	//The inventory thing has to be on the actual inventory, not the hotbar.  

@@ -4,15 +4,26 @@ using CatchCo;
 
 public class ElevatorControl : MonoBehaviour {
 
+	void OnTriggerEnter2D(Collider2D other) {
+		MoveElevator ();
+	}
+
 	[ExposeMethodInEditor]
 	public void MoveElevator() {
 		Debug.Log ("Starting elevator");
+		//Disable the elevator so that the player can't use it again.  
+		GetComponent <Collider2D> ().enabled = false;
 		StartCoroutine (MoveElevatorCoroutine ());
 	}
 
+	//Variables that are changed by outside methods.  
 	private bool movedUp = false;
+	private bool movedToNextLevel = false;
 
 	IEnumerator MoveElevatorCoroutine() {
+		//Make sure that the player moves with the elevator.  
+		InstanceDatabase.GetPlayerReference ().transform.SetParent (transform.GetChild(0).FindChild("Elevator"));
+
 		Animator anim = transform.GetChild(0).GetComponent <Animator> ();
 
 		//Wait until the elevator is above the terrain.  
@@ -41,6 +52,14 @@ public class ElevatorControl : MonoBehaviour {
 		anim.SetBool ("AppearMoving", false);
 		anim.SetTrigger ("MoveBack");
 
+		//Unparent the player so that he/she will not be destroyed as well.  
+		while (movedToNextLevel == false) {
+			yield return null;
+		}
+
+		InstanceDatabase.GetPlayerReference ().transform.SetParent (null);
+
+		//Wait until the player leaves the level.  
 		int currentLevel = LevelGenerator.instance.currentLevel;
 		while (LevelGenerator.instance.currentLevel == currentLevel) {
 			yield return null;
@@ -52,6 +71,10 @@ public class ElevatorControl : MonoBehaviour {
 
 	public void MovedUp() {
 		movedUp = true;
+	}
+
+	public void ReachedNextLevel() {
+		movedToNextLevel = true;
 	}
 
 }

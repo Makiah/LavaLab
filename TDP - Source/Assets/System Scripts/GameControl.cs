@@ -32,6 +32,9 @@ public class GameControl : MonoBehaviour {
 		//Default profession (TEMPORARY)
 		GameData.SetPlayerProfession (ResourceDatabase.GetRaceByParameter ("Agent"));
 
+		//Use the init sequence to initialize everything.  
+		StartCoroutine(InitializationSequence.instance.LoadEverything ());
+
 	}
 
 }

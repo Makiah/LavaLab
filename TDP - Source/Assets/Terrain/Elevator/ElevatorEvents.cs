@@ -8,4 +8,8 @@ public class ElevatorEvents : MonoBehaviour {
 		transform.parent.GetComponent <ElevatorControl> ().MovedUp ();
 	}
 
+	public void ReachedNextLevel() {
+		transform.parent.GetComponent <ElevatorControl> ().ReachedNextLevel ();
+	}
+
 }

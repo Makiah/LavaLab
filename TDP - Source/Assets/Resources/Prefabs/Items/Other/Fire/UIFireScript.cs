@@ -17,8 +17,8 @@ public class UIFireScript : ItemBase {
 	public override void InfluenceEnvironment(MovementAndMethod.PossibleMovements actionKey) {
 		if (physicalFireObject != null) {
 			//Create the object.  
-			Vector3 physicalFireOffset = new Vector3(1, 0, 0) * CurrentLevelVariableManagement.GetPlayerReference().GetComponent <PlayerAction> ().GetFacingDirection();
-			GameObject createdFireObject = (GameObject) (Instantiate (physicalFireObject, CurrentLevelVariableManagement.GetPlayerReference().transform.position + physicalFireOffset + physicalFireObject.transform.localPosition, Quaternion.identity));
+			Vector3 physicalFireOffset = new Vector3(1, 0, 0) * InstanceDatabase.GetPlayerReference().GetComponent <PlayerAction> ().GetFacingDirection();
+			GameObject createdFireObject = (GameObject) (Instantiate (physicalFireObject, InstanceDatabase.GetPlayerReference().transform.position + physicalFireOffset + physicalFireObject.transform.localPosition, Quaternion.identity));
 			createdFireObject.GetComponent <PhysicalFireScript> ().OnFireCreated();
 			//Used to remove the current item from the hotbar.  
 			ChangeStackOfCurrentHotbarItem(1);

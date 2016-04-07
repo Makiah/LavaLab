@@ -4,11 +4,11 @@ using System.Collections;
 public class NPCPanelController : MonoBehaviour {
 
 	void OnEnable() {
-		InitializationSequence.InitializeNPCPanelControllers += InitializeNPCPanelController;
+		UIInitializationSequence.InitializeNPCPanelControllers += InitializeNPCPanelController;
 	}
 
 	void OnDisable() {
-		InitializationSequence.InitializeNPCPanelControllers -= InitializeNPCPanelController;
+		UIInitializationSequence.InitializeNPCPanelControllers -= InitializeNPCPanelController;
 	}
 
 	//Class properties
@@ -24,10 +24,10 @@ public class NPCPanelController : MonoBehaviour {
 
 	//Set references to the playerIcon, start necessary coroutines, etc.  
 	void InitializeNPCPanelController() {
-		playerTransform = CurrentLevelVariableManagement.GetPlayerReference ().transform;
+		playerTransform = InstanceDatabase.GetPlayerReference ().transform;
 		playerIcon = transform.FindChild ("FlippingItem").FindChild ("Character").FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
-		mainSpeechControl = CurrentLevelVariableManagement.GetLevelUIReference ().transform.FindChild ("Speech Bubble").GetComponent <SpeechControl> ();
-		mainInteractablePanelController = CurrentLevelVariableManagement.GetLevelUIReference().transform.FindChild ("InteractablePanels").gameObject.GetComponent <InteractablePanelController> (); 
+		mainSpeechControl = InstanceDatabase.GetLevelUIReference ().transform.FindChild ("Speech Bubble").GetComponent <SpeechControl> ();
+		mainInteractablePanelController = InstanceDatabase.GetLevelUIReference().transform.FindChild ("InteractablePanels").gameObject.GetComponent <InteractablePanelController> (); 
 		StartCoroutine ("CheckForAndAttemptToSpeakToPlayer");
 	}
 

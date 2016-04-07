@@ -29,7 +29,7 @@ public class ProjectileScript : MonoBehaviour {
 	GameObject playerObject;
 
 	public virtual void InitializeProjectileWithThresholdAndDeviation(Vector3 positionToFireToward, float velocity, float currentHeading, float headingThreshold, float maxRandomDeviation, float ctorArrowPower) {
-		playerObject = CurrentLevelVariableManagement.GetPlayerReference ();
+		playerObject = InstanceDatabase.GetPlayerReference ();
 
 		//Set physics of the projectile.  
 		rb2d = GetComponent <Rigidbody2D> ();

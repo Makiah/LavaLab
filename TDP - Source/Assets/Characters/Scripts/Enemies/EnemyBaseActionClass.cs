@@ -52,7 +52,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass, ICombatan
 
 	protected override void InitializeCharacter() {
 		//Set required variables for the enemy to function.  
-		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
+		player = InstanceDatabase.GetPlayerReference ().transform;
 
 		InitializeEnemy ();
 
