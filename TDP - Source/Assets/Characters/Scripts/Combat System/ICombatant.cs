@@ -10,6 +10,6 @@ public interface ICombatant {
 	void OnAttackAnimationCompleted ();
 	string GetCombatantID();
 	void OnAttack ();
-	CharacterBaseActionClass GetActualClass();
+	Character GetActualClass();
 	void ApplyKnockback(Vector2 force);
 }

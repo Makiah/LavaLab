@@ -8,7 +8,7 @@ using UnityEngine;
 using System.Collections;
 
 public interface ICanHoldItems : ICombatant {
-	void OnRefreshCurrentWeaponMoves(ItemBase itemInUse);
+	void OnRefreshCurrentWeaponMoves(Item itemInUse);
 	void AttackAction(MovementAndMethod someAttack);
 	void ExternalJumpAction (int num);
 }

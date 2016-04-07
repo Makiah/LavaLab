@@ -39,7 +39,6 @@ public class ElevatorControl : MonoBehaviour {
 		transform.position = new Vector3 (transform.position.x, -35.13f, 0);
 
 		transform.GetChild (0).FindChild ("Elevator").transform.localPosition = Vector3.zero;
-		Debug.Log (transform.GetChild (0).FindChild ("Elevator").transform.localPosition);
 
 		transform.SetParent (null);
 

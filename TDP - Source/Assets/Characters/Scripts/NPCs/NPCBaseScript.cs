@@ -1,15 +1,15 @@
 using UnityEngine;
 using System.Collections;
 
-public abstract class NPCBaseScript : CharacterBaseActionClass {
+public abstract class NPCBaseScript : Character {
 
 	//Initialization.  
 	protected override void OnEnable() {
-		InitializationSequence.InitializeNPCs += SetReferences;
+		InitializationSequence.InitializeNPCs += Initialize;
 	}
 
 	protected override void OnDisable() {
-		InitializationSequence.InitializeNPCs -= SetReferences;
+		InitializationSequence.InitializeNPCs -= Initialize;
 	}
 
 	//Required for the NPCPanelController.  

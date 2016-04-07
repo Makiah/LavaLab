@@ -129,7 +129,7 @@ public class LinecastingUtilities : MonoBehaviour {
 				if (linecastResult[i].collider.transform.parent != null && linecastResult[i].collider.transform.parent.parent != null) {
 					Transform healthPanelTransform = linecastResult[i].collider.transform.parent.parent;
 					//Make sure that the character has a health panel manager and that the character is not attacking itself.  
-					if (healthPanelTransform.GetComponent <CharacterHealthPanelManager> () != null && healthPanelTransform.GetComponent <CharacterBaseActionClass> ().GetCombatantID().Equals(attackingCharacterGUID) == false) {
+					if (healthPanelTransform.GetComponent <CharacterHealthPanelManager> () != null && healthPanelTransform.GetComponent <Character> ().GetCombatantID().Equals(attackingCharacterGUID) == false) {
 						//Return the health panel manager if it exists.  
 						return healthPanelTransform.GetComponent <CharacterHealthPanelManager> ();
 					}

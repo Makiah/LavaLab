@@ -15,7 +15,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
+public class PlayerAction : Character, ICanHoldItems {
 
 	private bool touchingWall = false;
 	private bool playerCoroutinesCurrentlyActive = true;
@@ -27,7 +27,6 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 	IEnumerator weaponInputCoroutine, arrowMovementCoroutine;
 
 	protected override void InitializeCharacter() {
-		Debug.Log ("Initialized");
 		//No other character has a wall check, so only the player uses this property.  
 		wallCheck = transform.FindChild("FlippingItem").FindChild ("WallCheck");
 
@@ -151,10 +150,10 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 	//includes a string of the method.  
 	private MovementAndMethod[] possibleWeaponMoves;
 
-	private ItemBase itemInUseByCharacter;
+	private Item itemInUseByCharacter;
 
 	//This will be called by the item management part of the costume manager script
-	public void OnRefreshCurrentWeaponMoves(ItemBase ctorItemInUseByCharacter) {
+	public void OnRefreshCurrentWeaponMoves(Item ctorItemInUseByCharacter) {
 		itemInUseByCharacter = ctorItemInUseByCharacter;
 		if (ctorItemInUseByCharacter != null) {
 			possibleWeaponMoves = itemInUseByCharacter.GetPossibleActionsForItem ();

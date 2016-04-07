@@ -7,6 +7,5 @@ namespace CatchCo
 	[AttributeUsage(AttributeTargets.Method)]
 	public class ExposeMethodInEditorAttribute : Attribute
 	{
-		
 	}
 }
