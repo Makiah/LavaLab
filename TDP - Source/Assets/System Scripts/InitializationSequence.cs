@@ -58,9 +58,12 @@ public class InitializationSequence : MonoBehaviour {
 			yield return null;
 		}
 
+		//Initialize the instances of the newly created objects.  
 		InstanceDatabase.SetLevelReferences ();
-
+		//Initialize the UI
 		UIInitializationSequence.instance.Initialize ();
+		//Create the level (the turrets require the player).  
+		LevelGenerator.instance.Initialize();
 
 		if (InitializeCostume != null) InitializeCostume(); else Debug.LogError("InitializeCostume was null!"); //Used for PlayerCostumeManager
 		if (InitializePlayer != null) InitializePlayer (); else Debug.LogError("InitializePlayer was null!"); //Used for initializing the HumanoidBaseReferenceClass.  

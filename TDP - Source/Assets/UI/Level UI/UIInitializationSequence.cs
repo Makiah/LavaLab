@@ -5,7 +5,7 @@ public class UIInitializationSequence : MonoBehaviour {
 
 	public static UIInitializationSequence instance;
 
-	void Start() {
+	void Awake() {
 		instance = this;
 	}
 

@@ -20,7 +20,7 @@ using CatchCo;
 public class Projectile : MonoBehaviour {
 	
 	//Static properties.  
-	[SerializeField] private static GameObject basicProjectile = null;
+	private static GameObject basicProjectile = null;
 
 	public static Projectile Create(Sprite sprite, Vector3 location) {
 		//Attempt to load the basic projectile prefab since Unity won't serialize static variables).  

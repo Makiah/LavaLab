@@ -21,8 +21,11 @@ public class LevelGenerator : MonoBehaviour {
 	//By right elevator room and left elevator room I mean the direction you have to walk to get into the elevator.  
 	[SerializeField] private GameObject startRoom = null, midRoom = null, leftElevatorRoom = null, rightElevatorRoom = null, leftReceiverRoom = null, rightReceiverRoom = null;
 
-	void Start() {
+	void Awake() {
 		instance = this;
+	}
+
+	public void Initialize() {
 		CreateLevel (1);
 	}
 
@@ -74,9 +77,22 @@ public class LevelGenerator : MonoBehaviour {
 		//Increment the number of segments placed by 1 (for the receiver).  
 		segmentsPlaced++;
 
+		//Set the instance variables.  
 		currentLevel = levelID;
-
 		currentActiveObjects = level;
+
+		//Add the turrets to the level.  
+		AddTurretsToLevel ();
+	}
+
+	//Goes through the whole level and adds turrets equally spread through the level in a random config.  
+	private void AddTurretsToLevel() {
+		for (int i = 0; i < currentLevel * 5; i++) {
+			//Create a random turret at different points through the level.  
+			Turret.Create(
+				(1.0f * currentActiveObjects[currentActiveObjects.Length - 1].transform.position.x - currentActiveObjects[0].transform.position.x) / (currentLevel * 5f) * i, 
+				Random.Range(0, 2) == 0 ? Turret.TurretPosition.BOTTOM : Turret.TurretPosition.TOP);
+		}
 	}
 
 	private void RemoveCurrentLevel() {

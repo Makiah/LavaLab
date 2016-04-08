@@ -25,10 +25,10 @@ public class ResourceDatabase : MonoBehaviour {
 
 		/******************************************* ITEMS *******************************************/
 		//Tools
-		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Wooden Sword", "A weak sword, but useful for survival.", 0, "Weapons/Wooden/WoodenSword/"));
+		//masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Wooden Sword", "A weak sword, but useful for survival.", 0, "Weapons/Wooden/WoodenSword/"));
 
 		/******************************************* RACES *******************************************/
-		//Agent (Default
+		//Agent (Default)
 		gameProfessions.Add (new Profession ("Professions/Agent/", "Agent", 0, null));
 	}
 
