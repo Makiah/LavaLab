@@ -63,7 +63,7 @@ public class Turret : Enemy, IMethodReroute1 {
 
 	protected override void InitializeEnemy() {
 		//Change fireRate and bolt color depending on the current level.  
-		fireRate = Mathf.Clamp((fireRate * 3f) / (3f - Mathf.Log (LevelGenerator.instance.currentLevel)), .1f, 30);
+		fireRate = Mathf.Clamp((fireRate) / (Mathf.Log (LevelGenerator.instance.currentLevel)), .1f, 30);
 		fireSpeed = Mathf.Clamp(fireSpeed * (1f + Mathf.Log (LevelGenerator.instance.currentLevel)), .1f, 30);
 	}
 

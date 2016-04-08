@@ -97,9 +97,10 @@ public class LevelGenerator : MonoBehaviour {
 				posOffset = currentActiveObjects [currentActiveObjects.Length - 1].transform.position.x;
 			else
 				posOffset = currentActiveObjects [0].transform.position.x;
+
+			float xComponent = posOffset + (Mathf.Abs (currentActiveObjects[0].transform.position.x - currentActiveObjects[currentActiveObjects.Length - 1].transform.position.x) / (currentLevel * 5f)) * i;
 			Turret createdTurret = Turret.Create (
-				(posOffset + 1.0f * currentActiveObjects [0].transform.position.x - currentActiveObjects [currentActiveObjects.Length - 1].transform.position.x) / (currentLevel * 5f) * i, 
-				Random.Range (0, 2) == 0 ? Turret.TurretPosition.BOTTOM : Turret.TurretPosition.TOP);
+				xComponent, Random.Range (0, 2) == 0 ? Turret.TurretPosition.BOTTOM : Turret.TurretPosition.TOP);
 			createdTurret.transform.SetParent (turretParent);
 		}
 
