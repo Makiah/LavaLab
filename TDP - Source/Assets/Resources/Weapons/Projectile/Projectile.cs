@@ -48,13 +48,14 @@ public class Projectile : MonoBehaviour {
 	protected float power;
 	protected GameObject playerObject;
 
-	public virtual void Initialize(Vector3 positionToFireToward, float velocity, float power) {
+	public virtual void Initialize(Vector2 positionToFireToward, float velocity, float power) {
+		playerObject = InstanceDatabase.GetPlayerReference ();
 		//Get the Rigidbody component so that physics can be used.  
 		rb2d = GetComponent <Rigidbody2D> ();
 
 		//Calculate the heading to the fire location.  
 		float radianAngleToTarget = Mathf.Atan2 ((positionToFireToward.y - transform.position.y) , (positionToFireToward.x - transform.position.x));
-		float degreeAngleToTarget = ScriptingUtilities.RadiansToDegrees (radianAngleToTarget);
+		float degreeAngleToTarget = radianAngleToTarget * Mathf.Rad2Deg;
 
 		//Turn to the heading and move in that direction.  
 		transform.localRotation = Quaternion.Euler(new Vector3 (0, 0, degreeAngleToTarget));
@@ -67,19 +68,12 @@ public class Projectile : MonoBehaviour {
 		StartCoroutine (DestroyIfDistanceFromPlayer());
 	}
 
-	public virtual void Initialize(float degree, float velocity, float power) {
-		//Get the Rigidbody component so that physics can be used.  
-		rb2d = GetComponent <Rigidbody2D> ();
+	public void EnableLight() {
+		transform.GetChild (0).GetChild (0).gameObject.SetActive (true);
+	}
 
-		//Turn to the heading and move in that direction.  
-		transform.localRotation = Quaternion.Euler(new Vector3 (0, 0, degree));
-		rb2d.velocity = new Vector2 (velocity * Mathf.Cos (ScriptingUtilities.DegreesToRadians(degree)), velocity * Mathf.Sin (ScriptingUtilities.DegreesToRadians(degree)));
-
-		//Set the strength of the arrow.  
-		this.power = power;
-
-		//Start the coroutine that checks when the arrow should be destroyed (takes up memory space)
-		StartCoroutine (DestroyIfDistanceFromPlayer());
+	public void DisableLight() {
+		transform.GetChild (0).GetChild (0).gameObject.SetActive (false);
 	}
 
 	//If the distance to the player is too large, then destroy the projectile (used to avoid memory loss, but could be disabled for a more accurate setting).  

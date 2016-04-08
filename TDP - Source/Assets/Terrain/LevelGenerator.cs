@@ -87,12 +87,29 @@ public class LevelGenerator : MonoBehaviour {
 
 	//Goes through the whole level and adds turrets equally spread through the level in a random config.  
 	private void AddTurretsToLevel() {
+		//Create a "folder" for the turrets.  
+		Transform turretParent = new GameObject ("Turrets").transform;
+		//Place the turrets into the folder.  
 		for (int i = 0; i < currentLevel * 5; i++) {
 			//Create a random turret at different points through the level.  
-			Turret.Create(
-				(1.0f * currentActiveObjects[currentActiveObjects.Length - 1].transform.position.x - currentActiveObjects[0].transform.position.x) / (currentLevel * 5f) * i, 
-				Random.Range(0, 2) == 0 ? Turret.TurretPosition.BOTTOM : Turret.TurretPosition.TOP);
+			float posOffset;
+			if (currentLevel % 2 == 1)
+				posOffset = currentActiveObjects [currentActiveObjects.Length - 1].transform.position.x;
+			else
+				posOffset = currentActiveObjects [0].transform.position.x;
+			Turret createdTurret = Turret.Create (
+				(posOffset + 1.0f * currentActiveObjects [0].transform.position.x - currentActiveObjects [currentActiveObjects.Length - 1].transform.position.x) / (currentLevel * 5f) * i, 
+				Random.Range (0, 2) == 0 ? Turret.TurretPosition.BOTTOM : Turret.TurretPosition.TOP);
+			createdTurret.transform.SetParent (turretParent);
 		}
+
+		//Recreate the array with the turrets.  
+		GameObject[] oldObjects = currentActiveObjects;
+		currentActiveObjects = new GameObject[oldObjects.Length + 1];
+		for (int i = 0; i < oldObjects.Length; i++) {
+			currentActiveObjects [i] = oldObjects [i];
+		}
+		currentActiveObjects [currentActiveObjects.Length - 1] = turretParent.gameObject;
 	}
 
 	private void RemoveCurrentLevel() {

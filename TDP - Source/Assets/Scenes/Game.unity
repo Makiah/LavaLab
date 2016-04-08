@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.102941155, g: 0.102941155, b: 0.102941155, a: 1}
+  m_AmbientSkyColor: {r: 0.09558821, g: 0.09558821, b: 0.09558821, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -118,7 +118,7 @@ MonoBehaviour:
   startRoom: {fileID: 168532, guid: 4c3f79c01444d47fcba6ad4b67c1160a, type: 2}
   midRoom: {fileID: 152582, guid: ba74d294f4a0c4b60ac760b873e5970d, type: 2}
   leftElevatorRoom: {fileID: 119886, guid: 756ac86075429457991665fcfa06886c, type: 2}
-  rightElevatorRoom: {fileID: 119886, guid: 6b883b38fd7d3448cb68bab947018e2c, type: 2}
+  rightElevatorRoom: {fileID: 119886, guid: 4bcee53160d80498ba4f6ddf88e47760, type: 2}
   leftReceiverRoom: {fileID: 174592, guid: 819a1d58317b640ecb2cb9c02ad56bc1, type: 2}
   rightReceiverRoom: {fileID: 174592, guid: 08db88435223a49ab898f655af66915a, type: 2}
 --- !u!114 &168374797

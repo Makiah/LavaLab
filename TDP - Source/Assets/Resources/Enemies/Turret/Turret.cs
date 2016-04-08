@@ -53,24 +53,18 @@ public class Turret : Enemy, IMethodReroute1 {
 
 	//Instance variables.  
 	[SerializeField] private Sprite boltSprite = null;
-	private Color boltColor = Color.black;
-	private float fireRate = 5;
-	private float fireSpeed = 5;
+	//private Color boltColor = Color.black;
+	//Less value means faster.  
+	private float fireRate = 3;
+	//More value means faster.  
+	private float fireSpeed = 8;
 	private float fireThreshold = 45;
 	private TurretPosition localPosition;
 
 	protected override void InitializeEnemy() {
 		//Change fireRate and bolt color depending on the current level.  
-		switch (LevelGenerator.instance.currentLevel) {
-		case 0: 
-			boltColor = Color.red;
-			fireRate = 4;
-			break;
-		default: 
-			boltColor = Color.black;
-			fireRate = 5;
-			break;
-		}
+		fireRate = Mathf.Clamp((fireRate * 3f) / (3f - Mathf.Log (LevelGenerator.instance.currentLevel)), .1f, 30);
+		fireSpeed = Mathf.Clamp(fireSpeed * (1f + Mathf.Log (LevelGenerator.instance.currentLevel)), .1f, 30);
 	}
 
 	//Used for when the static Create method wants to set the local position for the turret.  
@@ -82,7 +76,7 @@ public class Turret : Enemy, IMethodReroute1 {
 
 	protected override IEnumerator EnemyControl() {
 		StartCoroutine (PointAtPlayer());
-		//StartCoroutine (FireRepeatedly ());
+		StartCoroutine (FireRepeatedly ());
 		yield return null;
 	}
 
@@ -90,7 +84,7 @@ public class Turret : Enemy, IMethodReroute1 {
 	private IEnumerator PointAtPlayer() {
 		//Avoid boxing and unboxing.  
 		Vector2 directionVector;
-		float zVal;
+		float zVal = 0;
 		Vector3 initialScale = transform.localScale;
 		Vector3 flippedScale = new Vector3 (initialScale.x * -1, initialScale.y, initialScale.z);
 
@@ -144,6 +138,7 @@ public class Turret : Enemy, IMethodReroute1 {
 					transform.GetChild (0).rotation = Quaternion.Euler (0, 0, zVal);
 				}
 			}
+
 			yield return null;
 		}
 	}
@@ -165,10 +160,12 @@ public class Turret : Enemy, IMethodReroute1 {
 	}
 
 	protected override void Attack() {
+		Transform shooter = transform.GetChild (0).GetChild (0), target = shooter.GetChild (0);
 		Debug.Log ("Creating bolt");
-		//Projectile bolt = Projectile.Create (boltSprite, transform.position);
+		Projectile bolt = Projectile.Create (boltSprite, shooter.position);
 		//bolt.transform.GetChild (0).GetComponent <SpriteRenderer> ().color = boltColor;
-		//bolt.Initialize (transform.GetChild (0).localRotation.z, fireSpeed, enemyAttackingPower);
+		bolt.EnableLight ();
+		bolt.Initialize (target.position, fireSpeed, enemyAttackingPower);
 	}
 
 }

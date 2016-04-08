@@ -2,10 +2,14 @@
 using System.Collections;
 using CatchCo;
 
-public class ElevatorControl : MonoBehaviour {
+public class ElevatorControl : MonoBehaviour, IMethodReroute1, IMethodReroute2 {
 
 	void OnTriggerEnter2D(Collider2D other) {
-		MoveElevator ();
+		if (other.transform.parent != null && other.transform.parent.parent != null) {
+			if (other.transform.parent.parent.GetComponent <PlayerAction> () != null) {
+				MoveElevator ();
+			}
+		}
 	}
 
 	[ExposeMethodInEditor]
@@ -68,11 +72,11 @@ public class ElevatorControl : MonoBehaviour {
 		Destroy (gameObject);
 	}
 
-	public void MovedUp() {
+	public void ReRoute1() {
 		movedUp = true;
 	}
 
-	public void ReachedNextLevel() {
+	public void ReRoute2() {
 		movedToNextLevel = true;
 	}
 

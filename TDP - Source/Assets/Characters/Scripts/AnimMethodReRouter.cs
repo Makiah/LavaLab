@@ -24,6 +24,7 @@ public class AnimMethodReRouter : MonoBehaviour {
 	public void ReRoute1() {
 		Transform current = transform;
 		while (current.parent != null) {
+			current = current.parent;
 			//Check the presence of the desired reroute.  
 			if (current.GetComponent <IMethodReroute1> () != null) {
 				//Call the method and exit.  
@@ -38,6 +39,7 @@ public class AnimMethodReRouter : MonoBehaviour {
 	public void ReRoute2() {
 		Transform current = transform;
 		while (current.parent != null) {
+			current = current.parent;
 			//Check the presence of the desired reroute.  
 			if (current.GetComponent <IMethodReroute2> () != null) {
 				//Call the method and exit.  
@@ -52,6 +54,7 @@ public class AnimMethodReRouter : MonoBehaviour {
 	public void ReRoute3() {
 		Transform current = transform;
 		while (current.parent != null) {
+			current = current.parent;
 			//Check the presence of the desired reroute.  
 			if (current.GetComponent <IMethodReroute3> () != null) {
 				//Call the method and exit.  
