@@ -40,8 +40,7 @@ public class Turret : Enemy, IMethodReroute1 {
 			//Instantiate the turret
 			GameObject createdTurret = (GameObject)(Instantiate (turret, new Vector3 (xLocation, yLocation, 0), Quaternion.identity));
 			//If the turret is on the turret, rotate the turret mount.  
-			if (position == TurretPosition.TOP)
-				createdTurret.transform.localScale = new Vector3 (1, -1, 1);
+			createdTurret.GetComponent <Turret> ().SetPosition (position);
 			//Initialize the turret.  
 			createdTurret.GetComponent <Turret> ().InitializeCharacter ();
 			//Return the turret.  
@@ -57,6 +56,8 @@ public class Turret : Enemy, IMethodReroute1 {
 	private Color boltColor = Color.black;
 	private float fireRate = 5;
 	private float fireSpeed = 5;
+	private float fireThreshold = 45;
+	private TurretPosition localPosition;
 
 	protected override void InitializeEnemy() {
 		//Change fireRate and bolt color depending on the current level.  
@@ -72,43 +73,89 @@ public class Turret : Enemy, IMethodReroute1 {
 		}
 	}
 
+	//Used for when the static Create method wants to set the local position for the turret.  
+	public void SetPosition(TurretPosition position) {
+		localPosition = position;
+		if (localPosition == TurretPosition.TOP)
+			transform.localScale = new Vector3 (transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+	}
+
 	protected override IEnumerator EnemyControl() {
 		StartCoroutine (PointAtPlayer());
-		StartCoroutine (FireRepeatedly ());
+		//StartCoroutine (FireRepeatedly ());
 		yield return null;
 	}
 
 	//Always point at the player. 
-	protected IEnumerator PointAtPlayer() {
-		while (true) {
-			//Avoid boxing and unboxing.  
-			Vector2 directionVector;
-			float zVal;
-			Vector3 initialScale = transform.localScale;
+	private IEnumerator PointAtPlayer() {
+		//Avoid boxing and unboxing.  
+		Vector2 directionVector;
+		float zVal;
+		Vector3 initialScale = transform.localScale;
+		Vector3 flippedScale = new Vector3 (initialScale.x * -1, initialScale.y, initialScale.z);
 
+		bool facingRight = true;
+
+		while (true) {
 			if (Vector2.Distance (player.position, transform.position) < 20) {
 				//Calculate the direction vector, and normalize it (make 1 the largest value, and scale the opposite value appropriately).  
 				directionVector = player.position - transform.position;
 				directionVector.Normalize ();
+
+				//Check the direction of the 
+				if (directionVector.x < 0) {
+					transform.localScale = flippedScale;
+					facingRight = false;
+				} else {
+					transform.localScale = initialScale;
+					facingRight = true;
+				}
+
 				//Calculate the correct direction to point.  
 				zVal = Mathf.Atan2 (directionVector.y, directionVector.x) * Mathf.Rad2Deg;
-//				if (zVal < 0)
-//					transform.localScale = new Vector3 (initialScale.x * -1, initialScale.y, initialScale.z);
-//				else if (zVal >= 0)
-//					transform.localScale = new Vector3 (initialScale.x, initialScale.y, initialScale.z);
-				transform.GetChild (0).rotation = Quaternion.Euler (0f, 0f, -zVal);
+
+				//Debugging.  
+				if (Vector2.Distance (player.position, transform.position) < 5) {
+					Debug.Log (zVal);
+				}
+
+				//Only works if the turret is rolling or on bottom.  
+				if (localPosition == TurretPosition.BOTTOM || localPosition == TurretPosition.ROLLING) {
+					//Clamp the values based on the direction the thing is facing.  
+					if (facingRight)
+						zVal *= -1;
+					else
+						zVal -= 180;
+
+					zVal = Mathf.Clamp (zVal, -fireThreshold, 0);
+
+					transform.GetChild (0).rotation = Quaternion.Euler (0, 0, zVal);
+				} else {
+					//Just flip the angle (ALL YOU HAVE TO DO YESSS)
+					zVal *= -1;
+					//Clamp the values based on the direction the thing is facing.  
+					if (facingRight)
+						zVal *= -1;
+					else
+						zVal -= 180;
+
+					zVal = Mathf.Clamp (zVal, -fireThreshold, 0);
+
+					transform.GetChild (0).rotation = Quaternion.Euler (0, 0, zVal);
+				}
 			}
 			yield return null;
 		}
 	}
 
-	protected IEnumerator FireRepeatedly() {
+	private IEnumerator FireRepeatedly() {
 		Animator anim = transform.GetChild (0).GetComponent <Animator> ();
 		while (true) {
 			if (Vector2.Distance (player.position, transform.position) < 20) {
 				anim.SetTrigger ("Shoot");
+				yield return new WaitForSeconds (fireRate);
 			}
-			yield return new WaitForSeconds (fireRate);
+			yield return null;
 		}
 	}
 
@@ -118,9 +165,10 @@ public class Turret : Enemy, IMethodReroute1 {
 	}
 
 	protected override void Attack() {
-		Projectile bolt = Projectile.Create (boltSprite, transform.position);
-		bolt.transform.GetChild (0).GetComponent <SpriteRenderer> ().color = boltColor;
-		bolt.Initialize (transform.GetChild (0).localRotation.z, fireSpeed, enemyAttackingPower);
+		Debug.Log ("Creating bolt");
+		//Projectile bolt = Projectile.Create (boltSprite, transform.position);
+		//bolt.transform.GetChild (0).GetComponent <SpriteRenderer> ().color = boltColor;
+		//bolt.Initialize (transform.GetChild (0).localRotation.z, fireSpeed, enemyAttackingPower);
 	}
 
 }
