@@ -13,6 +13,7 @@ using System.Collections;
 
 public class LevelGenerator : MonoBehaviour {
 
+	//Static instance, makes it more easy to access.  Also called a singleton.  
 	public static LevelGenerator instance;
 	public int currentLevel = 1;
 
@@ -89,16 +90,19 @@ public class LevelGenerator : MonoBehaviour {
 	private void AddTurretsToLevel() {
 		//Create a "folder" for the turrets.  
 		Transform turretParent = new GameObject ("Turrets").transform;
+		int desiredTurrets = (int)((1 + Mathf.Log (currentLevel)) * 5f + currentLevel / 2f);
 		//Place the turrets into the folder.  
-		for (int i = 0; i < currentLevel * 5; i++) {
+		for (int i = 0; i < desiredTurrets; i++) {
 			//Create a random turret at different points through the level.  
+			//Determine whether the first or last object in the array would be farther right based on the level id.  
 			float posOffset;
 			if (currentLevel % 2 == 1)
 				posOffset = currentActiveObjects [currentActiveObjects.Length - 1].transform.position.x;
 			else
 				posOffset = currentActiveObjects [0].transform.position.x;
 
-			float xComponent = posOffset + (Mathf.Abs (currentActiveObjects[0].transform.position.x - currentActiveObjects[currentActiveObjects.Length - 1].transform.position.x) / (currentLevel * 5f)) * i;
+			//Instantiate the turrets through the level using the Turret.Create method.  
+			float xComponent = posOffset + (Mathf.Abs (currentActiveObjects[0].transform.position.x - currentActiveObjects[currentActiveObjects.Length - 1].transform.position.x) / (desiredTurrets)) * i;
 			Turret createdTurret = Turret.Create (
 				xComponent, Random.Range (0, 2) == 0 ? Turret.TurretPosition.BOTTOM : Turret.TurretPosition.TOP);
 			createdTurret.transform.SetParent (turretParent);
