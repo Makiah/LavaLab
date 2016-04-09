@@ -117,10 +117,10 @@ MonoBehaviour:
   currentLevel: 0
   startRoom: {fileID: 168532, guid: 4c3f79c01444d47fcba6ad4b67c1160a, type: 2}
   midRoom: {fileID: 152582, guid: ba74d294f4a0c4b60ac760b873e5970d, type: 2}
-  leftElevatorRoom: {fileID: 119886, guid: 756ac86075429457991665fcfa06886c, type: 2}
-  rightElevatorRoom: {fileID: 119886, guid: 4bcee53160d80498ba4f6ddf88e47760, type: 2}
+  leftElevatorRoom: {fileID: 119886, guid: 5eb10b95ffe3648009e396f935663132, type: 2}
+  rightElevatorRoom: {fileID: 119886, guid: 99e9ba6034fc342a8b9751799b0e88ac, type: 2}
   leftReceiverRoom: {fileID: 174592, guid: 819a1d58317b640ecb2cb9c02ad56bc1, type: 2}
-  rightReceiverRoom: {fileID: 174592, guid: 08db88435223a49ab898f655af66915a, type: 2}
+  rightReceiverRoom: {fileID: 174592, guid: 8c199f58e37f647d0a23cb9d8fe9c9af, type: 2}
 --- !u!114 &168374797
 MonoBehaviour:
   m_ObjectHideFlags: 0

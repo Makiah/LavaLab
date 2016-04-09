@@ -26,8 +26,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 486112}
   - 212: {fileID: 21236306}
-  - 68: {fileID: 6830852}
-  - 68: {fileID: 6899552}
+  - 68: {fileID: 6806244}
+  - 68: {fileID: 6832164}
   m_Layer: 8
   m_Name: Left Elevator
   m_TagString: Untagged
@@ -120,7 +120,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.3, y: 40.96, z: 0}
+  m_LocalPosition: {x: -9.61, y: 40.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 405454}
@@ -165,6 +165,24 @@ BoxCollider2D:
   m_Offset: {x: -0.8, y: -41}
   serializedVersion: 2
   m_Size: {x: 1, y: 6}
+--- !u!68 &6806244
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119886}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: -6.9995794, y: 18.990147}
+  - {x: -7.095215, y: 0.64330816}
+  - {x: -6.329313, y: 0.643352}
+  - {x: -6.3202705, y: 3.2168984}
+  - {x: 18.52234, y: 3.1943288}
 --- !u!68 &6815386
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -184,7 +202,7 @@ EdgeCollider2D:
   - {x: -1.2475281, y: 3.5362434}
   - {x: -1.2667046, y: -2.5664291}
   - {x: 2.5599995, y: -2.552925}
---- !u!68 &6830852
+--- !u!68 &6832164
 EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -195,13 +213,13 @@ EdgeCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 3.2}
+  m_Offset: {x: 0, y: 0}
   m_Points:
-  - {x: -21.729, y: 15.81755}
-  - {x: -21.744875, y: -2.5519388}
-  - {x: -20.965925, y: -2.5699341}
-  - {x: -20.993765, y: -0.023545027}
-  - {x: 38.399998, y: 0}
+  - {x: -12.21005, y: 18.772251}
+  - {x: -12.099067, y: -7.0853915}
+  - {x: -7.1193533, y: -7.0650926}
+  - {x: -7.106158, y: -3.1973321}
+  - {x: 18.482315, y: -3.2238889}
 --- !u!68 &6838490
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -215,8 +233,8 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
-  - {x: 2.7709732, y: -22.168911}
-  - {x: 2.672285, y: 22.366844}
+  - {x: 2.5787044, y: -22.040731}
+  - {x: 2.5572848, y: 22.38601}
 --- !u!68 &6859052
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -230,26 +248,8 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: -5.15, y: 0}
   m_Points:
-  - {x: 2.7709732, y: -22.168911}
-  - {x: 2.672285, y: 22.366844}
---- !u!68 &6899552
-EdgeCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 119886}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -3.2}
-  m_Points:
-  - {x: -26.918453, y: 21.889198}
-  - {x: -26.849422, y: -3.8462727}
-  - {x: -21.735939, y: -3.8651364}
-  - {x: -21.686062, y: 0.013369799}
-  - {x: 38.399998, y: 0}
+  - {x: 2.598472, y: -22.168911}
+  - {x: 2.5764518, y: 22.38601}
 --- !u!95 &9566672
 Animator:
   serializedVersion: 3
@@ -315,7 +315,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 459935887
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 4399128bc84df4fa1a47e42a709d0301, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b06f52a76f2c94bc3a6d0c8078caefa4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -345,7 +345,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 459935887
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7dbb7bc7d2bbd41d38d6a0f9c1d8e939, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ceeedee1bebab43cbbf47642b4bacd1d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -375,7 +375,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 459935887
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 76095e8e23d9b43b5952992857242718, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2777a816333f5466181bb9c90ad62cee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

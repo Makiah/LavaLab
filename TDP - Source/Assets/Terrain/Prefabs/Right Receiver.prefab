@@ -9,8 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 490780}
   - 212: {fileID: 21264926}
-  - 68: {fileID: 6803726}
-  - 68: {fileID: 6866288}
+  - 68: {fileID: 6870478}
+  - 68: {fileID: 6838282}
   m_Layer: 8
   m_Name: Right Receiver
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!68 &6803726
+--- !u!68 &6838282
 EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -41,12 +41,12 @@ EdgeCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -3.2}
+  m_Offset: {x: 0, y: 0}
   m_Points:
-  - {x: -21.70358, y: -15.443868}
-  - {x: -21.764105, y: 0.014300585}
-  - {x: 38.399998, y: 0}
---- !u!68 &6866288
+  - {x: -7.0110164, y: -18.57687}
+  - {x: -6.940489, y: -3.2094035}
+  - {x: 18.56, y: -3.2041998}
+--- !u!68 &6870478
 EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -57,15 +57,15 @@ EdgeCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 3.2}
+  m_Offset: {x: 0, y: 0}
   m_Points:
-  - {x: -27.02542, y: -21.654459}
-  - {x: -26.932278, y: 1.2893579}
-  - {x: -21.72703, y: 1.2698781}
-  - {x: -21.773338, y: -2.565515}
-  - {x: -20.979607, y: -2.55228}
-  - {x: -20.965567, y: 0.065660715}
-  - {x: 38.399998, y: 0}
+  - {x: -12.156044, y: -18.565596}
+  - {x: -12.231022, y: 4.458824}
+  - {x: -7.046099, y: 4.5131164}
+  - {x: -7.0237784, y: 0.6424853}
+  - {x: -6.281868, y: 0.6511338}
+  - {x: -6.2772274, y: 3.2197993}
+  - {x: 18.539114, y: 3.2583272}
 --- !u!212 &21264926
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 459935887
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1b5f1d62888274e3288f72f754e19222, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 387d7923263a8402290f7dad7fa9a46d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -164,7 +164,7 @@ MonoBehaviour:
   playerAttackDistance: 0
   ignorePlayerMovementThreshold: 0
   maxYValueSeparation: 0
-  enemyAttackingPower: 0
+  enemyAttackingPower: 1
   enemyKnockbackPower: {x: 0, y: 0}
   enemyWithinAreaBounds: 0
   yOffsetToEnemy: 0
