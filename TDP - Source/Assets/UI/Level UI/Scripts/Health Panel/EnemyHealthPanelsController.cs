@@ -7,7 +7,6 @@
  * 
  * This script controls the health bars and icons of the UI, and includes a public function for adding enemies to the system.  
  * 
- * 
  */
 
 

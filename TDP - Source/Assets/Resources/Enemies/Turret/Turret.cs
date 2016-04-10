@@ -108,11 +108,6 @@ public class Turret : Enemy, IMethodReroute1 {
 				//Calculate the correct direction to point.  
 				zVal = Mathf.Atan2 (directionVector.y, directionVector.x) * Mathf.Rad2Deg;
 
-				//Debugging.  
-				if (Vector2.Distance (player.position, transform.position) < 5) {
-					Debug.Log (zVal);
-				}
-
 				//Only works if the turret is rolling or on bottom.  
 				if (localPosition == TurretPosition.BOTTOM || localPosition == TurretPosition.ROLLING) {
 					//Clamp the values based on the direction the thing is facing.  

@@ -64,25 +64,18 @@ public class HealthPanelReference : MonoBehaviour {
 		healthBar.value = currentHealth;
 		occupied = true;
 		panel.SetActive (true);
-		UpdateColor ();
+		healthBarFillImage.color = Color.green;
 	}
 
 	//Used when a potion is added or object is attacked (called by CharacterHealthPanelManager).  
 	public void UpdateHealth(float currentHealth) {
 		if (occupied) {
 			healthBar.value = currentHealth;
-			UpdateColor();
+			//Linearly interpolates between green and red based on fraction filled.  
+			healthBarFillImage.color = Color.Lerp (Color.green, Color.red, (healthBar.maxValue - healthBar.value) / healthBar.maxValue);
 		}
 		else
 			Debug.LogError ("Cannot update empty health panel");
-	}
-
-	protected void UpdateColor() {
-		if (healthBar.value / healthBar.maxValue < 0.4f) {
-			healthBarFillImage.color = new Color (1, 0, 0);
-		} else {
-			healthBarFillImage.color = new Color(0, 1, 0);
-		}
 	}
 
 }
