@@ -4,6 +4,12 @@ using UnityEngine.UI;
 
 public class SpeechControl : MonoBehaviour {
 
+	public static SpeechControl instance;
+
+	void Awake() {
+		instance = this;
+	}
+
 	/********************** INITIALIZATION **********************/
 	protected virtual void OnEnable() {
 		UIInitializationSequence.InitializeUISpeechControl += InitializeSpeechControl;

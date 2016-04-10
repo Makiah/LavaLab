@@ -18,7 +18,6 @@ public abstract class NPCBaseScript : Character {
 	bool walkingAround = true;
 
 	protected Transform playerTransform;
-	protected InventoryFunctions playerInventory;
 
 	//By using an actual IEnumerator object, we can selectively run and manipulate coroutines.  
 	protected IEnumerator walkAroundCoroutine;
@@ -27,7 +26,6 @@ public abstract class NPCBaseScript : Character {
 	protected override void InitializeCharacter() {
 		//Get required components.  
 		playerTransform = InstanceDatabase.GetPlayerReference ().transform;
-		playerInventory = InstanceDatabase.GetMainInventoryReference().GetComponent <InventoryFunctions> ();
 
 		//Initialize the NPC before starting to walk around.  
 		InitializeNPC ();
@@ -72,7 +70,7 @@ public abstract class NPCBaseScript : Character {
 	}
 
 	protected bool GiveMoneyToPlayer(int amount) {
-		return playerTransform.GetComponent <PlayerHealthPanelManager> ().GiveMoneyToPlayer (amount);
+		return PlayerHealthPanelReference.instance.UpdateCoinValue (amount);
 	}
 	
 	public void StopWalkingAround() {

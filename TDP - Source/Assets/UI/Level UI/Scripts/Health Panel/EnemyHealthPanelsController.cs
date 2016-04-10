@@ -15,7 +15,14 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-public class UIHealthController : MonoBehaviour {
+public class EnemyHealthPanelsController : MonoBehaviour {
+
+	public static EnemyHealthPanelsController instance;
+
+	void Awake() {
+		//Set the static instance variable.  
+		instance = this;
+	}
 
 	//Initialization
 	void OnEnable() {
@@ -27,23 +34,17 @@ public class UIHealthController : MonoBehaviour {
 	}
 
 	//Define Health controller components
-	PlayerHealthPanelReference playerHealthPanel;
 	HealthPanelReference enemyHealthPanel1, enemyHealthPanel2, enemyHealthPanel3;
 
 	//Set references to the health panel references.  
 	void InitializeUIHealthController() {
-		playerHealthPanel = transform.FindChild ("Player Health Controller").FindChild ("HealthPanelPlayer").GetComponent <PlayerHealthPanelReference> ();
-		enemyHealthPanel1 = transform.FindChild ("Enemy Health Controller").FindChild ("HealthPanel1").GetComponent <HealthPanelReference> ();
-		enemyHealthPanel2 = transform.FindChild("Enemy Health Controller").FindChild("HealthPanel2").GetComponent <HealthPanelReference> ();
-		enemyHealthPanel3 = transform.FindChild ("Enemy Health Controller").FindChild ("HealthPanel3").GetComponent <HealthPanelReference> ();	
+		enemyHealthPanel1 = transform.GetChild(0).GetComponent <HealthPanelReference> ();
+		enemyHealthPanel2 = transform.GetChild(1).GetComponent <HealthPanelReference> ();
+		enemyHealthPanel3 = transform.GetChild(2).GetComponent <HealthPanelReference> ();	
 	}
 	
 	public HealthPanelReference GetEnemyHealthPanelReference() {
 		return GetBestAvailableEnemyHealthPanelReference ();
-	}
-
-	public PlayerHealthPanelReference GetPlayerHealthPanelReference () {
-		return playerHealthPanel;
 	}
 
 	//Choose the best available health panel reference (in order of 1-3)
@@ -54,9 +55,8 @@ public class UIHealthController : MonoBehaviour {
 			return enemyHealthPanel2;
 		else if (enemyHealthPanel3.IsEmpty ())
 			return enemyHealthPanel3;
-		else {
+		else
 			return null;
-		}
 	}
 
 }

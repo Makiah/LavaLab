@@ -42,14 +42,14 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 		}
 		currentHealth = lifePoints;
 		//Create panel
-		uiHealthController = InstanceDatabase.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
-		playerHealthPanelReference = uiHealthController.GetPlayerHealthPanelReference ();
+		uiHealthController = EnemyHealthPanelsController.instance; 
+		playerHealthPanelReference = PlayerHealthPanelReference.instance;
 		//Initialize icon
 		characterHeadSprite = transform.FindChild ("FlippingItem").GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		playerHealthPanelReference.InitializePanel (characterHeadSprite, lifePoints, currentHealth);
 
 		//Give player money obtained previously.  
-		GiveMoneyToPlayer (GameData.GetPlayerMoney());
+		playerHealthPanelReference.UpdateCoinValue (GameData.GetPlayerMoney());
 	}
 
 	//Called by PlayerDropHandler.  
@@ -70,18 +70,6 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 		if (currentHealth <= 0) {
 			OnDeath();
 		}
-	}
-
-	public string GetPlayerName() {
-		return playerHealthPanelReference.GetPlayerName ();
-	}
-
-	public bool GiveMoneyToPlayer(int amount) {
-		return playerHealthPanelReference.UpdateCoinValue (amount);
-	}
-
-	public int GetPlayerMoney() {
-		return playerHealthPanelReference.GetCoinAmount ();
 	}
 
 	protected override void OnDeath() {

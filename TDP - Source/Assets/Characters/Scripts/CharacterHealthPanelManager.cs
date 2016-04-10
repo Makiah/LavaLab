@@ -34,7 +34,7 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	[SerializeField] protected float lifePoints;
 	protected float currentHealth;
 
-	protected UIHealthController uiHealthController;
+	protected EnemyHealthPanelsController uiHealthController;
 	HealthPanelReference healthPanelReference;
 	protected Sprite characterHeadSprite;
 
@@ -49,7 +49,7 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 		player = InstanceDatabase.GetPlayerReference ().transform;
 		currentHealth = lifePoints;
 		//Create panel
-		uiHealthController = InstanceDatabase.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
+		uiHealthController = EnemyHealthPanelsController.instance; 
 		//Initialize icon
 		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		//Start the coroutine that manages the active state of the health bar item.  

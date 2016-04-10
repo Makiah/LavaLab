@@ -28,7 +28,7 @@ public class PanelLayout : MonoBehaviour {
 	protected Vector2 inventoryPanelSize, slotPanelSize;
 
 	protected virtual void AddSlotsToSystem() {
-		GetComponent <InventoryFunctions> ().AddSlotsToSystem (InitializeSlots ());
+		PlayerInventory.instance.AddSlotsToSystem (InitializeSlots ());
 		Debug.Log ("Added slots");
 	}
 

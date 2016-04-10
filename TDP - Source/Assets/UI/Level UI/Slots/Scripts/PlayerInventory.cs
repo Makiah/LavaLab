@@ -2,7 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class InventoryFunctions : MonoBehaviour {
+public class PlayerInventory : MonoBehaviour {
+
+	//Static instance variable.  
+	public static PlayerInventory instance;
+
+	void Awake() {
+		instance = this;
+	}
 
 	//Required instance data.  
 	private SlotScript[,] slotArray = new SlotScript[0,0];
@@ -64,7 +71,7 @@ public class InventoryFunctions : MonoBehaviour {
 					successfullyAssigned = true;
 					bestAvailableSlot.AssignNewItem (item);
 					//Update the hotbar item.
-					InstanceDatabase.GetLevelUIReference ().transform.FindChild ("Hotbar").GetComponent <HotbarManager> ().UpdateSelectedItem ();
+					PlayerHotbar.instance.UpdateSelectedItem ();
 					//Check whether an objective has been completed
 				} else {
 					Debug.LogError("No slots are empty!");

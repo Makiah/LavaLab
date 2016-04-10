@@ -15,7 +15,13 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-public class HotbarManager : MonoBehaviour {
+public class PlayerHotbar : MonoBehaviour {
+
+	public static PlayerHotbar instance;
+
+	void Awake() {
+		instance = this;
+	}
 
 	/************************************************** INITIALIZATION **************************************************/
 

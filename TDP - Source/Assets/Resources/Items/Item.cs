@@ -46,9 +46,4 @@ public abstract class Item : MonoBehaviour {
 	public abstract MovementAndMethod[] GetPossibleActionsForItem ();
 	public abstract void InfluenceEnvironment(MovementAndMethod.PossibleMovements actionKey);
 
-	//Just added.  
-	protected void ChangeStackOfCurrentHotbarItem(int stackToChangeBy) {
-		InstanceDatabase.GetLevelUIReference ().transform.FindChild ("Hotbar").GetComponent <HotbarManager> ().ModifyStackOfSelectedItem (1);
-	}
-
 }

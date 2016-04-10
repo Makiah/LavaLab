@@ -12,6 +12,8 @@ public class UIInitializationSequence : MonoBehaviour {
 	//UI
 	public delegate void BaseInitialization();
 
+	//NOTE: Use Awake() to set instance static variables.  
+
 	public static event BaseInitialization CreateInventorySlots;
 	public static event BaseInitialization CreateHotbarSlots;
 	public static event BaseInitialization InitializeSlots;

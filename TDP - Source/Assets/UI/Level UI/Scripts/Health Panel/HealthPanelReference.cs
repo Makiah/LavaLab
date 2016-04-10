@@ -31,14 +31,14 @@ public class HealthPanelReference : MonoBehaviour {
 
 	bool occupied = false;
 
-	protected UIHealthController masterController;
+	protected EnemyHealthPanelsController masterController;
 
 	protected virtual void InitializeHealthPanelReference() {
 		//Setting basic component references.  
 		panel = gameObject;
 		headIcon = transform.FindChild ("Icon").gameObject.GetComponent <Image> ();
 		healthBar = transform.FindChild ("Health Bar").gameObject.GetComponent <Slider> ();
-		masterController = transform.parent.parent.GetComponent <UIHealthController> ();
+		masterController = transform.parent.parent.GetComponent <EnemyHealthPanelsController> ();
 		healthBarFillImage = healthBar.transform.FindChild ("Fill Area").FindChild ("Fill").GetComponent <Image> ();
 		//Make sure that the panels do not have any initial value.  
 		Clear ();

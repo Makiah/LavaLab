@@ -38,9 +38,6 @@ public class MerchantSlotScript : MonoBehaviour, IPointerClickHandler, IPointerE
 	private Text stackIndicator;
 	private Text priceIndicator;
 
-	//References
-	private InventoryFunctions playerInventory;
-
 	public void ReferenceChildren() {
 		childIcon = transform.FindChild ("Icon").GetComponent <Image> ();
 		childIcon.enabled = false;
@@ -56,9 +53,9 @@ public class MerchantSlotScript : MonoBehaviour, IPointerClickHandler, IPointerE
 	public void OnPointerClick(PointerEventData data) {
 		if (data.button == PointerEventData.InputButton.Left) {
 			if (currentlyAssigned != null) {
-				if (InstanceDatabase.GetPlayerReference ().GetComponent <PlayerHealthPanelManager> ().GiveMoneyToPlayer (-currentlyAssigned.price)) {
+				if (PlayerHealthPanelReference.instance.UpdateCoinValue (-currentlyAssigned.price)) {
 					//Add the deassigned item to the player inventory and deduct the price of the item.  
-					InstanceDatabase.GetMainInventoryReference ().GetComponent <InventoryFunctions> ().AssignNewItemToBestSlot (new ResourceReferenceWithStack (currentlyAssigned.mainContentReference.uiSlotContent, 1));
+					PlayerInventory.instance.AssignNewItemToBestSlot (new ResourceReferenceWithStack (currentlyAssigned.mainContentReference.uiSlotContent, 1));
 					ModifyCurrentItemStack (-1);
 				}
 			}

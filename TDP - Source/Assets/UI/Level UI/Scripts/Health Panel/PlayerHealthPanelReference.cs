@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class PlayerHealthPanelReference : HealthPanelReference {
 
+	//Only one player health panel reference instance, so this can be a singleton.  
+	public static PlayerHealthPanelReference instance;
+
 	//Experience components
 	private Text currentPlayerProfession;
 	private Slider experienceSlider;
@@ -14,12 +17,13 @@ public class PlayerHealthPanelReference : HealthPanelReference {
 	private Text playerName;
 	//Coin stuff
 	private Text coinValue;
-	//Mana
-	private Slider manaSlider;
 
 	//The method that initializes the values of the health panel.  
 	protected override void InitializeHealthPanelReference() {
 		base.InitializeHealthPanelReference ();
+
+		//Set the static instance variable.  
+		instance = this;
 
 		//Name of player
 		playerName = transform.FindChild ("Name").gameObject.GetComponent <Text> (); 
@@ -34,7 +38,6 @@ public class PlayerHealthPanelReference : HealthPanelReference {
 		//Coin Values
 		coinValue = transform.FindChild("Cash").FindChild("Value").GetComponent <Text> ();
 		coinValue.text = "0";
-		//Mana values
 	}
 
 	public string GetPlayerName() {

@@ -17,21 +17,14 @@ public class PlayerDropHandler : MonoBehaviour {
 
 	/************************************************** DROP HANDLER **************************************************/
 
-	private InventoryFunctions playerInventory;
-
 	//When an item drop hits the player.  
 	void OnTriggerEnter2D(Collider2D externalTrigger) {
-		if (playerInventory == null)
-			playerInventory = InstanceDatabase.GetMainInventoryReference ().GetComponent <InventoryFunctions> ();
-
 		if (((externalTrigger.gameObject.GetComponent <DroppedItemProperties> () != null || externalTrigger.gameObject.CompareTag("Coin") || 
-			externalTrigger.gameObject.CompareTag("ExpNodule"))) && playerInventory.IsInitialized()) 
+			externalTrigger.gameObject.CompareTag("ExpNodule"))) && PlayerInventory.instance.IsInitialized()) 
 			PickupItem (externalTrigger.gameObject);
 	}
 
 	public void PickupItem(GameObject item) {
-		if (playerInventory == null)
-			playerInventory = InstanceDatabase.GetMainInventoryReference ().GetComponent <InventoryFunctions> ();
 		//This does not check the resourcereference property of the attached script as a comparison, only the tag.  Consider changing later.  
 		if (item.CompareTag ("ExpNodule")) {
 			transform.parent.gameObject.GetComponent <PlayerHealthPanelManager> ().OnExperienceNodulePickedUp ();
@@ -41,7 +34,7 @@ public class PlayerDropHandler : MonoBehaviour {
 			Destroy (item);
 		} else {
 			ResourceReferenceWithStack pendingObject = item.GetComponent <DroppedItemProperties> ().localResourceReference;
-			if (! playerInventory.AssignNewItemToBestSlot(pendingObject)) {
+			if (! PlayerInventory.instance.AssignNewItemToBestSlot(pendingObject)) {
 				Debug.LogError("ERROR WHEN ASSIGNING OBJECT");
 			} else {
 				Destroy (item);

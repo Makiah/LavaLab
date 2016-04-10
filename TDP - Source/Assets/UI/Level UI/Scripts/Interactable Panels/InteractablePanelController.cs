@@ -3,6 +3,12 @@ using System.Collections;
 
 public class InteractablePanelController : MonoBehaviour {
 
+	public static InteractablePanelController instance;
+
+	void Awake() {
+		instance = this;
+	}
+
 	void OnEnable() {
 		UIInitializationSequence.InitializeInteractablePanelController += InitializeInteractablePanelController;
 	}

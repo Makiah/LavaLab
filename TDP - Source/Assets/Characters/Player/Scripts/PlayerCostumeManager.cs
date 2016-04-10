@@ -35,11 +35,8 @@ public class PlayerCostumeManager : MonoBehaviour {
 	//The prefab of the item will be childed to this object.  
 	private Transform item;
 
-	private InventoryFunctions playerInventory;
-
 	void InitializeSpriteChildren() {
 		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <PlayerAction> ();
-		playerInventory = GameObject.Find("UI").GetComponent <InventoryFunctions> ();
 		//Just setting up the basic costume.  
 		body = transform.FindChild("Body").GetComponent <SpriteRenderer> ();
 		head = transform.FindChild ("Head").GetComponent <SpriteRenderer> ();
@@ -80,7 +77,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 		//Add the initial items for the profession to the inventory.  
 		if (profession.initialObjects != null) {
 			for (int i = 0; i < profession.initialObjects.Length; i++) {
-				playerInventory.AssignNewItemToBestSlot (profession.initialObjects [i]);
+				PlayerInventory.instance.AssignNewItemToBestSlot (profession.initialObjects [i]);
 			}
 		}
 	}
