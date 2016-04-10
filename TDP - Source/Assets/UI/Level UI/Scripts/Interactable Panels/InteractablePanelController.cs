@@ -4,11 +4,11 @@ using System.Collections;
 public class InteractablePanelController : MonoBehaviour {
 
 	void OnEnable() {
-		LevelEventManager.InitializeInteractablePanelController += InitializeInteractablePanelController;
+		UIInitializationSequence.InitializeInteractablePanelController += InitializeInteractablePanelController;
 	}
 
 	void OnDisable() {
-		LevelEventManager.InitializeInteractablePanelController -= InitializeInteractablePanelController;
+		UIInitializationSequence.InitializeInteractablePanelController -= InitializeInteractablePanelController;
 	}
 
 	InteractablePanelReference interactablePanel1;

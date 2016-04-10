@@ -62,7 +62,6 @@ public class PlayerHealthPanelReference : HealthPanelReference {
 	//Add/subtract coins.  
 	public bool UpdateCoinValue(int valueToAdd) {
 		//In case an objective depends on this.  
-		CurrentLevelVariableManagement.GetMainObjectiveManager ().OnMoneyModified (valueToAdd);
 		//Determine the new coin value.  
 		int newCoinValue = int.Parse (coinValue.text) + valueToAdd;
 		if (newCoinValue >= 0) {

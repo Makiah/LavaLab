@@ -18,11 +18,11 @@ using System.Collections;
 public abstract class DropsItems : MonoBehaviour {
 
 	void OnEnable() {
-		LevelEventManager.InitializeEnemies += MakeReferences;
+		InitializationSequence.InitializeEnemies += MakeReferences;
 	}
 
 	void OnDisable() {
-		LevelEventManager.InitializeEnemies -= MakeReferences;
+		InitializationSequence.InitializeEnemies -= MakeReferences;
 	}
 
 	protected DropReferenceClass[] drops;

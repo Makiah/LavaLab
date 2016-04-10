@@ -3,11 +3,11 @@ using System.Collections;
 
 public class SetInactiveAfterInitialization : MonoBehaviour {
 	void OnEnable() {
-		LevelEventManager.SetInactiveObjects += SetState;
+		InitializationSequence.SetInactiveObjects += SetState;
 	}
 
 	void OnDisable() {
-		LevelEventManager.SetInactiveObjects -= SetState;
+		InitializationSequence.SetInactiveObjects -= SetState;
 	}
 
 	void SetState() {

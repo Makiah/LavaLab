@@ -16,7 +16,7 @@ using System.Collections;
 public class Profession {
 	//Components that do not depend on gender.
 	public Sprite icon;
-	public readonly Sprite maleHead, femaleHead, body, arm, leg;
+	public readonly Sprite maleHead, femaleHead, body, arm1, arm2, leg1, leg2;
 	public string name;
 	public int professionID;
 	public ResourceReferenceWithStack[] initialObjects;
@@ -30,8 +30,10 @@ public class Profession {
 		maleHead = Resources.Load <Sprite> (resourcesPath + "Male Head");
 		femaleHead = Resources.Load <Sprite> (resourcesPath + "Female Head");
 		body = Resources.Load <Sprite> (resourcesPath + "Body");
-		leg = Resources.Load <Sprite> (resourcesPath + "Leg");
-		arm = Resources.Load <Sprite> (resourcesPath + "Arm");
+		leg1 = Resources.Load <Sprite> (resourcesPath + "Leg1");
+		leg2 = Resources.Load <Sprite> (resourcesPath + "Leg2");
+		arm1 = Resources.Load <Sprite> (resourcesPath + "Arm1");
+		arm2 = Resources.Load <Sprite> (resourcesPath + "Arm2");
 
 		//ID requirements
 		professionID = ctorProfessionID;

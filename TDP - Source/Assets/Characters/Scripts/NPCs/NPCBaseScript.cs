@@ -1,15 +1,15 @@
 using UnityEngine;
 using System.Collections;
 
-public abstract class NPCBaseScript : CharacterBaseActionClass {
+public abstract class NPCBaseScript : Character {
 
 	//Initialization.  
 	protected override void OnEnable() {
-		LevelEventManager.InitializeNPCs += SetReferences;
+		InitializationSequence.InitializeNPCs += Initialize;
 	}
 
 	protected override void OnDisable() {
-		LevelEventManager.InitializeNPCs -= SetReferences;
+		InitializationSequence.InitializeNPCs -= Initialize;
 	}
 
 	//Required for the NPCPanelController.  
@@ -26,8 +26,8 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	//Initializing the NPC
 	protected override void InitializeCharacter() {
 		//Get required components.  
-		playerTransform = CurrentLevelVariableManagement.GetPlayerReference ().transform;
-		playerInventory = CurrentLevelVariableManagement.GetMainInventoryReference().GetComponent <InventoryFunctions> ();
+		playerTransform = InstanceDatabase.GetPlayerReference ().transform;
+		playerInventory = InstanceDatabase.GetMainInventoryReference().GetComponent <InventoryFunctions> ();
 
 		//Initialize the NPC before starting to walk around.  
 		InitializeNPC ();

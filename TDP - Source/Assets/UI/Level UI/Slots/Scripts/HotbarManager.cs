@@ -20,11 +20,11 @@ public class HotbarManager : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 
 	void OnEnable() {
-		LevelEventManager.InitializeHotbarManager += InitializeHotbarManager;
+		UIInitializationSequence.InitializeHotbarManager += InitializeHotbarManager;
 	}
 
 	void OnDisable() {
-		LevelEventManager.InitializeHotbarManager -= InitializeHotbarManager;
+		UIInitializationSequence.InitializeHotbarManager -= InitializeHotbarManager;
 	}
 
 
@@ -46,7 +46,7 @@ public class HotbarManager : MonoBehaviour {
 	void InitializeHotbarManager() {
 		//Define player and hotbar slots.  
 		Transform slotParent = transform.FindChild("Slots");
-		playerObject = CurrentLevelVariableManagement.GetPlayerReference ();
+		playerObject = InstanceDatabase.GetPlayerReference ();
 		playerCostumeManager = playerObject.transform.FindChild ("FlippingItem").FindChild ("Character").GetComponent <PlayerCostumeManager>();
 		hotbarSlots = new HotbarSlotScript[slotParent.childCount];
 		for (int i = 0; i < slotParent.childCount; i++) {

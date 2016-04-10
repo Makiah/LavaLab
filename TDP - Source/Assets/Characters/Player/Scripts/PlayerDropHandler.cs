@@ -22,7 +22,7 @@ public class PlayerDropHandler : MonoBehaviour {
 	//When an item drop hits the player.  
 	void OnTriggerEnter2D(Collider2D externalTrigger) {
 		if (playerInventory == null)
-			playerInventory = CurrentLevelVariableManagement.GetMainInventoryReference ().GetComponent <InventoryFunctions> ();
+			playerInventory = InstanceDatabase.GetMainInventoryReference ().GetComponent <InventoryFunctions> ();
 
 		if (((externalTrigger.gameObject.GetComponent <DroppedItemProperties> () != null || externalTrigger.gameObject.CompareTag("Coin") || 
 			externalTrigger.gameObject.CompareTag("ExpNodule"))) && playerInventory.IsInitialized()) 
@@ -31,7 +31,7 @@ public class PlayerDropHandler : MonoBehaviour {
 
 	public void PickupItem(GameObject item) {
 		if (playerInventory == null)
-			playerInventory = CurrentLevelVariableManagement.GetMainInventoryReference ().GetComponent <InventoryFunctions> ();
+			playerInventory = InstanceDatabase.GetMainInventoryReference ().GetComponent <InventoryFunctions> ();
 		//This does not check the resourcereference property of the attached script as a comparison, only the tag.  Consider changing later.  
 		if (item.CompareTag ("ExpNodule")) {
 			transform.parent.gameObject.GetComponent <PlayerHealthPanelManager> ().OnExperienceNodulePickedUp ();

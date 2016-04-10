@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class DistrictDisplayer : MonoBehaviour {
 
 	void OnEnable() {
-		LevelEventManager.InitializePlayer += StartCountdown;
+		InitializationSequence.InitializePlayer += StartCountdown;
 	}
 
 	void OnDisable() {
-		LevelEventManager.InitializePlayer -= StartCountdown;
+		InitializationSequence.InitializePlayer -= StartCountdown;
 	}
 	
 	[System.Serializable]

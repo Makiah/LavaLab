@@ -22,11 +22,11 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	/************************* INITIALIZATION *************************/
 
 	protected virtual void OnEnable() {
-		LevelEventManager.InitializeEnemyHealthControllers += InitializeHealthBar;
+		UIInitializationSequence.InitializeEnemyHealthControllers += InitializeHealthBar;
 	}
 
 	protected virtual void OnDisable() {
-		LevelEventManager.InitializeEnemyHealthControllers -= InitializeHealthBar;
+		UIInitializationSequence.InitializeEnemyHealthControllers -= InitializeHealthBar;
 	}
 
 	/************************* HEALTH MANAGER *************************/
@@ -46,10 +46,10 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	//Look into initializing this once the player comes into activation distance.  
 	//Has to be public for Thuk Guards.  Could be extended though.  
 	public virtual void InitializeHealthBar() {
-		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
+		player = InstanceDatabase.GetPlayerReference ().transform;
 		currentHealth = lifePoints;
 		//Create panel
-		uiHealthController = CurrentLevelVariableManagement.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
+		uiHealthController = InstanceDatabase.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
 		//Initialize icon
 		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		//Start the coroutine that manages the active state of the health bar item.  

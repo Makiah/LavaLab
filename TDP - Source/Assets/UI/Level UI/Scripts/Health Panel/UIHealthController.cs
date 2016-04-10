@@ -19,11 +19,11 @@ public class UIHealthController : MonoBehaviour {
 
 	//Initialization
 	void OnEnable() {
-		LevelEventManager.InitializeUIHealthController += InitializeUIHealthController;
+		UIInitializationSequence.InitializeUIHealthController += InitializeUIHealthController;
 	}
 
 	void OnDisable() {
-		LevelEventManager.InitializeUIHealthController -= InitializeUIHealthController;
+		UIInitializationSequence.InitializeUIHealthController -= InitializeUIHealthController;
 	}
 
 	//Define Health controller components
