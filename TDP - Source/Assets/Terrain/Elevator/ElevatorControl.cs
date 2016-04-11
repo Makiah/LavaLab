@@ -25,6 +25,8 @@ public class ElevatorControl : MonoBehaviour, IMethodReroute1, IMethodReroute2 {
 	private bool movedToNextLevel = false;
 
 	IEnumerator MoveElevatorCoroutine() {
+		//Reset the lava timer so that the player does not die while on the elevator.  
+		LavaNotifier.instance.RestartLavaTimer();
 		//Make sure that the player moves with the elevator.  
 		InstanceDatabase.GetPlayerReference ().transform.SetParent (transform.GetChild(0).FindChild("Elevator"));
 
@@ -49,7 +51,7 @@ public class ElevatorControl : MonoBehaviour, IMethodReroute1, IMethodReroute2 {
 		//Create the level.  HAS TO BE PREINCREMENT NOT POSTINCREMENT
 		LevelGenerator.instance.CreateLevel(++LevelGenerator.instance.currentLevel);
 
-		yield return new WaitForSeconds (6);
+		yield return new WaitForSeconds (4);
 
 		//Move back up to the receiver.  
 		anim.SetBool ("AppearMoving", false);
@@ -61,6 +63,9 @@ public class ElevatorControl : MonoBehaviour, IMethodReroute1, IMethodReroute2 {
 		}
 
 		InstanceDatabase.GetPlayerReference ().transform.SetParent (null);
+
+		//Start the lava timer again.  
+		LavaNotifier.instance.StartLavaTimer();
 
 		//Wait until the player leaves the level.  
 		int currentLevel = LevelGenerator.instance.currentLevel;

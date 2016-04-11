@@ -24,6 +24,7 @@ public class UIInitializationSequence : MonoBehaviour {
 	public static event BaseInitialization InitializeInteractablePanelController;
 	public static event BaseInitialization InitializeInteractablePanels;
 	public static event BaseInitialization InitializeUISpeechControl;
+	public static event BaseInitialization InitializeLavaNotifier;
 
 	public static event BaseInitialization InitializeEnemyHealthControllers;
 	public static event BaseInitialization InitializeNPCPanelControllers;
@@ -48,6 +49,8 @@ public class UIInitializationSequence : MonoBehaviour {
 		if (InitializeInteractablePanels != null) InitializeInteractablePanels(); else Debug.LogError("InitializeInteractablePanels was null!");
 		//Speech control
 		if (InitializeUISpeechControl != null) InitializeUISpeechControl (); else Debug.LogError("InitializeUISpeechControl was null!");
+
+		if (InitializeLavaNotifier != null) InitializeLavaNotifier(); else Debug.LogError("InitializeLavaNotifier was null!");
 
 		if (InitializeHotbarManager != null) InitializeHotbarManager (); else Debug.LogError("InitializeHotbarItems was null!"); //Used for initializing the HotbarManager.  
 
