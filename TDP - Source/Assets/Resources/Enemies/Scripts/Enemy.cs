@@ -155,7 +155,7 @@ public abstract class Enemy : Character, ICombatant {
 		}
 	}
 
-	//The Combatant Interface methods
+	//If you actually want to attack after the animation, do it in the method that overrides this one.  
 	protected abstract void Attack();
 
 }

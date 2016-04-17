@@ -15,7 +15,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerAction : Character, ICanHoldItems {
+public class Player : Character, ICanHoldItems {
 
 	private bool touchingWall = false;
 	private bool playerCoroutinesCurrentlyActive = true;

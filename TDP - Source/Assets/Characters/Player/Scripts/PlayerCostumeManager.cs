@@ -29,14 +29,14 @@ public class PlayerCostumeManager : MonoBehaviour {
 	/************************************************ COSTUME MANAGEMENT ************************************************/
 
 	//Main player action
-	private PlayerAction mainPlayerAction;
+	private Player mainPlayerAction;
 	//SpriteRenderer child components
 	private SpriteRenderer head, body, idleArm, idleHand, occupiedArm, occupiedHand, topLeg, topFoot, bottomLeg, bottomFoot;
 	//The prefab of the item will be childed to this object.  
 	private Transform item;
 
 	void InitializeSpriteChildren() {
-		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <PlayerAction> ();
+		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <Player> ();
 		//Just setting up the basic costume.  
 		body = transform.FindChild("Body").GetComponent <SpriteRenderer> ();
 		head = transform.FindChild ("Head").GetComponent <SpriteRenderer> ();

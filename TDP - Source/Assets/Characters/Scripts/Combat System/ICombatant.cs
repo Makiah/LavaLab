@@ -5,11 +5,9 @@
 using UnityEngine;
 using System.Collections;
 
-public interface ICombatant {
+public interface ICombatant : IMethodReroute1, IMethodReroute2 {
 	bool CheckCurrentAttackAnimationState();
-	void OnAttackAnimationCompleted ();
 	string GetCombatantID();
-	void OnAttack ();
 	Character GetActualClass();
 	void ApplyKnockback(Vector2 force);
 }

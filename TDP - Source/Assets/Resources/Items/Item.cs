@@ -38,8 +38,7 @@ public abstract class Item : MonoBehaviour {
 	public virtual void SetAttachedCharacterInput(ICanHoldItems ctorCharacterInput) {
 		attachedCharacterInput = ctorCharacterInput;
 		//Similar to Java's instanceof operator.  
-		Debug.Log(attachedCharacterInput.GetActualClass().gameObject.name + " is " + (attachedCharacterInput.GetActualClass() is PlayerAction ? "" : "not") + " the player");
-		heldByPlayer = attachedCharacterInput.GetActualClass () is PlayerAction;
+		heldByPlayer = attachedCharacterInput.GetActualClass () is Player;
 	}
 
 	//Called by CharacterBaseActionClass when a new item is being used.  

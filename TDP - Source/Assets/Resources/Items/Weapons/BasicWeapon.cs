@@ -40,17 +40,17 @@ public class BasicWeapon : Item {
 		if (actionKey == MovementAndMethod.PossibleMovements.GroundPound) {
 			attachedCharacterInput.ExternalJumpAction (4);
 			if (attackAfterAnimation)
-				attachedCharacterInput.GetActualClass ().ActionsOnAttack += GroundPoundEnemy;
+				attachedCharacterInput.GetActualClass ().Action1 += GroundPoundEnemy;
 			else
 				GroundPoundEnemy ();
 		} else if (actionKey == MovementAndMethod.PossibleMovements.AirSlash) {
 			if (attackAfterAnimation)
-				attachedCharacterInput.GetActualClass ().ActionsOnAttack += AirSlashEnemy;
+				attachedCharacterInput.GetActualClass ().Action1 += AirSlashEnemy;
 			else
 				AirSlashEnemy ();
 		} else {
 			if (attackAfterAnimation)
-				attachedCharacterInput.GetActualClass ().ActionsOnAttack += AttackEnemyInFocus;
+				attachedCharacterInput.GetActualClass ().Action1 += AttackEnemyInFocus;
 			else
 				AttackEnemyInFocus ();
 		}
@@ -87,7 +87,6 @@ public class BasicWeapon : Item {
 
 	void AttackEnemyInFocus () {
 		//Used to look for health panel manager.  ALWAYS REMEMBER TO KEEP THE PARAMETERS IN ORDER.   
-		Debug.Log("Ignoring " + attachedCharacterInput.GetCombatantID());
 		CharacterHealthPanelManager resultingHealthPanelManager = LinecastingUtilities.FindEnemyViaLinecast (
 			attachedCharacterInput.GetActualClass().transform.position, 
 			distToEnemyOffset, 

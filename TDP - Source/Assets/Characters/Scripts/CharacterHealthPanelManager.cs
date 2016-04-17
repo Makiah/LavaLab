@@ -109,8 +109,8 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	protected virtual void OnDeath() {
 		StopCoroutine ("ControlHealthBarState");
 		OnThisEnemyDeActivated();
-		if (GetComponent <EnemyExpDropper> () != null)
-			GetComponent <EnemyExpDropper> ().OnEnemyDeath ();
+		if (GetComponent <CharacterItemDropper> () != null)
+			GetComponent <CharacterItemDropper> ().DropItems ();
 		else
 			Debug.Log (gameObject.name + " does not drop any EXP.");
 		Destroy (this.gameObject);

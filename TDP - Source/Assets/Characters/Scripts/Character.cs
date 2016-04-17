@@ -19,6 +19,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+//Although the NPCs don't actually need the rerouting (since they aren't attacking), it would be way too difficult to link the ICombatant interface to a whole new 
+//system, so I'll stick with this.  
+
 public abstract class Character : MonoBehaviour {
 
 	/********************************************** INITIALIZATION ******************************************************/
@@ -173,36 +176,52 @@ public abstract class Character : MonoBehaviour {
 	}
 	
 	
-	/************************************************* ATTACKING *********************************************************/
+	/************************************************* COMBATANT *********************************************************/
 	//Used for both the player and the enemies.  
 	protected bool currentlyInAttackAnimation = false;
 
 	//This delegate is called after the animation completes.  
 	public delegate void ActionAnimation ();
-	public event ActionAnimation ActionsOnAttack;
-	public event ActionAnimation ActionsAfterCompletedAnimation;
+	public event ActionAnimation Action1;
+	public event ActionAnimation Action2;
 	
 	public bool CheckCurrentAttackAnimationState() {
 		return currentlyInAttackAnimation;
 	}
 
-	//Attacking method.  
-	public void OnAttack() {
-		if (ActionsOnAttack != null) {
-			ActionsOnAttack ();
-			ActionsOnAttack = null;
+	//This is for actions that should occur before the animation.  
+	public void ReRoute1() {
+		if (Action1 != null) {
+			Action1 ();
+			Action1 = null;
 		}
 	}
 
-	//Only called by costume manager.  
-	public void OnAttackAnimationCompleted() {
-		//Make sure that the attack animation has already been run (it will exit immediately if the delegate is already null.  
-		OnAttack();
-		if (ActionsAfterCompletedAnimation != null) {
-			ActionsAfterCompletedAnimation ();
-			ActionsAfterCompletedAnimation = null;
+	//For actions that should occur after the animation.  Called by the animation or the animation script.  
+	public void ReRoute2() {
+		//Make sure that the attack animation has already been run (it will exit immediately if the delegate is already null).  
+		ReRoute1();
+		if (Action2 != null) {
+			Action2 ();
+			Action2 = null;
 		}
 		currentlyInAttackAnimation = false;
+	}
+
+	//When knockback should be applied to the character.  
+	public void ApplyKnockback(Vector2 force) {
+		//Maintaining a constant velocity would interfere with this.  
+		rb2d.AddForce (force);
+	}
+
+	//Combatant stuff.  
+	public string GetCombatantID() {
+		return characterGUID;
+	}
+
+	//Used for stuff like the transform.  
+	public Character GetActualClass() {
+		return this;
 	}
 
 	/**************** CHARACTER UTILITIES ***********************/
@@ -233,22 +252,6 @@ public abstract class Character : MonoBehaviour {
 			//Wait for the fixed update (has to be done on all physics-related coroutines).
 			yield return new WaitForFixedUpdate();
 		}
-	}
-
-	//When knockback should be applied to the character.  
-	public void ApplyKnockback(Vector2 force) {
-		//Maintaining a constant velocity would interfere with this.  
-		rb2d.AddForce (force);
-	}
-
-	//Combatant stuff.  
-	public string GetCombatantID() {
-		return characterGUID;
-	}
-
-	//Used for stuff like the transform.  
-	public Character GetActualClass() {
-		return this;
 	}
 
 	/***************************************** USED FOR POINTS WHERE THE ORIGINAL BEHAVIOUR WOULD BE OVERRIDDEN BY THE STORY *****************************************/

@@ -25,9 +25,9 @@ public class Projectile : MonoBehaviour {
 	public static Projectile Create(Sprite sprite, Vector3 location) {
 		//Attempt to load the basic projectile prefab since Unity won't serialize static variables).  
 		if (basicProjectile == null) {
-			basicProjectile = Resources.Load ("Weapons/Projectile/Projectile") as GameObject;
+			basicProjectile = Resources.Load ("Items/Weapons/Projectile/Projectile") as GameObject;
 			if (basicProjectile == null)
-				Debug.LogError ("Failed to load \"Weapons/Projectile/Projectile\"");
+				Debug.LogError ("Failed to load \"Items/Weapons/Projectile/Projectile\"");
 		}
 
 		//Check to make sure that the projectile requirements are satisfied.  

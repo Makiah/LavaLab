@@ -16,26 +16,24 @@ using System.Collections;
 public class PlayerDropHandler : MonoBehaviour {
 
 	/************************************************** DROP HANDLER **************************************************/
-
 	//When an item drop hits the player.  
 	void OnTriggerEnter2D(Collider2D externalTrigger) {
-		if (((externalTrigger.gameObject.GetComponent <DroppedItemProperties> () != null || externalTrigger.gameObject.CompareTag("Coin") || 
-			externalTrigger.gameObject.CompareTag("ExpNodule"))) && PlayerInventory.instance.IsInitialized()) 
-			PickupItem (externalTrigger.gameObject);
+		if (externalTrigger.gameObject.GetComponent <Drop> () != null && PlayerInventory.instance.IsInitialized())
+			PickupItem (externalTrigger.gameObject.GetComponent <Drop> ());
 	}
 
-	public void PickupItem(GameObject item) {
+	public void PickupItem(Drop item) {
 		//This does not check the resourcereference property of the attached script as a comparison, only the tag.  Consider changing later.  
-		if (item.CompareTag ("ExpNodule")) {
+		if (item.gameObject.CompareTag ("ExpNodule")) {
 			transform.parent.gameObject.GetComponent <PlayerHealthPanelManager> ().OnExperienceNodulePickedUp ();
-			Destroy (item);
-		} else if (item.CompareTag ("Coin")) {
+			Destroy (item.gameObject);
+		} else if (item.gameObject.CompareTag ("Coin")) {
 			transform.parent.gameObject.GetComponent <PlayerHealthPanelManager> ().OnCoinPickedUp(1);
-			Destroy (item);
+			Destroy (item.gameObject);
 		} else {
-			ResourceReferenceWithStack pendingObject = item.GetComponent <DroppedItemProperties> ().localResourceReference;
+			ResourceReferenceWithStack pendingObject = item.localResourceReference;
 			if (! PlayerInventory.instance.AssignNewItemToBestSlot(pendingObject)) {
-				Debug.LogError("ERROR WHEN ASSIGNING OBJECT");
+				Debug.LogError("ERROR WHEN ASSIGNING OBJECT TO INVENTORY");
 			} else {
 				Destroy (item);
 			}

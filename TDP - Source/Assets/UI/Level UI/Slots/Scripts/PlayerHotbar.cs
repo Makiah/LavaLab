@@ -70,7 +70,7 @@ public class PlayerHotbar : MonoBehaviour {
 	//Used for detecting number keys.  
 	IEnumerator CheckForActiveItemKey() {
 		while (true) {
-			if (playerObject.GetComponent <PlayerAction> ().CheckCurrentAttackAnimationState () != true) {
+			if (playerObject.GetComponent <Player> ().CheckCurrentAttackAnimationState () != true) {
 				if (Input.GetKeyDown (KeyCode.Alpha1)) {
 					if (previouslyActiveSlot != 0) {
 						currentlyActiveSlot = 0;
@@ -141,7 +141,7 @@ public class PlayerHotbar : MonoBehaviour {
 			if (Input.GetMouseButtonDown (1) && Input.GetKey (KeyCode.LeftShift) && hotbarSlots[currentlyActiveSlot].GetCurrentlyAssigned() != null) {			
 
 				//Instantiate the item.  
-				DropUtilities.InstantiateDroppedItem (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned (), playerObject.transform, 15 * playerObject.GetComponent <PlayerAction> ().GetFacingDirection ());
+				Drop.Create (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned (), playerObject.transform.position, 15 * playerObject.GetComponent <Player> ().GetFacingDirection ());
 
 				//Used to remove the current item from the hotbar.  
 				ModifyStackOfSelectedItem (1);

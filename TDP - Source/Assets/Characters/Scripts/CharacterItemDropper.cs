@@ -14,8 +14,9 @@
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public abstract class DropsItems : MonoBehaviour {
+public class CharacterItemDropper : MonoBehaviour {
 
 	void OnEnable() {
 		InitializationSequence.InitializeEnemies += MakeReferences;
@@ -25,26 +26,33 @@ public abstract class DropsItems : MonoBehaviour {
 		InitializationSequence.InitializeEnemies -= MakeReferences;
 	}
 
-	protected DropReferenceClass[] drops;
+	protected List <DropReferenceClass> drops;
 
 	private DropReferenceClass expDrop, coinDrop;
 
 	[SerializeField] protected int experienceToDrop = 0, cashToDrop = 0;
 
-	protected virtual void MakeReferences() {
+	private void MakeReferences () {
+		//Define the default elements.  
 		expDrop = new DropReferenceClass(ResourceDatabase.GetItemByParameter ("ExpNodule"), 1, 1, 1);
 		coinDrop = new DropReferenceClass (ResourceDatabase.GetItemByParameter ("Coin"), 1, 1, 1);
 	}
 
-	protected void DropItems() {
+	//The character has to call this method to change the drops.  
+	public void DefineDrops(List <DropReferenceClass> drops) {
+		this.drops = drops;
+	}
+
+	//Drops all items around the enemy or character when some event is triggered.  
+	public void DropItems() {
 		if (drops != null) {
-			for (int i = 0; i < drops.Length; i++) {
+			for (int i = 0; i < drops.Count; i++) {
 				if (Random.Range (0, drops [i].probabilityToDrop) == 0) {
 					for (int q = 0; q < Random.Range(drops[i].minToDrop, drops[i].maxToDrop + 1); q++) {
 						if (drops[i].dropReference != null) {
-							DropUtilities.InstantiateDroppedItem(new ResourceReferenceWithStack(drops[i].dropReference, 1), transform, 0);
+							Drop.Create(new ResourceReferenceWithStack(drops[i].dropReference, 1), transform.position, 0);
 						} else {
-							Debug.Log("DropReference was null!!! (DropsItems)");
+							Debug.Log("DropReference " + i + " was null!!! (DropsItems)");
 						}
 					}
 				}
@@ -55,10 +63,7 @@ public abstract class DropsItems : MonoBehaviour {
 
 		if (experienceToDrop > 0) {
 			for (int i = 0; i < experienceToDrop; i++) {
-				GameObject expDropped = (GameObject) (Instantiate (expDrop.dropReference.playerHoldingPrefab, transform.position, Quaternion.identity));
-				expDropped.AddComponent <DroppedItemProperties> ();
-				expDropped.GetComponent <DroppedItemProperties> ().localResourceReference = new ResourceReferenceWithStack(expDrop.dropReference, 1);
-				expDropped.GetComponent <DroppedItemProperties> ().Initialize();
+				Drop.Create (new ResourceReferenceWithStack (expDrop.dropReference, 1), transform.position, 0);
 			}
 		} else {
 			Debug.Log("Did not drop any experience, experience to drop was 0. (DropsItems)");
@@ -66,10 +71,7 @@ public abstract class DropsItems : MonoBehaviour {
 
 		if (cashToDrop > 0) {
 			for (int i = 0; i < cashToDrop; i++) {
-				GameObject cashDropped = (GameObject) (Instantiate (coinDrop.dropReference.playerHoldingPrefab, transform.position, Quaternion.identity));
-				cashDropped.AddComponent <DroppedItemProperties> ();
-				cashDropped.GetComponent <DroppedItemProperties> ().localResourceReference = new ResourceReferenceWithStack(coinDrop.dropReference, 1);
-				cashDropped.GetComponent <DroppedItemProperties> ().Initialize();
+				Drop.Create (new ResourceReferenceWithStack (coinDrop.dropReference, 1), transform.position, 0);
 			}
 		} else {
 			Debug.Log("Did not drop any experience, experience to drop was 0. (DropsItems)");

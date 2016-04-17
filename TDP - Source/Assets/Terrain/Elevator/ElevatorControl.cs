@@ -6,7 +6,7 @@ public class ElevatorControl : MonoBehaviour, IMethodReroute1, IMethodReroute2 {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.transform.parent != null && other.transform.parent.parent != null) {
-			if (other.transform.parent.parent.GetComponent <PlayerAction> () != null) {
+			if (other.transform.parent.parent.GetComponent <Player> () != null) {
 				MoveElevator ();
 			}
 		}

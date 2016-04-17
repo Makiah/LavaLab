@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Turret : Enemy, IMethodReroute1 {
+public class Turret : Enemy {
 
 	//Have to be taken from the resources folder.  
 	private static GameObject turret;
@@ -143,17 +143,13 @@ public class Turret : Enemy, IMethodReroute1 {
 		while (true) {
 			if (Vector2.Distance (player.position, transform.position) < 20) {
 				anim.SetTrigger ("Shoot");
+				Action2 += Attack;
 				yield return new WaitForSeconds (fireRate);
 			}
 			yield return null;
 		}
 	}
-
-	//Used for the animator.  
-	public void ReRoute1() {
-		Attack ();
-	}
-
+		
 	protected override void Attack() {
 		Transform shooter = transform.GetChild (0).GetChild (0), target = shooter.GetChild (0);
 		Debug.Log ("Creating bolt");
