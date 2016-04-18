@@ -104,9 +104,9 @@ public class PlayerCostumeManager : MonoBehaviour {
 			createdItem.transform.localScale = new Vector3(prefabSelectedInHotbar.transform.localScale.x, prefabSelectedInHotbar.transform.localScale.y, 1);//transform.parent.localScale * createdItem.transform.localScale;
 			createdItem.transform.localRotation = transform.parent.localRotation;
 
-			if (prefabSelectedInHotbar.GetComponent <Item> () != null) {
-				prefabSelectedInHotbar.GetComponent <Item> ().SetAttachedCharacterInput (mainPlayerAction);
-				mainPlayerAction.OnRefreshCurrentWeaponMoves (prefabSelectedInHotbar.GetComponent <Item> ());
+			if (createdItem.GetComponent <Item> () != null) {
+				createdItem.GetComponent <Item> ().SetAttachedCharacterInput (mainPlayerAction);
+				mainPlayerAction.OnRefreshCurrentWeaponMoves (createdItem.GetComponent <Item> ());
 			} else {
 				mainPlayerAction.OnRefreshCurrentWeaponMoves (null);
 			}

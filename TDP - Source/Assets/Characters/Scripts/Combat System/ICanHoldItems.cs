@@ -9,6 +9,5 @@ using System.Collections;
 
 public interface ICanHoldItems : ICombatant {
 	void OnRefreshCurrentWeaponMoves(Item itemInUse);
-	void AttackAction(MovementAndMethod someAttack);
 	void ExternalJumpAction (int num);
 }

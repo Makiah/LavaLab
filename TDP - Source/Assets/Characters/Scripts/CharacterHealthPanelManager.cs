@@ -21,13 +21,14 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 
 	/************************* INITIALIZATION *************************/
 
-	protected virtual void OnEnable() {
-		UIInitializationSequence.InitializeEnemyHealthControllers += InitializeHealthBar;
-	}
-
-	protected virtual void OnDisable() {
-		UIInitializationSequence.InitializeEnemyHealthControllers -= InitializeHealthBar;
-	}
+	//Has to be initialized by the enemies (dynamically instantiated)
+//	protected virtual void OnEnable() {
+//		UIInitializationSequence.InitializeEnemyHealthControllers += InitializeHealthBar;
+//	}
+//
+//	protected virtual void OnDisable() {
+//		UIInitializationSequence.InitializeEnemyHealthControllers -= InitializeHealthBar;
+//	}
 
 	/************************* HEALTH MANAGER *************************/
 
@@ -36,7 +37,7 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 
 	protected EnemyHealthPanelsController uiHealthController;
 	HealthPanelReference healthPanelReference;
-	protected Sprite characterHeadSprite;
+	[SerializeField] protected Sprite characterHeadSprite;
 
 	//The player transform
 	protected Transform player;
@@ -50,8 +51,6 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 		currentHealth = lifePoints;
 		//Create panel
 		uiHealthController = EnemyHealthPanelsController.instance; 
-		//Initialize icon
-		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		//Start the coroutine that manages the active state of the health bar item.  
 		StartCoroutine (ControlHealthBarState());
 	}

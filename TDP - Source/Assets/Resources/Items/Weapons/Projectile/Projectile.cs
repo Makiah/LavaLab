@@ -15,7 +15,9 @@
 
 using UnityEngine;
 using System.Collections;
-using CatchCo;
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
 
 public class Projectile : MonoBehaviour {
 	
@@ -42,13 +44,20 @@ public class Projectile : MonoBehaviour {
 		}
 	}
 
+	public static Projectile Create(Sprite sprite, Vector3 location, string guidToIgnore) {
+		Projectile p = Create (sprite, location);
+		p.ignoreGUID = guidToIgnore;
+		return p;
+	}
+
 	//Instance variables
 	protected Rigidbody2D rb2d;
 	private bool notificationSent = false;
 	protected float power;
 	protected GameObject playerObject;
+	public string ignoreGUID = "";
 
-	public virtual void Initialize(Vector2 positionToFireToward, float velocity, float power) {
+	public virtual void Initialize(Vector2 positionToFireToward, float speed, float power) {
 		playerObject = InstanceDatabase.GetPlayerReference ();
 		//Get the Rigidbody component so that physics can be used.  
 		rb2d = GetComponent <Rigidbody2D> ();
@@ -59,7 +68,7 @@ public class Projectile : MonoBehaviour {
 
 		//Turn to the heading and move in that direction.  
 		transform.localRotation = Quaternion.Euler(new Vector3 (0, 0, degreeAngleToTarget));
-		rb2d.velocity = new Vector2 (velocity * Mathf.Cos (ScriptingUtilities.DegreesToRadians(degreeAngleToTarget)), velocity * Mathf.Sin (ScriptingUtilities.DegreesToRadians(degreeAngleToTarget)));
+		rb2d.velocity = new Vector2 (speed * Mathf.Cos (ScriptingUtilities.DegreesToRadians(degreeAngleToTarget)), speed * Mathf.Sin (ScriptingUtilities.DegreesToRadians(degreeAngleToTarget)));
 
 		//Set the strength of the arrow.  
 		this.power = power;
@@ -68,12 +77,8 @@ public class Projectile : MonoBehaviour {
 		StartCoroutine (DestroyIfDistanceFromPlayer());
 	}
 
-	public void EnableLight() {
-		transform.GetChild (0).GetChild (0).gameObject.SetActive (true);
-	}
-
-	public void DisableLight() {
-		transform.GetChild (0).GetChild (0).gameObject.SetActive (false);
+	public void SetLightState(bool state) {
+		transform.GetChild (0).GetChild (0).gameObject.SetActive (state);
 	}
 
 	//If the distance to the player is too large, then destroy the projectile (used to avoid memory loss, but could be disabled for a more accurate setting).  
@@ -86,17 +91,32 @@ public class Projectile : MonoBehaviour {
 		}
 	}
 
+	//When something hits the projectile (or the projectile hits something)
 	void OnTriggerEnter2D (Collider2D externalTrigger) {
-		//Make sure that the second parent of the transform exists.  
-		if (externalTrigger.transform.parent != null && externalTrigger.transform.parent.parent != null) {
-			//Check to see whether it exists.  
-			if (externalTrigger.transform.parent.parent.GetComponent <CharacterHealthPanelManager> () != null && notificationSent == false) {
-				externalTrigger.transform.parent.parent.GetComponent <CharacterHealthPanelManager> ().YouHaveBeenAttacked (power);
+		//Even this boolean seems pointless, it is actually required.  Destroy() does not destroy the object on that frame, and DestroyImmediate causes
+		//strange side effects, so this is an easier way of dealing with the issue.  
+		if (notificationSent == false) {
+			//GetComponentInParent checks recursively to find the desired component (really useful)
+			GameObject externalGameObject = externalTrigger.gameObject;
+			ICombatant combatant;
+			if (externalGameObject.GetComponent <ICombatant> () != null)
+				combatant = externalGameObject.GetComponent <ICombatant> ();
+			else if (externalGameObject.transform.parent != null && externalGameObject.GetComponentInParent <ICombatant> () != null)
+				combatant = externalGameObject.GetComponentInParent <ICombatant> ();
+			else {
+				//Exit if no ICombatant is present.  
+				Debug.Log("No ICombatant");
+				return;
+			}
+
+			//Make sure that we are not attacking ourself.  
+			if (combatant.GetCombatantID ().Equals (ignoreGUID) == false) {
+				//Attack the other combatant.  
+				combatant.GetHealthController ().YouHaveBeenAttacked (power);
 				notificationSent = true;
 				Destroy (this.gameObject);
 			}
 		}
-
 	}
 
 }

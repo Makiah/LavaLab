@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(CharacterHealthPanelManager))]
+
 public class Turret : Enemy {
 
 	//Have to be taken from the resources folder.  
@@ -63,8 +65,8 @@ public class Turret : Enemy {
 
 	protected override void InitializeEnemy() {
 		//Change fireRate and bolt color depending on the current level.  
-		fireRate = Mathf.Clamp((fireRate) / (1 + (Mathf.Log (LevelGenerator.instance.currentLevel) / 6f)), .1f, 30);
-		fireSpeed = Mathf.Clamp(fireSpeed * (1f + (Mathf.Log (LevelGenerator.instance.currentLevel) / 6f)), .1f, 30);
+		fireRate = Mathf.Clamp((fireRate * 3f) / (3f - Mathf.Log (LevelGenerator.instance.currentLevel)), .1f, 30);
+		fireSpeed = Mathf.Clamp(fireSpeed * (1f + Mathf.Log (LevelGenerator.instance.currentLevel)), .1f, 30);
 	}
 
 	//Used for when the static Create method wants to set the local position for the turret.  
@@ -90,6 +92,7 @@ public class Turret : Enemy {
 
 		bool facingRight = true;
 
+		//Constantly
 		while (true) {
 			if (Vector2.Distance (player.position, transform.position) < 20) {
 				//Calculate the direction vector, and normalize it (make 1 the largest value, and scale the opposite value appropriately).  
@@ -108,30 +111,20 @@ public class Turret : Enemy {
 				//Calculate the correct direction to point.  
 				zVal = Mathf.Atan2 (directionVector.y, directionVector.x) * Mathf.Rad2Deg;
 
-				//Only works if the turret is rolling or on bottom.  
-				if (localPosition == TurretPosition.BOTTOM || localPosition == TurretPosition.ROLLING) {
-					//Clamp the values based on the direction the thing is facing.  
-					if (facingRight)
-						zVal *= -1;
-					else
-						zVal -= 180;
-
-					zVal = Mathf.Clamp (zVal, -fireThreshold, 0);
-
-					transform.GetChild (0).rotation = Quaternion.Euler (0, 0, zVal);
-				} else {
-					//Just flip the angle (ALL YOU HAVE TO DO YESSS)
+				//Flip it if the turret is on top.  
+				if (localPosition == TurretPosition.TOP)
 					zVal *= -1;
-					//Clamp the values based on the direction the thing is facing.  
-					if (facingRight)
-						zVal *= -1;
-					else
-						zVal -= 180;
 
-					zVal = Mathf.Clamp (zVal, -fireThreshold, 0);
+				//Calculate the actual value based off of the trig calculated previously.  
+				if (facingRight)
+					zVal *= -1;
+				else
+					zVal -= 180;
 
-					transform.GetChild (0).rotation = Quaternion.Euler (0, 0, zVal);
-				}
+				zVal = Mathf.Clamp (zVal, -fireThreshold, 0);
+
+				//HAS to be Quaternion.Euler, not the other way.  
+				transform.GetChild(0).localRotation = Quaternion.Euler(0, 0, zVal);
 			}
 
 			yield return null;
@@ -143,19 +136,18 @@ public class Turret : Enemy {
 		while (true) {
 			if (Vector2.Distance (player.position, transform.position) < 20) {
 				anim.SetTrigger ("Shoot");
-				Action2 += Attack;
+				Action1 += Attack;
 				yield return new WaitForSeconds (fireRate);
 			}
 			yield return null;
 		}
 	}
-		
+
 	protected override void Attack() {
 		Transform shooter = transform.GetChild (0).GetChild (0), target = shooter.GetChild (0);
-		Debug.Log ("Creating bolt");
-		Projectile bolt = Projectile.Create (boltSprite, shooter.position);
+		Projectile bolt = Projectile.Create (boltSprite, shooter.position, GetCombatantID());
 		//bolt.transform.GetChild (0).GetComponent <SpriteRenderer> ().color = boltColor;
-		bolt.EnableLight ();
+		bolt.SetLightState (true);
 		bolt.Initialize (target.position, fireSpeed, enemyAttackingPower);
 	}
 

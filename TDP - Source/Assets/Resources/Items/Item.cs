@@ -19,9 +19,10 @@ using System.Collections.Generic;
 public abstract class Item : MonoBehaviour {
 
 	//Used for base classes.  
-	protected bool heldByPlayer = false;
+	protected bool initialized = false;
 
-	//Attack and move works by creating a serializable system for defining MovementAndMethod[].  
+	//Attack and move works by creating a serializable system for defining MovementAndMethod[].  This class HAS to be present, even though it is pretty much
+	//just a copy of the MovementAndMethod class, since it is the way that it will work in the inspector.  
 	[System.Serializable]
 	public class AttackAndMove {
 		public MovementAndMethod.PossibleTriggers method;
@@ -35,13 +36,17 @@ public abstract class Item : MonoBehaviour {
 	//The class methods.  
 	protected ICanHoldItems attachedCharacterInput;
 
-	public virtual void SetAttachedCharacterInput(ICanHoldItems ctorCharacterInput) {
+	//Has to be called before being initialized.  
+	public void SetAttachedCharacterInput(ICanHoldItems ctorCharacterInput) {
+		//Set the attached character (simpler than searching through the whole parent for the character action class).  
 		attachedCharacterInput = ctorCharacterInput;
-		//Similar to Java's instanceof operator.  
-		heldByPlayer = attachedCharacterInput.GetActualClass () is Player;
+		//Tell the child classes that the object is initialized.  
+		initialized = true;
+		InitializeItem ();
 	}
 
 	//Called by CharacterBaseActionClass when a new item is being used.  
+	public abstract void InitializeItem();
 	public abstract MovementAndMethod[] GetPossibleActionsForItem ();
 	public abstract void InfluenceEnvironment(MovementAndMethod.PossibleMovements actionKey);
 

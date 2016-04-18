@@ -10,4 +10,5 @@ public interface ICombatant : IMethodReroute1, IMethodReroute2 {
 	string GetCombatantID();
 	Character GetActualClass();
 	void ApplyKnockback(Vector2 force);
+	CharacterHealthPanelManager GetHealthController();
 }

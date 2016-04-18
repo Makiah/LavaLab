@@ -19,6 +19,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
+
 //Although the NPCs don't actually need the rerouting (since they aren't attacking), it would be way too difficult to link the ICombatant interface to a whole new 
 //system, so I'll stick with this.  
 

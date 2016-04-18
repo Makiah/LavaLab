@@ -41,8 +41,8 @@ public class ResourceReference {
 	}
 
 	//Note: These constructors require each folder to have naming conventions.  
-	//Player holding prefab for "Mace" should be under Prefabs/(path specified here)/Mace.  
-	//Drop Prefab for "Mace" should be under Prefabs/(path specified here)/MaceDrop.  
+	//Player holding prefab for "Mace" should be under (path specified here)/Mace.  
+	//Drop Prefab for "Mace" should be under (path specified here)/MaceDrop.  
 	//Custom item icon (for inventory and cursor) should be under Prefabs/(path specified here)/MaceCustomIcon.  
 	//These components are loaded automatically if they exist.  If they do not, very specific errors should be returned.  
 
@@ -55,14 +55,14 @@ public class ResourceReference {
 		localGroupID = ctorLocalGroupID;
 
 		//Load the holding prefab.  
-		string inGamePrefabPath = "Prefabs/" + path + itemScreenName;
+		string inGamePrefabPath = path + itemScreenName;
 		if ((Resources.Load (inGamePrefabPath) as GameObject) != null) 
 			playerHoldingPrefab = Resources.Load (inGamePrefabPath) as GameObject;
 		else 
 			Debug.LogError ("Could not load item " + itemScreenName + " holding prefab from path " + inGamePrefabPath);
 
 		//Set the sprite icon if it exists.  
-		string customIconPath = "Prefabs/" + path + itemScreenName + "CustomIcon";
+		string customIconPath = path + itemScreenName + "CustomIcon";
 		if (Resources.Load <Sprite> (customIconPath) != null) {
 			itemIcon = Resources.Load <Sprite> (customIconPath);
 		} else {

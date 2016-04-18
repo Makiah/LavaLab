@@ -15,6 +15,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(PlayerHealthPanelManager))]
+
 public class Player : Character, ICanHoldItems {
 
 	private bool touchingWall = false;
@@ -161,18 +163,6 @@ public class Player : Character, ICanHoldItems {
 			possibleWeaponMoves = null;
 		}
 	}
-
-	//Has to be public for the interface
-	public void AttackAction(MovementAndMethod someAttack) {
-		if (!currentlyInAttackAnimation) {
-			anim.SetTrigger (someAttack.GetActionKey());
-			itemInUseByCharacter.InfluenceEnvironment (someAttack.GetActionEnum());
-			if (someAttack.GetActionEnum() != MovementAndMethod.PossibleMovements.CreatePhysicalItem)
-				currentlyInAttackAnimation = true;
-		} else {
-			Debug.Log("Was in attack animation, did not attack");
-		}
-	}
 		
 	//The coroutine method that will check whether the dictionary requirements for some attack have been met.  The code that sets the array (above) 
 	//is in the costume manager class.  
@@ -187,7 +177,12 @@ public class Player : Character, ICanHoldItems {
 							//If the can be used while midair is false, then it will only work while grounded is true.  Vice versa is also the case.  
 							if (possibleWeaponMoves [i].GetCanBeUsedWhileMidair () == ! grounded) {
 								if (possibleWeaponMoves [i].GetTriggerHasOccurred ()) {
-									AttackAction (possibleWeaponMoves [i]);
+									if (!currentlyInAttackAnimation) {
+										anim.SetTrigger (possibleWeaponMoves[i].GetActionKey());
+										itemInUseByCharacter.InfluenceEnvironment (possibleWeaponMoves[i].GetActionEnum());
+									} else {
+										Debug.Log("Was in attack animation, did not attack");
+									}
 								}
 							}
 						}
@@ -226,5 +221,10 @@ public class Player : Character, ICanHoldItems {
 		} else {
 			Debug.Log ("Cannot enable coroutines: Coroutines are already active.");
 		}
+	}
+
+	/************************** HEALTH PANEL MANAGER ***********************************/
+	public CharacterHealthPanelManager GetHealthController() {
+		return GetComponent <CharacterHealthPanelManager> ();
 	}
 }

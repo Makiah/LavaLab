@@ -25,11 +25,14 @@ public class ResourceDatabase : MonoBehaviour {
 
 		/******************************************* ITEMS *******************************************/
 		//Tools
-		//masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Wooden Sword", "A weak sword, but useful for survival.", 0, "Weapons/Wooden/WoodenSword/"));
+		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Pistol", "Weak, but durable", 0, "Items/Weapons/Ranged/Pistol/"));
 
 		/******************************************* RACES *******************************************/
 		//Agent (Default)
-		gameProfessions.Add (new Profession ("Professions/Agent/", "Agent", 0, null));
+		ResourceReferenceWithStack[] initialItems = new ResourceReferenceWithStack[] {
+			new ResourceReferenceWithStack(ResourceDatabase.GetItemByParameter("Pistol"), 1)
+		};
+		gameProfessions.Add (new Profession ("Professions/Agent/", "Agent", 0, initialItems));
 	}
 
 	public static Profession GetRaceByParameter(string specifiedName) {

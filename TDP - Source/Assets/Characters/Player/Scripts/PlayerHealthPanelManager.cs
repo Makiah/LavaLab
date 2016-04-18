@@ -21,11 +21,11 @@ using UnityEngine.UI;
 
 public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 
-	protected override void OnEnable() {
+	protected void OnEnable() {
 		InitializationSequence.InitializePlayer += InitializeHealthBar;
 	}
 
-	protected override void OnDisable() {
+	protected void OnDisable() {
 		InitializationSequence.InitializePlayer -= InitializeHealthBar;
 	}
 	

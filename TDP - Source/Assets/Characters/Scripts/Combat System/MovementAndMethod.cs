@@ -14,13 +14,7 @@ public class MovementAndMethod {
 	[SerializeField]
 	public enum PossibleMovements 
 	{
-		OverheadSlice, 
-		Stab, 
-		ShootBow, 
-		CreatePhysicalItem, 
-		GroundPound, 
-		SpinningSlash, 
-		AirSlash
+		ShootPistol
 	}
 
 	//Specifies the required delegate.  

@@ -15,6 +15,8 @@ using UnityEngine;
 using System.Collections;
 using System;
 
+[RequireComponent(typeof(CharacterHealthPanelManager))]
+
 public abstract class Enemy : Character, ICombatant {
 
 	/******************************************** INITIALIZATION *******************************************/
@@ -52,6 +54,7 @@ public abstract class Enemy : Character, ICombatant {
 	protected override void InitializeCharacter() {
 		//Set required variables for the enemy to function.  
 		player = InstanceDatabase.GetPlayerReference ().transform;
+		GetComponent <CharacterHealthPanelManager> ().InitializeHealthBar ();
 
 		InitializeEnemy ();
 
@@ -157,5 +160,10 @@ public abstract class Enemy : Character, ICombatant {
 
 	//If you actually want to attack after the animation, do it in the method that overrides this one.  
 	protected abstract void Attack();
+
+	/************************************* HEALTH PANEL THING *************************************/
+	public CharacterHealthPanelManager GetHealthController() {
+		return GetComponent <CharacterHealthPanelManager> ();
+	}
 
 }
