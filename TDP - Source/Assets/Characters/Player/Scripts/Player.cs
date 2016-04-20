@@ -91,16 +91,7 @@ public class Player : Character, ICanHoldItems {
 			lastJumpWasWallJump = false;
 			break;
 		case 2: 
-			rb2d.velocity = new Vector2 (rb2d.velocity.x, jumpForce);
-			lastJumpWasWallJump = false;
-			break;
-		case 3: 
-			rb2d.velocity = new Vector2 (wallJumpForce * -GetFacingDirection (), jumpForce);
-			lastJumpWasWallJump = true;
-			Flip ();
-			break;
-		case 4: 
-			rb2d.velocity = new Vector2 (0, -6);
+			rb2d.velocity = new Vector2 (rb2d.velocity.x, -jumpForce);
 			lastJumpWasWallJump = false;
 			break;
 		default: 
