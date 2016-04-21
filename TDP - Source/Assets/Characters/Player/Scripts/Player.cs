@@ -67,7 +67,7 @@ public class Player : Character, ICanHoldItems {
 					//Double jump
 					InitializeJump (2);
 			} else if (playerCoroutinesCurrentlyActive && Input.GetKeyDown(KeyCode.DownArrow)) {
-				if (jumpInEffect == 0 || jumpInEffect == 1) 
+				if (jumpInEffect == 0 || jumpInEffect == 1 || jumpInEffect == 2) 
 					//Dive and roll.  
 					InitializeJump(3);
 			}

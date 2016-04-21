@@ -95,26 +95,30 @@ public class Projectile : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D externalTrigger) {
 		//Even this boolean seems pointless, it is actually required.  Destroy() does not destroy the object on that frame, and DestroyImmediate causes
 		//strange side effects, so this is an easier way of dealing with the issue.  
-		if (notificationSent == false) {
+		//For some reason, I have to check to make sure that the collider is a trigger (even though the method header already implies this.  
+		if (notificationSent == false && externalTrigger.isTrigger) {
 			//GetComponentInParent checks recursively to find the desired component (really useful)
 			GameObject externalGameObject = externalTrigger.gameObject;
-			ICombatant combatant;
-			if (externalGameObject.GetComponent <ICombatant> () != null)
-				combatant = externalGameObject.GetComponent <ICombatant> ();
-			else if (externalGameObject.transform.parent != null && externalGameObject.GetComponentInParent <ICombatant> () != null)
-				combatant = externalGameObject.GetComponentInParent <ICombatant> ();
-			else {
-				//Exit if no ICombatant is present.  
-				Debug.Log("No ICombatant");
-				return;
-			}
+			if (externalGameObject.layer == LayerMask.NameToLayer ("Fighting")) {
+				Debug.Log("External trigger is " + externalTrigger.gameObject.name);
+				ICombatant combatant;
+				if (externalGameObject.GetComponent <ICombatant> () != null)
+					combatant = externalGameObject.GetComponent <ICombatant> ();
+				else if (externalGameObject.transform.parent != null && externalGameObject.GetComponentInParent <ICombatant> () != null)
+					combatant = externalGameObject.GetComponentInParent <ICombatant> ();
+				else {
+					//Exit if no ICombatant is present.  
+					Debug.Log ("No ICombatant");
+					return;
+				}
 
-			//Make sure that we are not attacking ourself.  
-			if (combatant.GetCombatantID ().Equals (ignoreGUID) == false) {
-				//Attack the other combatant.  
-				combatant.GetHealthController ().YouHaveBeenAttacked (power);
-				notificationSent = true;
-				Destroy (this.gameObject);
+				//Make sure that we are not attacking ourself.  
+				if (combatant.GetCombatantID ().Equals (ignoreGUID) == false) {
+					//Attack the other combatant.  
+					combatant.GetHealthController ().YouHaveBeenAttacked (power);
+					notificationSent = true;
+					Destroy (this.gameObject);
+				}
 			}
 		}
 	}
