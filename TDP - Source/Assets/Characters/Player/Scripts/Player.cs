@@ -47,7 +47,7 @@ public class Player : Character, ICanHoldItems {
 			touchingWall = Physics2D.Linecast (transform.position, wallCheck.position, 1 << LayerMask.NameToLayer ("Ground"));
 
 			//The ground checks should be extremely close to the player, or it appears as grounded on the next frame.  
-			if (grounded && jumpInEffect != 0) {
+			if (grounded && jumpInEffect != 0 && jumpInEffect != 4) {
 				InitializeJump (0);
 			} 
 
@@ -59,17 +59,27 @@ public class Player : Character, ICanHoldItems {
 			}
 
 			//When the player wants to jump.  
-			if (playerCoroutinesCurrentlyActive && Input.GetKeyDown(KeyCode.UpArrow)) {
-				//The order of these conditions is important.  
-				if (jumpInEffect == 0)
-					InitializeJump (1);
-				else if (jumpInEffect == 1)
-					//Double jump
-					InitializeJump (2);
-			} else if (playerCoroutinesCurrentlyActive && Input.GetKeyDown(KeyCode.DownArrow)) {
-				if (jumpInEffect == 0 || jumpInEffect == 1 || jumpInEffect == 2) 
-					//Dive and roll.  
-					InitializeJump(3);
+			if (playerCoroutinesCurrentlyActive) {
+				if (jumpInEffect != 4) {
+					if (Input.GetKeyDown (KeyCode.UpArrow)) {
+						//The order of these conditions is important.  
+						if (jumpInEffect == 0)
+							InitializeJump (1);
+						else if (jumpInEffect == 1)
+							//Double jump
+							InitializeJump (2);
+					} else if (Input.GetKeyDown (KeyCode.DownArrow)) {
+						if (jumpInEffect == 1 || jumpInEffect == 2) 
+							//Dive and roll.  
+							InitializeJump (3);
+						if (jumpInEffect == 0)
+							InitializeJump (4);
+					} 
+				}
+
+				if (Input.GetKeyUp(KeyCode.DownArrow) && jumpInEffect == 4) {
+					InitializeJump(0);
+				}
 			}
 
 
@@ -97,6 +107,9 @@ public class Player : Character, ICanHoldItems {
 		case 3: 
 			rb2d.velocity = new Vector2 (rb2d.velocity.x, -jumpForce);
 			break;
+		case 4: 
+			//Ducking, nothing happens.  
+			break;
 		default: 
 			Debug.LogError ("Invalid jumpStyle of " + jumpStyle + " input");
 			break;
@@ -113,6 +126,12 @@ public class Player : Character, ICanHoldItems {
 		while (true) {
 			//This gets the current state of the pressed keys.  
 			h = Input.GetAxis ("Horizontal");
+			//Make it so the player cannot move if the character is ducking.  
+			if (jumpInEffect == 4) {
+				h = 0;
+				rb2d.velocity = new Vector2 (0, rb2d.velocity.y);
+			}
+
 			if (Mathf.Abs (h) > 0)
 				anim.SetBool ("Running", true);
 			else
