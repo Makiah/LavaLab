@@ -39,17 +39,17 @@ public class MeleeWeapon : Item {
 		Collider2D[] results = null;
 		if (aoe is CircleCollider2D) {
 			CircleCollider2D circle = (CircleCollider2D)aoe;
-			results = Physics2D.OverlapCircleAll (circle.offset, circle.radius, LayerMask.NameToLayer("Interactable"));
+			results = Physics2D.OverlapCircleAll (circle.offset, circle.radius, LayerMask.NameToLayer("Fighting"));
 		} else if (aoe is BoxCollider2D) {
 			BoxCollider2D box = (BoxCollider2D)aoe;
 			Vector2 bound1 = new Vector2 (box.offset.x - box.bounds.size.x / 2f, box.offset.y - box.bounds.size.y / 2f), 
 			bound2 = new Vector2(box.offset.x + box.bounds.size.x / 2f, box.offset.y + box.bounds.size.y / 2f);
-			results = Physics2D.OverlapAreaAll (bound1, bound2, LayerMask.NameToLayer ("Interactable"));
+			results = Physics2D.OverlapAreaAll (bound1, bound2, LayerMask.NameToLayer ("Fighting"));
 		}
 		//Go through each collider and see whether it is a fighting character.  
 		foreach (Collider2D col in results) {
 			ICombatant combatant = col.GetComponent <ICombatant> ();
-			if (combatant != null) {
+			if (combatant != null && combatant.GetCombatantID().Equals(attachedCharacterInput.GetCombatantID()) == false) {
 				combatant.GetHealthController ().YouHaveBeenAttacked (damage);
 			}
 		}
