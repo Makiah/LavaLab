@@ -23,8 +23,7 @@ public class Player : Character, ICanHoldItems {
 	private bool playerCoroutinesCurrentlyActive = true;
 	private Transform wallCheck;
 
-	//Used so when the player is in between two close walls, he/she automatically goes up by just pressing the up arrow.  
-	private bool lastJumpWasWallJump = false;
+	//Used so when the player is in between two close walls, he/she automatically goes up by just pressing the up arrow. 
 
 	IEnumerator weaponInputCoroutine, arrowMovementCoroutine;
 
@@ -60,16 +59,19 @@ public class Player : Character, ICanHoldItems {
 			}
 
 			//When the player wants to jump.  
-			if (playerCoroutinesCurrentlyActive && Input.GetButtonDown ("Jump")) {
+			if (playerCoroutinesCurrentlyActive && Input.GetKeyDown(KeyCode.UpArrow)) {
 				//The order of these conditions is important.  
 				if (jumpInEffect == 0)
 					InitializeJump (1);
-				else if (touchingWall && (lastJumpWasWallJump || (Input.GetAxis("Horizontal") != 0 && Mathf.Sign(Input.GetAxis("Horizontal")) == GetFacingDirection())))
-					//Make sure that the player is trying to wall jump before actually wall jumping.  
-					InitializeJump (3);
 				else if (jumpInEffect == 1)
+					//Double jump
 					InitializeJump (2);
+			} else if (playerCoroutinesCurrentlyActive && Input.GetKeyDown(KeyCode.DownArrow)) {
+				if (jumpInEffect == 0 || jumpInEffect == 1) 
+					//Dive and roll.  
+					InitializeJump(3);
 			}
+
 
 			//Every frame.  
 			yield return null;
@@ -88,11 +90,12 @@ public class Player : Character, ICanHoldItems {
 			break;
 		case 1: 
 			rb2d.velocity = new Vector2 (rb2d.velocity.x, jumpForce);
-			lastJumpWasWallJump = false;
 			break;
 		case 2: 
+			rb2d.velocity = new Vector2 (rb2d.velocity.x, jumpForce);
+			break;
+		case 3: 
 			rb2d.velocity = new Vector2 (rb2d.velocity.x, -jumpForce);
-			lastJumpWasWallJump = false;
 			break;
 		default: 
 			Debug.LogError ("Invalid jumpStyle of " + jumpStyle + " input");

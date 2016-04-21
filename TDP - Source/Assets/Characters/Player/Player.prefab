@@ -467,7 +467,7 @@ Transform:
   - {fileID: 439048}
   m_Father: {fileID: 410538}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 119.85112}
 --- !u!4 &408148
 Transform:
   m_ObjectHideFlags: 1
@@ -511,7 +511,7 @@ Transform:
   - {fileID: 477400}
   m_Father: {fileID: 482286}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 4.790096}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &412278
 Transform:
   m_ObjectHideFlags: 1
@@ -550,7 +550,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 483876}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 61.399998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 93.49}
 --- !u!4 &419608
 Transform:
   m_ObjectHideFlags: 1
@@ -564,7 +564,7 @@ Transform:
   - {fileID: 480442}
   m_Father: {fileID: 452968}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.1100116}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 18.26}
 --- !u!4 &419628
 Transform:
   m_ObjectHideFlags: 1
@@ -605,7 +605,7 @@ Transform:
   - {fileID: 439324}
   m_Father: {fileID: 407748}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 151.83308}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 77.45}
 --- !u!4 &439324
 Transform:
   m_ObjectHideFlags: 1
@@ -619,7 +619,7 @@ Transform:
   - {fileID: 412278}
   m_Father: {fileID: 439048}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 82.13}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 79.28}
 --- !u!4 &442250
 Transform:
   m_ObjectHideFlags: 1
@@ -688,7 +688,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 410538}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 4.050008}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &477400
 Transform:
   m_ObjectHideFlags: 1
@@ -727,7 +727,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 419608}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.4076041}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -18.23}
 --- !u!4 &481928
 Transform:
   m_ObjectHideFlags: 1
@@ -770,7 +770,7 @@ Transform:
   - {fileID: 418470}
   m_Father: {fileID: 407748}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 188.40753}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 6.8999996}
 --- !u!4 &484958
 Transform:
   m_ObjectHideFlags: 1
@@ -811,7 +811,7 @@ Transform:
   - {fileID: 484958}
   m_Father: {fileID: 452968}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -4.9632196}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3.3}
 --- !u!4 &494082
 Transform:
   m_ObjectHideFlags: 1
