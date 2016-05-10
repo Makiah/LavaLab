@@ -103,9 +103,15 @@ public class LevelGenerator : MonoBehaviour {
 
 			//Instantiate the turrets through the level using the Turret.Create method.  
 			float xComponent = posOffset + (Mathf.Abs (currentActiveObjects[0].transform.position.x - currentActiveObjects[currentActiveObjects.Length - 1].transform.position.x) / (desiredTurrets)) * i;
-			Turret createdTurret = Turret.Create (
-				xComponent, Random.Range (0, 2) == 0 ? Turret.TurretPosition.BOTTOM : Turret.TurretPosition.TOP);
-			createdTurret.transform.SetParent (turretParent);
+			if (Random.Range (0, 2) == 0) {
+				RotatingTurret createdTurret = RotatingTurret.Create (
+					                               xComponent, Random.Range (0, 2) == 0 ? RotatingTurret.TurretPosition.BOTTOM : RotatingTurret.TurretPosition.TOP);
+				createdTurret.transform.SetParent (turretParent);
+			} else {
+				FixedTurret createdTurret = FixedTurret.Create (
+					xComponent, Random.Range (0, 2) == 0 ? FixedTurret.TurretPosition.BOTTOM : FixedTurret.TurretPosition.TOP);
+				createdTurret.transform.SetParent (turretParent);
+			}
 		}
 
 		//Recreate the array with the turrets.  

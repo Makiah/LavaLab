@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Turret
+  m_Name: FixedTurret
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Shoot
@@ -13,7 +13,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -91,7 +91,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 47b1c8329bf2f4c999155d4fd7bc96bb, type: 2}
+  m_Motion: {fileID: 7400000, guid: 63dc3f50d0ea945e18c5904a47122675, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

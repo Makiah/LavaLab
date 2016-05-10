@@ -100,7 +100,6 @@ public class Projectile : MonoBehaviour {
 			//GetComponentInParent checks recursively to find the desired component (really useful)
 			GameObject externalGameObject = externalTrigger.gameObject;
 			if (externalGameObject.layer == LayerMask.NameToLayer ("Fighting")) {
-				Debug.Log("External trigger is " + externalTrigger.gameObject.name);
 				ICombatant combatant;
 				if (externalGameObject.GetComponent <ICombatant> () != null)
 					combatant = externalGameObject.GetComponent <ICombatant> ();
@@ -120,6 +119,8 @@ public class Projectile : MonoBehaviour {
 					Destroy (this.gameObject);
 				}
 			}
+		} else if (externalTrigger.gameObject.layer == LayerMask.NameToLayer("Ground")) {
+			Destroy (this.gameObject);
 		}
 	}
 

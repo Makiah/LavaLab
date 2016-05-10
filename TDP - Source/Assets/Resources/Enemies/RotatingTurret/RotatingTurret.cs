@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(CharacterHealthPanelManager))]
 
-public class Turret : Enemy {
+public class RotatingTurret : Enemy {
 
 	//Have to be taken from the resources folder.  
 	private static GameObject turret;
@@ -12,16 +12,15 @@ public class Turret : Enemy {
 	public enum TurretPosition
 	{
 		TOP,
-		BOTTOM, 
-		ROLLING
+		BOTTOM
 	}
 
-	public static Turret Create (float xLocation, TurretPosition position) {
+	public static RotatingTurret Create (float xLocation, TurretPosition position) {
 		//Get the turret from the Resources folder.  
 		if (turret == null) {
-			turret = Resources.Load ("Enemies/Turret/Turret") as GameObject;
+			turret = Resources.Load ("Enemies/RotatingTurret/RotatingTurret") as GameObject;
 			if (turret == null)
-				Debug.LogError ("Enemies/Turret/Turret could not be loaded!");
+				Debug.LogError ("Enemies/RotatingTurret/RotatingTurret could not be loaded!");
 		}
 
 		//Determine the y location of the turret based on the position.  
@@ -34,21 +33,17 @@ public class Turret : Enemy {
 			case TurretPosition.TOP: 
 				yLocation = 3.2f;
 				break;
-			case TurretPosition.ROLLING: 
-				//These guys can pretty much go anywhere and have a rigidbody 2d, so it doesn't really matter where they goe.  
-				yLocation = -1f;
-				break;
 			}
 			//Instantiate the turret
 			GameObject createdTurret = (GameObject)(Instantiate (turret, new Vector3 (xLocation, yLocation, 0), Quaternion.identity));
 			//If the turret is on the turret, rotate the turret mount.  
-			createdTurret.GetComponent <Turret> ().SetPosition (position);
+			createdTurret.GetComponent <RotatingTurret> ().SetPosition (position);
 			//Initialize the turret.  
-			createdTurret.GetComponent <Turret> ().InitializeCharacter ();
+			createdTurret.GetComponent <RotatingTurret> ().InitializeCharacter ();
 			//Return the turret.  
-			return createdTurret.GetComponent <Turret> ();
+			return createdTurret.GetComponent <RotatingTurret> ();
 		} else {
-			Debug.LogError ("Turret does not exist!");
+			Debug.LogError ("RotatingTurret does not exist!");
 			return null;
 		}
 	}

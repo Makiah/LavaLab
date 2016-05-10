@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Shoot
+  m_Name: FixedTurretShoot
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -18,24 +18,24 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: {x: -0.43, y: 0.404, z: 0}
-        inSlope: {x: 0.9360001, y: 0, z: 0}
-        outSlope: {x: 0.9360001, y: 0, z: 0}
+        value: {x: 0, y: -0.96, z: 0}
+        inSlope: {x: 0, y: 0.36, z: 0}
+        outSlope: {x: 0, y: 0.36, z: 0}
         tangentMode: 0
       - time: 0.16666667
-        value: {x: -0.274, y: 0.404, z: 0}
-        inSlope: {x: 0.31200004, y: 0, z: 0}
-        outSlope: {x: 0.31200004, y: 0, z: 0}
+        value: {x: 0, y: -0.9, z: 0}
+        inSlope: {x: 0, y: 0.109999955, z: 0}
+        outSlope: {x: 0, y: 0.109999955, z: 0}
         tangentMode: 0
       - time: 0.6666667
-        value: {x: -0.43, y: 0.404, z: 0}
-        inSlope: {x: -0.31200004, y: 0, z: 0}
-        outSlope: {x: -0.31200004, y: 0, z: 0}
+        value: {x: 0, y: -0.97, z: 0}
+        inSlope: {x: 0, y: -0.1400001, z: 0}
+        outSlope: {x: 0, y: -0.1400001, z: 0}
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Shooter
+    path: 
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves: []
@@ -46,7 +46,7 @@ AnimationClip:
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
     genericBindings:
-    - path: 3869829588
+    - path: 0
       attribute: 1
       script: {fileID: 0}
       classID: 4
@@ -78,50 +78,50 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: -0.43
-        inSlope: 0.9360001
-        outSlope: 0.9360001
+        value: 0
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: 0.16666667
-        value: -0.274
-        inSlope: 0.31200004
-        outSlope: 0.31200004
+        value: 0
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       - time: 0.6666667
-        value: -0.43
-        inSlope: -0.31200004
-        outSlope: -0.31200004
+        value: 0
+        inSlope: 0
+        outSlope: 0
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Shooter
+    path: 
     classID: 4
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 0.404
-        inSlope: 0
-        outSlope: 0
+        value: -0.96
+        inSlope: 0.36
+        outSlope: 0.36
         tangentMode: 10
       - time: 0.16666667
-        value: 0.404
-        inSlope: 0
-        outSlope: 0
+        value: -0.9
+        inSlope: 0.109999955
+        outSlope: 0.109999955
         tangentMode: 10
       - time: 0.6666667
-        value: 0.404
-        inSlope: 0
-        outSlope: 0
+        value: -0.97
+        inSlope: -0.1400001
+        outSlope: -0.1400001
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Shooter
+    path: 
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -146,11 +146,11 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Shooter
+    path: 
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []
-  m_HasGenericRootTransform: 0
+  m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:

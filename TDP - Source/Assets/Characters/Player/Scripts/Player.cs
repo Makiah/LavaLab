@@ -19,7 +19,7 @@ using System.Collections.Generic;
 
 public class Player : Character, ICanHoldItems {
 
-	private bool touchingWall = false;
+	//Instance data for the Player.  
 	private bool playerCoroutinesCurrentlyActive = true;
 	private Transform wallCheck;
 
@@ -43,8 +43,6 @@ public class Player : Character, ICanHoldItems {
 		while (true) {
 			//Update the grounded boolean.  
 			grounded = CheckWhetherGrounded();
-			//Debug.DrawLine(groundCheck.position + new Vector3(groundedOffset, 0, 0), groundCheck.position - new Vector3(groundedOffset, 0, 0));
-			touchingWall = Physics2D.Linecast (transform.position, wallCheck.position, 1 << LayerMask.NameToLayer ("Ground"));
 
 			//The ground checks should be extremely close to the player, or it appears as grounded on the next frame.  
 			if (grounded && jumpInEffect != 0 && jumpInEffect != 4) {
