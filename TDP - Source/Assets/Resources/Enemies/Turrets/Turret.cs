@@ -55,7 +55,7 @@ public abstract class Turret : Enemy {
 		while (true) {
 			//Every so often, the turret should fire a laser.  
 			if (Vector2.Distance (player.position, transform.position) < 20) {
-				if (bulletShots >= 2 && Random.Range (0, 2) == 0) {
+				if (bulletShots >= 4 && Random.Range (0, 2) == 0 && LevelGenerator.instance.currentLevel > 2) {
 					yield return new WaitForSeconds (.75f);
 					bulletShots = 0;
 					SetLaserState (true);

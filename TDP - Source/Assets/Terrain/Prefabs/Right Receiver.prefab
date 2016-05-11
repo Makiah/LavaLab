@@ -184,6 +184,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 29b04b4bf6b7e492d82a102483c4d2e6, type: 3}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -211,6 +212,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 29b04b4bf6b7e492d82a102483c4d2e6, type: 3}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -245,7 +247,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: 29b04b4bf6b7e492d82a102483c4d2e6, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4286808963
+    rgba: 4281677109
 --- !u!102 &102000014206795380
 TextMesh:
   serializedVersion: 3
@@ -266,4 +268,4 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: 29b04b4bf6b7e492d82a102483c4d2e6, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4286808963
+    rgba: 4281677109
