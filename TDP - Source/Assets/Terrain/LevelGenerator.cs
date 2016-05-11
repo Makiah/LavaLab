@@ -17,6 +17,18 @@ public class LevelGenerator : MonoBehaviour {
 	public static LevelGenerator instance;
 	public int currentLevel = 1;
 
+	private string[] levelDescriptions = new string[]{
+		"Just give up already.",
+		"You stink at this.",
+		"Are you still trying to keep going?",
+		"Just lay down in front of a turret.",
+		"You'll never get out.", 
+		"Your friends have already died.", 
+		"You were too slow.", 
+		"I am sick of you.", 
+		"Time to send in some friends..."
+	};
+
 	private GameObject[] currentActiveObjects;
 
 	//By right elevator room and left elevator room I mean the direction you have to walk to get into the elevator.  
@@ -81,6 +93,19 @@ public class LevelGenerator : MonoBehaviour {
 		//Set the instance variables.  
 		currentLevel = levelID;
 		currentActiveObjects = level;
+
+		//Add the level description and the floor level so that people can brag to their friends, enjoy the signs, etc.  
+		if (currentLevel > 1) {
+			TextMesh description = level [0].transform.FindChild ("Floor Description").GetComponent <TextMesh> ();
+			description.text = levelDescriptions [currentLevel - 2];
+			description.gameObject.GetComponent <MeshRenderer> ().sortingLayerName = "Terrain";
+			description.gameObject.GetComponent <MeshRenderer> ().sortingOrder = 2;
+			TextMesh name = level [0].transform.FindChild ("Floor Name").GetComponent <TextMesh> ();
+			name.text = "Floor " + currentLevel;
+			name.gameObject.GetComponent <MeshRenderer> ().sortingLayerName = "Terrain";
+			name.gameObject.GetComponent <MeshRenderer> ().sortingOrder = 2;
+			Debug.Log ("Set");
+		}
 
 		//Add the turrets to the level.  
 		AddTurretsToLevel ();

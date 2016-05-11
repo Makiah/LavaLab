@@ -77,10 +77,6 @@ public class Projectile : MonoBehaviour {
 		StartCoroutine (DestroyIfDistanceFromPlayer());
 	}
 
-	public void SetLightState(bool state) {
-		transform.GetChild (0).GetChild (0).gameObject.SetActive (state);
-	}
-
 	//If the distance to the player is too large, then destroy the projectile (used to avoid memory loss, but could be disabled for a more accurate setting).  
 	IEnumerator DestroyIfDistanceFromPlayer() {
 		while (true) {

@@ -21,16 +21,12 @@ public class Player : Character, ICanHoldItems {
 
 	//Instance data for the Player.  
 	private bool playerCoroutinesCurrentlyActive = true;
-	private Transform wallCheck;
 
 	//Used so when the player is in between two close walls, he/she automatically goes up by just pressing the up arrow. 
 
 	IEnumerator weaponInputCoroutine, arrowMovementCoroutine;
 
 	protected override void InitializeCharacter() {
-		//No other character has a wall check, so only the player uses this property.  
-		wallCheck = transform.FindChild("FlippingItem").FindChild ("WallCheck");
-
 		//Start the coroutines required for the player.  
 		weaponInputCoroutine = CheckForWeaponInput ();
 		arrowMovementCoroutine = ListenForArrowMovement ();
