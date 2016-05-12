@@ -66,8 +66,10 @@ public class Player : Character, ICanHoldItems {
 						if (jumpInEffect == 1 || jumpInEffect == 2) 
 							//Dive and roll.  
 							InitializeJump (3);
-						if (jumpInEffect == 0)
+						if (jumpInEffect == 0 && Math.Abs(rb2d.velocity.x) < 0.1f)
 							InitializeJump (4);
+						if (jumpInEffect == 0 && Math.Abs (rb2d.velocity.x) > 0.1f)
+							anim.SetTrigger ("Slide");
 					} 
 				}
 
@@ -126,6 +128,7 @@ public class Player : Character, ICanHoldItems {
 				rb2d.velocity = new Vector2 (0, rb2d.velocity.y);
 			}
 
+			//Movement
 			if (Mathf.Abs (h) > 0)
 				anim.SetBool ("Running", true);
 			else
