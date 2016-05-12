@@ -21,7 +21,7 @@ public class ScreenFlasher : MonoBehaviour {
 		completed = false;
 		float initialTime = Time.time;
 		Image uiImage = GetComponent <Image> ();
-		float maxAlpha = .66f;
+		float maxAlpha = .5f;
 		//Ranges between 0 and 1 to represent the degree of completion.  
 		float cPercentage = 0;
 		while (cPercentage < 1) {

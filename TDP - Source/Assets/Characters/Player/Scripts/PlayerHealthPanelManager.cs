@@ -71,7 +71,7 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 			OnDeath();
 		}
 		//Pretty simple and elegant code, if I do say so myself.  
-		ScreenFlasher.instance.Flash (0.8f);
+		ScreenFlasher.instance.Flash (0.5f);
 	}
 
 	protected override void OnDeath() {

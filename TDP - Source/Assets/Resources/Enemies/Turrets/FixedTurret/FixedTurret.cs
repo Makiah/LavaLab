@@ -45,7 +45,7 @@ public class FixedTurret : Turret {
 	protected override void InitializeEnemy() {
 		base.InitializeEnemy ();
 		//Change fireRate and bolt color depending on the current level.  
-		fireRate = Mathf.Clamp((fireRate) / (1 + (Mathf.Log (LevelGenerator.instance.currentLevel) / 6f)), .1f, 30) / 3f;
+		fireRate = Mathf.Clamp((fireRate) / (1 + (Mathf.Log (LevelGenerator.instance.currentLevel) / 6f)), .1f, 30) / 2f;
 		fireSpeed = Mathf.Clamp(fireSpeed * (1f + (Mathf.Log (LevelGenerator.instance.currentLevel) / 6f)), .1f, 30) / 2f;
 	}
 
