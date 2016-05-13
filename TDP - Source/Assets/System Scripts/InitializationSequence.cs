@@ -27,9 +27,6 @@ public class InitializationSequence : MonoBehaviour {
 
 	public delegate void BaseInitialization();
 
-	//Notification UI
-	public static event BaseInitialization InitializeNotificationUI;
-
 	//Player
 	//public static event BaseInitialization CreatePlayer;
 	public static event BaseInitialization InitializePlayer; //Use for initializing CostumeManager and PlayerAction, as well as the PlayerHealthController.  

@@ -24,18 +24,18 @@ public class Player : Character, ICanHoldItems {
 
 	//Used so when the player is in between two close walls, he/she automatically goes up by just pressing the up arrow. 
 
-	IEnumerator weaponInputCoroutine, arrowMovementCoroutine;
+	IEnumerator weaponInputCoroutine;
 
 	protected override void InitializeCharacter() {
 		//Start the coroutines required for the player.  
 		weaponInputCoroutine = CheckForWeaponInput ();
-		arrowMovementCoroutine = ListenForArrowMovement ();
 		StartCoroutine (weaponInputCoroutine);
-		StartCoroutine (arrowMovementCoroutine);
 	}
 
 	//Used to check whether or not player is grounded, touching a wall, etc.  Defines movements.  
 	protected override IEnumerator CheckCharacterPhysics() {
+		float h = 0;
+
 		while (true) {
 			//Update the grounded boolean.  
 			grounded = CheckWhetherGrounded();
@@ -54,6 +54,31 @@ public class Player : Character, ICanHoldItems {
 
 			//When the player wants to jump.  
 			if (playerCoroutinesCurrentlyActive) {
+				//This gets the current state of the pressed keys.  
+				h = Input.GetAxis ("Horizontal");
+				//Make it so the player cannot move if the character is ducking.  
+				if (jumpInEffect == 4) {
+					h = 0;
+					rb2d.velocity = new Vector2 (0, rb2d.velocity.y);
+				}
+
+				//Movement
+				if (Mathf.Abs (h) > 0)
+					anim.SetBool ("Running", true);
+				else
+					anim.SetBool ("Running", false);
+
+				rb2d.AddForce (Vector2.right * moveForce * h * 1 / (2f * jumpInEffect + 1));
+
+				rb2d.velocity = new Vector2 (Mathf.Clamp (rb2d.velocity.x, -maxSpeed, maxSpeed), rb2d.velocity.y);
+
+				//Control flipping based on the arrow keys.  
+				if (h > 0 && !facingRight) 
+					Flip ();
+				else if (h < 0 && facingRight) 
+					Flip ();
+
+				//Jumping actions.  
 				if (jumpInEffect != 4) {
 					if (Input.GetKeyDown (KeyCode.UpArrow)) {
 						//The order of these conditions is important.  
@@ -76,11 +101,11 @@ public class Player : Character, ICanHoldItems {
 				if (Input.GetKeyUp(KeyCode.DownArrow) && jumpInEffect == 4) {
 					InitializeJump(0);
 				}
+					
 			}
-
-
+				
 			//Every frame.  
-			yield return null;
+			yield return new WaitForFixedUpdate();
 		}
 
 	}
@@ -111,45 +136,6 @@ public class Player : Character, ICanHoldItems {
 			break;
 		}
 
-	}
-
-	//Movement based on arrow keys
-	IEnumerator ListenForArrowMovement () { 
-		//Prevent constant boxing and unboxing.  
-		float h = 0;
-
-		//Constantly
-		while (true) {
-			//This gets the current state of the pressed keys.  
-			h = Input.GetAxis ("Horizontal");
-			//Make it so the player cannot move if the character is ducking.  
-			if (jumpInEffect == 4) {
-				h = 0;
-				rb2d.velocity = new Vector2 (0, rb2d.velocity.y);
-			}
-
-			//Movement
-			if (Mathf.Abs (h) > 0)
-				anim.SetBool ("Running", true);
-			else
-				anim.SetBool ("Running", false);
-
-			rb2d.AddForce (Vector2.right * moveForce * h * 1 / (2f * jumpInEffect + 1));
-
-			rb2d.velocity = new Vector2 (Mathf.Clamp (rb2d.velocity.x, -maxSpeed, maxSpeed), rb2d.velocity.y);
-
-			//Control flipping based on the arrow keys.  
-			if (h > 0 && !facingRight) 
-				Flip ();
-			else if (h < 0 && facingRight) 
-				Flip ();
-
-			//Tell the camera that the player is moving (should be changed at some point.  
-			//transform.FindChild("Main Camera").FindChild("Background").GetComponent <BackgroundManager> ().MoveBackground(rb2d.velocity.x / maxSpeed);
-
-			yield return new WaitForFixedUpdate();
-
-		}
 	}
 
 	//Used for weapons.  
@@ -211,7 +197,6 @@ public class Player : Character, ICanHoldItems {
 	public void DisablePlayerActions() {
 		if (playerCoroutinesCurrentlyActive) {
 			//Disable the coroutines.  
-			StopCoroutine (arrowMovementCoroutine);
 			StopCoroutine (weaponInputCoroutine);
 			playerCoroutinesCurrentlyActive = false;
 			anim.SetBool ("Running", false);
@@ -223,9 +208,7 @@ public class Player : Character, ICanHoldItems {
 	public void EnablePlayerActions() {
 		if (playerCoroutinesCurrentlyActive == false) {
 			//Enable the coroutines.  
-			arrowMovementCoroutine = ListenForArrowMovement ();
 			weaponInputCoroutine = CheckForWeaponInput ();
-			StartCoroutine (arrowMovementCoroutine);
 			StartCoroutine (weaponInputCoroutine);
 			playerCoroutinesCurrentlyActive = true;
 		} else {
