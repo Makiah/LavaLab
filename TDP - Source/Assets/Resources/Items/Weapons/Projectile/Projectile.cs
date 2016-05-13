@@ -92,7 +92,7 @@ public class Projectile : MonoBehaviour {
 		//Even this boolean seems pointless, it is actually required.  Destroy() does not destroy the object on that frame, and DestroyImmediate causes
 		//strange side effects, so this is an easier way of dealing with the issue.  
 		//For some reason, I have to check to make sure that the collider is a trigger (even though the method header already implies this.  
-		if (notificationSent == false && externalTrigger.isTrigger) {
+		if (notificationSent == false) {
 			//GetComponentInParent checks recursively to find the desired component (really useful)
 			GameObject externalGameObject = externalTrigger.gameObject;
 			if (externalGameObject.layer == LayerMask.NameToLayer ("Fighting")) {
@@ -115,7 +115,9 @@ public class Projectile : MonoBehaviour {
 					Destroy (this.gameObject);
 				}
 			}
-		} else if (externalTrigger.gameObject.layer == LayerMask.NameToLayer("Ground")) {
+		} 
+
+		if (notificationSent == false && externalTrigger.gameObject.layer == LayerMask.NameToLayer("Ground")) {
 			Destroy (this.gameObject);
 		}
 	}

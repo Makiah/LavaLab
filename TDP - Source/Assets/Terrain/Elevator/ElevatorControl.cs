@@ -5,11 +5,8 @@ using CatchCo;
 public class ElevatorControl : MonoBehaviour, IMethodReroute1, IMethodReroute2 {
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.transform.parent != null && other.transform.parent.parent != null) {
-			if (other.transform.parent.parent.GetComponent <Player> () != null) {
-				MoveElevator ();
-			}
-		}
+		if (other.transform.GetComponent <Player> () != null || other.transform.GetComponentInParent <Player> () != null)
+			MoveElevator ();
 	}
 
 	[ExposeMethodInEditor]
