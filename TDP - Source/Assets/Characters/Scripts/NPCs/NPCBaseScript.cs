@@ -25,7 +25,7 @@ public abstract class NPCBaseScript : Character {
 	//Initializing the NPC
 	protected override void InitializeCharacter() {
 		//Get required components.  
-		playerTransform = InstanceDatabase.GetPlayerReference ().transform;
+		playerTransform = Player.instance.transform;
 
 		//Initialize the NPC before starting to walk around.  
 		InitializeNPC ();

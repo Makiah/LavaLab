@@ -19,6 +19,12 @@ using System.Collections.Generic;
 
 public class Player : Character, ICanHoldItems {
 
+	public static Player instance;
+
+	void Awake() {
+		instance = this;
+	}
+
 	//Instance data for the Player.  
 	private bool playerCoroutinesCurrentlyActive = true;
 
@@ -30,6 +36,8 @@ public class Player : Character, ICanHoldItems {
 		//Start the coroutines required for the player.  
 		weaponInputCoroutine = CheckForWeaponInput ();
 		StartCoroutine (weaponInputCoroutine);
+		//Enable the camera movement.  
+		CameraControl.instance.EnableCameraFunctions ();
 	}
 
 	//Used to check whether or not player is grounded, touching a wall, etc.  Defines movements.  
@@ -166,7 +174,7 @@ public class Player : Character, ICanHoldItems {
 		//Unless the possible attack dictionary is empty,
 		while (true) {
 			//Make sure that the player is not doing anything with the inventory.  An elegant solution!
-			if (SlotMouseInputControl.GetItemInControlByMouse () == null) {
+			if (PlayerInventory.instance.GetInventoryModeStatus() == false) {
 				if (itemInUseByCharacter != null) {
 					//Works due to short-circuiting.  
 					if (possibleWeaponMoves != null && possibleWeaponMoves.Length != 0) {

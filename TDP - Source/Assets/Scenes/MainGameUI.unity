@@ -3040,7 +3040,6 @@ GameObject:
   m_Component:
   - 224: {fileID: 1814765888}
   - 114: {fileID: 1814765889}
-  - 114: {fileID: 1814765892}
   - 114: {fileID: 1814765894}
   m_Layer: 5
   m_Name: Inventory
@@ -3082,17 +3081,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotPrefab: {fileID: 175360, guid: bc15ce90acfcfab4d88e6f4966a351f4, type: 2}
---- !u!114 &1814765892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1814765887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 142b77fd47adc414482035e08d9fb4a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1814765894
 MonoBehaviour:
   m_ObjectHideFlags: 0

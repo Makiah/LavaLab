@@ -52,38 +52,40 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	/******************************* MOUSE CLICK MANAGER *******************************/
 
 	public void OnPointerClick(PointerEventData data) {
-		Debug.Log ("Got click");
-		if (!thisSlotHasACombinationPending) {
-			if (data.button == PointerEventData.InputButton.Left) {
-				if (Input.GetKey (KeyCode.LeftShift) && currentlyAssigned != null) {
-					ItemCombinationHandler ();
-				} else {
-					MouseItemMovementAndStackHandler ();
-				}
-			} else if (data.button == PointerEventData.InputButton.Right) {
-				if (SlotMouseInputControl.GetItemInControlByMouse() == null) {
-					if (currentlyAssigned != null) {
-						int amountOfItemToAssign = (currentlyAssigned.stack - currentlyAssigned.stack % 2) / 2;
-						if (amountOfItemToAssign != 0) {
-							SlotMouseInputControl.AssignItemToMouseControl(new ResourceReferenceWithStack(currentlyAssigned.uiSlotContent, amountOfItemToAssign));
-						}
-						currentlyAssigned.stack -= amountOfItemToAssign;
-						UpdateStackIndicator();
-						Debug.Log("Assigned " + amountOfItemToAssign + " of " + currentlyAssigned.uiSlotContent.itemScreenName + " to mouse control.");
-					} 
-				} else if (SlotMouseInputControl.GetItemInControlByMouse() != null) {
-					if (currentlyAssigned == null) {
-						if (SlotMouseInputControl.GetItemInControlByMouse().stack == 1) {
-							AssignNewItem(SlotMouseInputControl.DeAssignItemFromMouseControl());
-						} else {
-							AssignNewItem(new ResourceReferenceWithStack(SlotMouseInputControl.GetItemInControlByMouse().uiSlotContent, 1));
-							SlotMouseInputControl.ChangeStackOfItemInControlByMouse(SlotMouseInputControl.GetItemInControlByMouse().stack - 1);
-						}
-					} else if (currentlyAssigned != null) {
-						if (currentlyAssigned.Equals(SlotMouseInputControl.GetItemInControlByMouse())) {
-							currentlyAssigned.stack += 1;
-							UpdateStackIndicator();
-							SlotMouseInputControl.ChangeStackOfItemInControlByMouse(SlotMouseInputControl.GetItemInControlByMouse().stack - 1);
+		//Make sure that the mode is correct.  
+		if (PlayerInventory.instance.GetInventoryModeStatus ()) {
+			if (!thisSlotHasACombinationPending) {
+				if (data.button == PointerEventData.InputButton.Left) {
+					if (Input.GetKey (KeyCode.LeftShift) && currentlyAssigned != null) {
+						ItemCombinationHandler ();
+					} else {
+						MouseItemMovementAndStackHandler ();
+					}
+				} else if (data.button == PointerEventData.InputButton.Right) {
+					if (SlotMouseInputControl.GetItemInControlByMouse () == null) {
+						if (currentlyAssigned != null) {
+							int amountOfItemToAssign = (currentlyAssigned.stack - currentlyAssigned.stack % 2) / 2;
+							if (amountOfItemToAssign != 0) {
+								SlotMouseInputControl.AssignItemToMouseControl (new ResourceReferenceWithStack (currentlyAssigned.uiSlotContent, amountOfItemToAssign));
+							}
+							currentlyAssigned.stack -= amountOfItemToAssign;
+							UpdateStackIndicator ();
+							Debug.Log ("Assigned " + amountOfItemToAssign + " of " + currentlyAssigned.uiSlotContent.itemScreenName + " to mouse control.");
+						} 
+					} else if (SlotMouseInputControl.GetItemInControlByMouse () != null) {
+						if (currentlyAssigned == null) {
+							if (SlotMouseInputControl.GetItemInControlByMouse ().stack == 1) {
+								AssignNewItem (SlotMouseInputControl.DeAssignItemFromMouseControl ());
+							} else {
+								AssignNewItem (new ResourceReferenceWithStack (SlotMouseInputControl.GetItemInControlByMouse ().uiSlotContent, 1));
+								SlotMouseInputControl.ChangeStackOfItemInControlByMouse (SlotMouseInputControl.GetItemInControlByMouse ().stack - 1);
+							}
+						} else if (currentlyAssigned != null) {
+							if (currentlyAssigned.Equals (SlotMouseInputControl.GetItemInControlByMouse ())) {
+								currentlyAssigned.stack += 1;
+								UpdateStackIndicator ();
+								SlotMouseInputControl.ChangeStackOfItemInControlByMouse (SlotMouseInputControl.GetItemInControlByMouse ().stack - 1);
+							}
 						}
 					}
 				}

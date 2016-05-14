@@ -24,7 +24,7 @@ public class NPCPanelController : MonoBehaviour {
 
 	//Set references to the playerIcon, start necessary coroutines, etc.  
 	void InitializeNPCPanelController() {
-		playerTransform = InstanceDatabase.GetPlayerReference ().transform;
+		playerTransform = Player.instance.transform;
 		playerIcon = transform.FindChild ("FlippingItem").FindChild ("Character").FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		mainSpeechControl = SpeechControl.instance;
 		mainInteractablePanelController = InteractablePanelController.instance; 

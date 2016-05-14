@@ -58,7 +58,7 @@ public class Projectile : MonoBehaviour {
 	[HideInInspector] public string ignoreGUID = "";
 
 	public virtual void Initialize(Vector2 positionToFireToward, float speed, float power) {
-		playerObject = InstanceDatabase.GetPlayerReference ();
+		playerObject = Player.instance.gameObject;
 		//Get the Rigidbody component so that physics can be used.  
 		rb2d = GetComponent <Rigidbody2D> ();
 

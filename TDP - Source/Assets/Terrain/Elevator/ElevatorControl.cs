@@ -25,7 +25,7 @@ public class ElevatorControl : MonoBehaviour, IMethodReroute1, IMethodReroute2 {
 		//Reset the lava timer so that the player does not die while on the elevator.  
 		LavaNotifier.instance.RestartLavaTimer();
 		//Make sure that the player moves with the elevator.  
-		InstanceDatabase.GetPlayerReference ().transform.SetParent (transform.GetChild(0).FindChild("Elevator"));
+		Player.instance.transform.SetParent (transform.GetChild(0).FindChild("Elevator"));
 
 		Animator anim = transform.GetChild(0).GetComponent <Animator> ();
 
@@ -59,7 +59,7 @@ public class ElevatorControl : MonoBehaviour, IMethodReroute1, IMethodReroute2 {
 			yield return null;
 		}
 
-		InstanceDatabase.GetPlayerReference ().transform.SetParent (null);
+		Player.instance.transform.SetParent (null);
 
 		//Start the lava timer again.  
 		LavaNotifier.instance.StartLavaTimer();

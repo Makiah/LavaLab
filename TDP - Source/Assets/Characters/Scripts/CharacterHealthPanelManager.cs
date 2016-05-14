@@ -47,7 +47,7 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	//Look into initializing this once the player comes into activation distance.  
 	//Has to be public for Thuk Guards.  Could be extended though.  
 	public virtual void InitializeHealthBar() {
-		player = InstanceDatabase.GetPlayerReference ().transform;
+		player = Player.instance.transform;
 		currentHealth = lifePoints;
 		//Create panel
 		uiHealthController = EnemyHealthPanelsController.instance; 

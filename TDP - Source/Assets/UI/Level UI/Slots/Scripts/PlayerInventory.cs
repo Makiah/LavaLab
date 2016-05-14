@@ -14,6 +14,13 @@ public class PlayerInventory : MonoBehaviour {
 	//Required instance data.  
 	private SlotScript[,] slotArray = new SlotScript[0,0];
 	private bool initialized = false;
+	private Transform slotsParent;
+
+	void Start() {
+		//Hide the inventory to begin with.  
+		slotsParent = transform.GetChild(0);
+		StartCoroutine (ListenForInventoryMode ());
+	}
 
 	//Used when called from LevelEventManager.  
 	public void AddSlotsToSystem(SlotScript[,] slots) {
@@ -33,7 +40,6 @@ public class PlayerInventory : MonoBehaviour {
 				newSlotArray [y + slotArray.GetLength(0), x] = slots [y, x];
 			}
 		}
-
 
 		//Set the old slot array to the new slot array.  
 		slotArray = newSlotArray;
@@ -183,6 +189,32 @@ public class PlayerInventory : MonoBehaviour {
 			for (int j = 0; j < slotArray.GetLength (1); j++) {
 				slotArray [i, j].DeAssignItem ();
 			}
+		}
+	}
+
+	/***************** INVENTORY MODE ********************/
+
+	private bool inInventoryMode = true;
+
+	public bool GetInventoryModeStatus() {
+		return inInventoryMode;
+	}
+
+	private IEnumerator ListenForInventoryMode() {
+		while (true) {
+			if (Input.GetKeyDown(KeyCode.I)) {
+				inInventoryMode = !inInventoryMode;
+				if (inInventoryMode) {
+					CameraControl.instance.DisableCameraFunctions ();
+					CameraControl.instance.CenterCamera ();
+					slotsParent.gameObject.SetActive (true);
+				} else {
+					CameraControl.instance.EnableCameraFunctions ();
+					slotsParent.gameObject.SetActive (false);
+				}
+			}
+
+			yield return null;
 		}
 	}
 

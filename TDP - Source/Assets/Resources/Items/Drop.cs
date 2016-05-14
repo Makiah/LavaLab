@@ -35,7 +35,7 @@ public class Drop : MonoBehaviour {
 	private Transform player;
 
 	public void Initialize() {
-		player = InstanceDatabase.GetPlayerReference ().transform;
+		player = Player.instance.transform;
 		StartCoroutine (MoveTowardsPlayer());
 	}
 

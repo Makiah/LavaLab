@@ -53,7 +53,7 @@ public abstract class Enemy : Character, ICombatant {
 
 	protected override void InitializeCharacter() {
 		//Set required variables for the enemy to function.  
-		player = InstanceDatabase.GetPlayerReference ().transform;
+		player = Player.instance.transform;
 		GetComponent <CharacterHealthPanelManager> ().InitializeHealthBar ();
 
 		InitializeEnemy ();
