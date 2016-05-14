@@ -100,12 +100,11 @@ public class CameraControl : MonoBehaviour {
 		Vector3 opPosition, optimalCameraPosition;
 		float speed;
 
-		while (true) {
+		while (Vector2.Distance(transform.position, playerTransform.position) > .01f) {
 			opPosition = playerTransform.position;
 
 			//The Screen point is remaining constant, yet the world point is changing as the object moves.  
-			optimalCameraPosition = (playerTransform.position + opPosition) / 2;
-			optimalCameraPosition = new Vector3 (optimalCameraPosition.x, optimalCameraPosition.y, -10);
+			optimalCameraPosition = new Vector3 (playerTransform.position.x, playerTransform.position.y, -10);
 
 			//The camera should move less quickly the further it gets away from the player.  The camera has a base movement speed of 30.  
 			speed = moveSpeed * Time.deltaTime * (30f / (Vector2.Distance (opPosition, playerTransform.position) + 1));
