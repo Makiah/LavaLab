@@ -33,6 +33,7 @@ public class AOEUtilities : MonoBehaviour {
 				componentList.Add (c.gameObject.GetComponentInParent <T> ());
 		}
 
+		//Create a new list which will hold no duplicates.  
 		List <T> finishedList = new List<T> ();
 		while (componentList.Count > 0) {
 			//Add the first one.  

@@ -46,8 +46,6 @@ public class InitializationSequence : MonoBehaviour {
 	//public static event BaseInitialization InitializePurchasePanels;
 	//public static event BaseInitialization InitializePurchasePanelManager;
 
-	public static event BaseInitialization SetInactiveObjects;
-
 	public IEnumerator LoadEverything() {
 		//Add the main game UI
 		AsyncOperation loadingOperation = SceneManager.LoadSceneAsync ("MainGameUI", LoadSceneMode.Additive);

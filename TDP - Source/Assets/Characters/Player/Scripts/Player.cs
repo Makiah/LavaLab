@@ -165,26 +165,29 @@ public class Player : Character, ICanHoldItems {
 	IEnumerator CheckForWeaponInput() {
 		//Unless the possible attack dictionary is empty,
 		while (true) {
-			if (itemInUseByCharacter != null) {
-				//Works due to short-circuiting.  
-				if (possibleWeaponMoves != null && possibleWeaponMoves.Length != 0) {
-					if (currentlyInAttackAnimation == false) {
-						for (int i = 0; i < possibleWeaponMoves.Length; i++) {
-							//If the can be used while midair is false, then it will only work while grounded is true.  Vice versa is also the case.  
-							if (possibleWeaponMoves [i].GetCanBeUsedWhileMidair () == ! grounded) {
-								if (possibleWeaponMoves [i].GetTriggerHasOccurred ()) {
-									if (!currentlyInAttackAnimation) {
-										anim.SetTrigger (possibleWeaponMoves[i].GetActionKey());
-										itemInUseByCharacter.InfluenceEnvironment (possibleWeaponMoves[i].GetActionEnum());
-									} else {
-										Debug.Log("Was in attack animation, did not attack");
+			//Make sure that the player is not doing anything with the inventory.  An elegant solution!
+			if (SlotMouseInputControl.GetItemInControlByMouse () == null) {
+				if (itemInUseByCharacter != null) {
+					//Works due to short-circuiting.  
+					if (possibleWeaponMoves != null && possibleWeaponMoves.Length != 0) {
+						if (currentlyInAttackAnimation == false) {
+							for (int i = 0; i < possibleWeaponMoves.Length; i++) {
+								//If the can be used while midair is false, then it will only work while grounded is true.  Vice versa is also the case.  
+								if (possibleWeaponMoves [i].GetCanBeUsedWhileMidair () == !grounded) {
+									if (possibleWeaponMoves [i].GetTriggerHasOccurred ()) {
+										if (!currentlyInAttackAnimation) {
+											anim.SetTrigger (possibleWeaponMoves [i].GetActionKey ());
+											itemInUseByCharacter.InfluenceEnvironment (possibleWeaponMoves [i].GetActionEnum ());
+										} else {
+											Debug.Log ("Was in attack animation, did not attack");
+										}
 									}
 								}
 							}
 						}
+					} else {
+						Debug.LogError ("Possible weapon moves of " + itemInUseByCharacter.gameObject.name + " is null");
 					}
-				} else {
-					Debug.LogError ("Possible weapon moves of " + itemInUseByCharacter.gameObject.name + " is null");
 				}
 			}
 

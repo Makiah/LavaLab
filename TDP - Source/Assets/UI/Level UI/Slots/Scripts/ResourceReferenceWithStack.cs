@@ -15,12 +15,16 @@ using System.Collections;
 
 public class ResourceReferenceWithStack {
 
-	public ResourceReference uiSlotContent;
+	public readonly ResourceReference uiSlotContent;
 	public int stack;
 
 	public ResourceReferenceWithStack (ResourceReference ctorUISlotContent, int ctorStack) {
 		uiSlotContent = ctorUISlotContent;
 		stack = ctorStack;
+	}
+
+	public bool Equals(ResourceReferenceWithStack other) {
+		return (uiSlotContent.Equals(other.uiSlotContent) && stack == other.stack);
 	}
 
 }

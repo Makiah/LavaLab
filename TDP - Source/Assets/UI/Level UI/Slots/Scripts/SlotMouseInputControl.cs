@@ -19,14 +19,14 @@ using System.Collections.Generic;
 
 public class SlotMouseInputControl : MonoBehaviour {
 
-	ResourceReferenceWithStack itemInControlByMouse = null;
+	private static ResourceReferenceWithStack itemInControlByMouse = null;
 
-	ResourceReferenceWithStack pendingCombinationIngredient1;
-	SlotScript assigner1;
-	ResourceReferenceWithStack pendingCombinationIngredient2;
-	SlotScript assigner2;
+	private static ResourceReferenceWithStack pendingCombinationIngredient1;
+	private static SlotScript assigner1;
+	private static ResourceReferenceWithStack pendingCombinationIngredient2;
+	private static SlotScript assigner2;
 
-	public void AssignItemToMouseControl(ResourceReferenceWithStack assignment) {
+	public static void AssignItemToMouseControl(ResourceReferenceWithStack assignment) {
 		if (assignment.stack != 0) {
 			itemInControlByMouse = assignment;
 			SetCursorTexture (true);
@@ -35,14 +35,14 @@ public class SlotMouseInputControl : MonoBehaviour {
 		}
 	}
 
-	public ResourceReferenceWithStack DeAssignItemFromMouseControl() {
+	public static ResourceReferenceWithStack DeAssignItemFromMouseControl() {
 		ResourceReferenceWithStack toReturn = itemInControlByMouse;
 		itemInControlByMouse = null;
 		SetCursorTexture (false);
 		return toReturn;
 	}
 
-	public void AddIngredient(ResourceReferenceWithStack ingredient, SlotScript assigner) {
+	public static void AddIngredient(ResourceReferenceWithStack ingredient, SlotScript assigner) {
 		if (pendingCombinationIngredient1 == null) {
 			pendingCombinationIngredient1 = ingredient;
 			assigner1 = assigner;
@@ -59,7 +59,7 @@ public class SlotMouseInputControl : MonoBehaviour {
 		}
 	}
 
-	public void ResetPendingCombinationSequence() {
+	public static void ResetPendingCombinationSequence() {
 		if (assigner1 != null)
 			assigner1.DisableCombinationPending();
 
@@ -73,7 +73,7 @@ public class SlotMouseInputControl : MonoBehaviour {
 	}
 
 	//Called from the public AddIngredient function.  
-	void ManageCombination() {
+	private static void ManageCombination() {
 		// Check the createdIngredientArray to see whether the ResourceReference components match.  
 		ResourceReference[] createdIngredientResourceReferenceArray = {
 			pendingCombinationIngredient1.uiSlotContent,
@@ -133,7 +133,7 @@ public class SlotMouseInputControl : MonoBehaviour {
 		}
 	}
 
-	int DetermineMaxPossibleStackOfItem(int[] ingredientBaseStack, int[] actualStackOfIngredients) {
+	private static int DetermineMaxPossibleStackOfItem(int[] ingredientBaseStack, int[] actualStackOfIngredients) {
 		//Determine max for the first element.  
 		int maxStackOfElement0 = ((actualStackOfIngredients[0] - actualStackOfIngredients[0] % ingredientBaseStack[0]) / (ingredientBaseStack[0]));
 		int maxStackOfElement1 = ((actualStackOfIngredients[1] - actualStackOfIngredients[1] % ingredientBaseStack[1]) / (ingredientBaseStack[1]));
@@ -148,7 +148,7 @@ public class SlotMouseInputControl : MonoBehaviour {
 	}
 
 	//Used for setting mouse cursor textures.  
-	void SetCursorTexture(bool assignToANewValue) {
+	private static void SetCursorTexture(bool assignToANewValue) {
 		Texture2D cursorTexture;
 
 		Vector2 cursorHotspot;
@@ -165,11 +165,11 @@ public class SlotMouseInputControl : MonoBehaviour {
 		Cursor.SetCursor(cursorTexture, cursorHotspot, CursorMode.ForceSoftware);
 	}
 
-	public ResourceReferenceWithStack GetItemInControlByMouse() {
+	public static ResourceReferenceWithStack GetItemInControlByMouse() {
 		return itemInControlByMouse;
 	}
 
-	public void ChangeStackOfItemInControlByMouse(int newStack) {
+	public static void ChangeStackOfItemInControlByMouse(int newStack) {
 		itemInControlByMouse.stack = newStack;
 		if (itemInControlByMouse.stack <= 0) {
 			DeAssignItemFromMouseControl();

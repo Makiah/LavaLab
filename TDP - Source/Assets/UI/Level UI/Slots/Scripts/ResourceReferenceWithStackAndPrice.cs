@@ -23,4 +23,8 @@ public class ResourceReferenceWithStackAndPrice {
 		price = ctorPrice;
 	}
 
+	public bool Equals(ResourceReferenceWithStackAndPrice other) {
+		return (mainContentReference.Equals(other.mainContentReference) && other.price == price);
+	}
+
 }

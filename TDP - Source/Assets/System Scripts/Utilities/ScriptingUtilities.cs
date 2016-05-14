@@ -38,28 +38,6 @@ public class ScriptingUtilities : MonoBehaviour {
 		return true;
 	}
 
-	//Used for checking UIResourceReference classes for equality.  
-	public static bool CheckUIResourceReferencesForEquality (ResourceReferenceWithStack object1, ResourceReferenceWithStack object2) {
-		if (object1.uiSlotContent.itemType == object2.uiSlotContent.itemType) {
-			if (object1.uiSlotContent.localGroupID == object2.uiSlotContent.localGroupID) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	//Used for converting degrees to radians.  
-	public static float DegreesToRadians (float degrees) {
-		float toReturn = degrees * (float)(Mathf.PI / 180f);
-		return toReturn;
-	}
-
-	//Used for converting radians to degrees.  
-	public static float RadiansToDegrees (float radians) {
-		float toReturn = radians * (float)(180f / Mathf.PI);
-		return toReturn;
-	}
-
 	//Uses generics to get any random object from an array.  
 	public static T GetRandomObjectFromArray <T> (T[] array) {
 		if (array.Length != 0) {

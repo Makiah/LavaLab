@@ -31,19 +31,15 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
 	// Main properties of each slot.  
 	protected ResourceReferenceWithStack currentlyAssigned;
-	bool thisSlotHasACombinationPending = false;
+	private bool thisSlotHasACombinationPending = false;
 
 	//Components
 	protected Image childIcon;
-	RectTransform selectionIndicator;
-	Transform tooltip;
+	private RectTransform selectionIndicator;
+	private Transform tooltip;
 	protected Text stackIndicator;
 
-	//References
-	protected SlotMouseInputControl mainSlotManager;
-
 	public virtual void ReferenceChildren() {
-		mainSlotManager = transform.parent.parent.GetComponent <SlotMouseInputControl> ();
 		childIcon = transform.FindChild ("Icon").GetComponent <Image> ();
 		childIcon.enabled = false;
 		tooltip = transform.FindChild ("Tooltip");
@@ -65,29 +61,29 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 					MouseItemMovementAndStackHandler ();
 				}
 			} else if (data.button == PointerEventData.InputButton.Right) {
-				if (mainSlotManager.GetItemInControlByMouse() == null) {
+				if (SlotMouseInputControl.GetItemInControlByMouse() == null) {
 					if (currentlyAssigned != null) {
 						int amountOfItemToAssign = (currentlyAssigned.stack - currentlyAssigned.stack % 2) / 2;
 						if (amountOfItemToAssign != 0) {
-							mainSlotManager.AssignItemToMouseControl(new ResourceReferenceWithStack(currentlyAssigned.uiSlotContent, amountOfItemToAssign));
+							SlotMouseInputControl.AssignItemToMouseControl(new ResourceReferenceWithStack(currentlyAssigned.uiSlotContent, amountOfItemToAssign));
 						}
 						currentlyAssigned.stack -= amountOfItemToAssign;
 						UpdateStackIndicator();
 						Debug.Log("Assigned " + amountOfItemToAssign + " of " + currentlyAssigned.uiSlotContent.itemScreenName + " to mouse control.");
 					} 
-				} else if (mainSlotManager.GetItemInControlByMouse() != null) {
+				} else if (SlotMouseInputControl.GetItemInControlByMouse() != null) {
 					if (currentlyAssigned == null) {
-						if (mainSlotManager.GetItemInControlByMouse().stack == 1) {
-							AssignNewItem(mainSlotManager.DeAssignItemFromMouseControl());
+						if (SlotMouseInputControl.GetItemInControlByMouse().stack == 1) {
+							AssignNewItem(SlotMouseInputControl.DeAssignItemFromMouseControl());
 						} else {
-							AssignNewItem(new ResourceReferenceWithStack(mainSlotManager.GetItemInControlByMouse().uiSlotContent, 1));
-							mainSlotManager.ChangeStackOfItemInControlByMouse(mainSlotManager.GetItemInControlByMouse().stack - 1);
+							AssignNewItem(new ResourceReferenceWithStack(SlotMouseInputControl.GetItemInControlByMouse().uiSlotContent, 1));
+							SlotMouseInputControl.ChangeStackOfItemInControlByMouse(SlotMouseInputControl.GetItemInControlByMouse().stack - 1);
 						}
 					} else if (currentlyAssigned != null) {
-						if (ScriptingUtilities.CheckUIResourceReferencesForEquality(currentlyAssigned, mainSlotManager.GetItemInControlByMouse())) {
+						if (currentlyAssigned.Equals(SlotMouseInputControl.GetItemInControlByMouse())) {
 							currentlyAssigned.stack += 1;
 							UpdateStackIndicator();
-							mainSlotManager.ChangeStackOfItemInControlByMouse(mainSlotManager.GetItemInControlByMouse().stack - 1);
+							SlotMouseInputControl.ChangeStackOfItemInControlByMouse(SlotMouseInputControl.GetItemInControlByMouse().stack - 1);
 						}
 					}
 				}
@@ -96,21 +92,21 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	}
 	
 	public virtual void MouseItemMovementAndStackHandler() {
-		mainSlotManager.ResetPendingCombinationSequence ();
+		SlotMouseInputControl.ResetPendingCombinationSequence ();
 
 		if (currentlyAssigned == null) {
-			if (mainSlotManager.GetItemInControlByMouse() != null) {
-				AssignNewItem (mainSlotManager.DeAssignItemFromMouseControl());
+			if (SlotMouseInputControl.GetItemInControlByMouse() != null) {
+				AssignNewItem (SlotMouseInputControl.DeAssignItemFromMouseControl());
 				UpdateStackIndicator();
 			} 
 		} else if (currentlyAssigned != null) {
-			if (mainSlotManager.GetItemInControlByMouse() == null) {
-				mainSlotManager.AssignItemToMouseControl(DeAssignItem ());
+			if (SlotMouseInputControl.GetItemInControlByMouse() == null) {
+				SlotMouseInputControl.AssignItemToMouseControl(DeAssignItem ());
 				UpdateStackIndicator();
 			} else {
-				if (mainSlotManager.GetItemInControlByMouse().uiSlotContent.itemType == currentlyAssigned.uiSlotContent.itemType) {
-					if (mainSlotManager.GetItemInControlByMouse().uiSlotContent.localGroupID == currentlyAssigned.uiSlotContent.localGroupID) {
-						currentlyAssigned.stack += mainSlotManager.DeAssignItemFromMouseControl().stack;
+				if (SlotMouseInputControl.GetItemInControlByMouse().uiSlotContent.itemType == currentlyAssigned.uiSlotContent.itemType) {
+					if (SlotMouseInputControl.GetItemInControlByMouse().uiSlotContent.localGroupID == currentlyAssigned.uiSlotContent.localGroupID) {
+						currentlyAssigned.stack += SlotMouseInputControl.DeAssignItemFromMouseControl().stack;
 						UpdateStackIndicator();
 					}
 				}
@@ -172,8 +168,8 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	/******************************* COMBINATIONS *******************************/
 
 	void ItemCombinationHandler() {
-		if (mainSlotManager.GetItemInControlByMouse () == null) {
-			mainSlotManager.AddIngredient (currentlyAssigned, this);
+		if (SlotMouseInputControl.GetItemInControlByMouse () == null) {
+			SlotMouseInputControl.AddIngredient (currentlyAssigned, this);
 		} else {
 			Debug.Log("Main Slot Manager had an item assigned, did not add item.");
 		}

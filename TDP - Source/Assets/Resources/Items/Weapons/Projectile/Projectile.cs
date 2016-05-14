@@ -68,7 +68,7 @@ public class Projectile : MonoBehaviour {
 
 		//Turn to the heading and move in that direction.  
 		transform.localRotation = Quaternion.Euler(new Vector3 (0, 0, degreeAngleToTarget));
-		rb2d.velocity = new Vector2 (speed * Mathf.Cos (ScriptingUtilities.DegreesToRadians(degreeAngleToTarget)), speed * Mathf.Sin (ScriptingUtilities.DegreesToRadians(degreeAngleToTarget)));
+		rb2d.velocity = new Vector2 (speed * Mathf.Cos (degreeAngleToTarget * Mathf.Deg2Rad), speed * Mathf.Sin (degreeAngleToTarget * Mathf.Deg2Rad));
 
 		//Set the strength of the arrow.  
 		this.power = power;

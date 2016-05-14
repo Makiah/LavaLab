@@ -74,5 +74,9 @@ public class ResourceReference {
 		}
 	}
 
+	public bool Equals(ResourceReference other) {
+		return (itemType == other.itemType && localGroupID == other.localGroupID);
+	}
+
 }
 
