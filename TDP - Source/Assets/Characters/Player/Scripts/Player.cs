@@ -91,9 +91,9 @@ public class Player : Character, ICanHoldItems {
 						if (jumpInEffect == 1 || jumpInEffect == 2) 
 							//Dive and roll.  
 							InitializeJump (3);
-						if (jumpInEffect == 0 && Math.Abs(rb2d.velocity.x) < 0.6f)
+						if (jumpInEffect == 0 && Math.Abs(h) == 0)
 							InitializeJump (4);
-						if (jumpInEffect == 0 && Math.Abs (rb2d.velocity.x) >= 0.6f)
+						if (jumpInEffect == 0 && Math.Abs (h) > 0)
 							anim.SetTrigger ("Slide");
 					} 
 				}
@@ -105,7 +105,7 @@ public class Player : Character, ICanHoldItems {
 			}
 				
 			//Every frame.  
-			yield return new WaitForFixedUpdate();
+			yield return null;
 		}
 
 	}

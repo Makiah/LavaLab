@@ -56,6 +56,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	/******************************* MOUSE CLICK MANAGER *******************************/
 
 	public void OnPointerClick(PointerEventData data) {
+		Debug.Log ("Got click");
 		if (!thisSlotHasACombinationPending) {
 			if (data.button == PointerEventData.InputButton.Left) {
 				if (Input.GetKey (KeyCode.LeftShift) && currentlyAssigned != null) {

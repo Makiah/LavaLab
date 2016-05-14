@@ -55,7 +55,7 @@ public class Projectile : MonoBehaviour {
 	private bool notificationSent = false;
 	protected float power;
 	protected GameObject playerObject;
-	public string ignoreGUID = "";
+	[HideInInspector] public string ignoreGUID = "";
 
 	public virtual void Initialize(Vector2 positionToFireToward, float speed, float power) {
 		playerObject = InstanceDatabase.GetPlayerReference ();
