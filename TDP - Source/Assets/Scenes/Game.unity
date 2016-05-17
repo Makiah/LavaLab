@@ -126,6 +126,8 @@ MonoBehaviour:
   rightElevatorRoom: {fileID: 119886, guid: 99e9ba6034fc342a8b9751799b0e88ac, type: 2}
   leftReceiverRoom: {fileID: 174592, guid: 819a1d58317b640ecb2cb9c02ad56bc1, type: 2}
   rightReceiverRoom: {fileID: 174592, guid: 8c199f58e37f647d0a23cb9d8fe9c9af, type: 2}
+  rotatingTurret: {fileID: 194232, guid: b14c1fd19276c4d40a6efc07a9d68260, type: 2}
+  fixedTurret: {fileID: 194232, guid: e3e77a6732cee48c58c893fa964a0608, type: 2}
 --- !u!114 &168374797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +259,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5671ed06df1ee439fbb72bf6174ed518, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 37583199ddf154e138d4cb91b7917003, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

@@ -108,35 +108,53 @@ public class LevelGenerator : MonoBehaviour {
 		}
 
 		//Add the turrets to the level.  
-		AddTurretsToLevel ();
+		PlaceEnemies ();
 	}
 
-	//Goes through the whole level and adds turrets equally spread through the level in a random config.  
-	private void AddTurretsToLevel() {
-		//Create a "folder" for the turrets.  
-		Transform turretParent = new GameObject ("Turrets").transform;
-		int desiredTurrets = (int)((1 + Mathf.Log (currentLevel)) * 5f + currentLevel / 2f);
-		//Place the turrets into the folder.  
-		for (int i = 0; i < desiredTurrets; i++) {
-			//Create a random turret at different points through the level.  
-			//Determine whether the first or last object in the array would be farther right based on the level id.  
-			float posOffset;
-			if (currentLevel % 2 == 1)
-				posOffset = currentActiveObjects [currentActiveObjects.Length - 1].transform.position.x;
-			else
-				posOffset = currentActiveObjects [0].transform.position.x;
+	//Make the player define the turret objects.  
+	[SerializeField] private GameObject rotatingTurret = null, fixedTurret = null;
 
+	//Goes through the whole level and adds turrets equally spread through the level in a random config.  
+	private void PlaceEnemies() {
+
+		//Create a "folder" for the turrets.  
+		Transform enemyParent = new GameObject ("Enemies").transform;
+		int desiredTurrets = (int)((1 + Mathf.Log (currentLevel)) * 5f + currentLevel / 2f);
+
+		//Create a random turret at different points through the level.  
+		//Determine whether the first or last object in the array would be farther right based on the level id.  
+		float posOffset;
+		if (currentLevel % 2 == 1)
+			posOffset = currentActiveObjects [currentActiveObjects.Length - 1].transform.position.x;
+		else
+			posOffset = currentActiveObjects [0].transform.position.x;
+
+		float xComponent;
+		GameObject toInstantiate;
+
+		//Place the turrets into the GameObject.  
+		for (int i = 0; i < desiredTurrets; i++) {
+			
 			//Instantiate the turrets through the level using the Turret.Create method.  
-			float xComponent = posOffset + (Mathf.Abs (currentActiveObjects[0].transform.position.x - currentActiveObjects[currentActiveObjects.Length - 1].transform.position.x) / (desiredTurrets)) * i;
-			if (Random.Range (0, 2) == 0) {
-				RotatingTurret createdTurret = RotatingTurret.Create (
-					                               xComponent, Random.Range (0, 2) == 0 ? RotatingTurret.TurretPosition.BOTTOM : RotatingTurret.TurretPosition.TOP);
-				createdTurret.transform.SetParent (turretParent);
-			} else {
-				FixedTurret createdTurret = FixedTurret.Create (
-					xComponent, Random.Range (0, 2) == 0 ? FixedTurret.TurretPosition.BOTTOM : FixedTurret.TurretPosition.TOP);
-				createdTurret.transform.SetParent (turretParent);
-			}
+			xComponent = posOffset + (Mathf.Abs (currentActiveObjects[0].transform.position.x - currentActiveObjects[currentActiveObjects.Length - 1].transform.position.x) / (desiredTurrets)) * i;
+
+			Debug.Log ("xComponent is " + xComponent);
+
+			//Choose the enemy to instantiate at the given point.  
+			toInstantiate = null;
+			if (Random.Range (0, 2) == 0)
+				toInstantiate = fixedTurret;
+			else
+				toInstantiate = rotatingTurret;
+
+			if (toInstantiate != null) {
+				GameObject createdEnemy = (GameObject)(Instantiate (toInstantiate, new Vector3 (xComponent, 0, 0), Quaternion.identity));
+				createdEnemy.GetComponent <Enemy> ().Initialize ();
+				createdEnemy.transform.SetParent (enemyParent);
+				//Do something with the enemy here
+			} else
+				Debug.LogError("Please give valid enemies on LevelGenerator!");
+
 		}
 
 		//Recreate the array with the turrets.  
@@ -145,7 +163,7 @@ public class LevelGenerator : MonoBehaviour {
 		for (int i = 0; i < oldObjects.Length; i++) {
 			currentActiveObjects [i] = oldObjects [i];
 		}
-		currentActiveObjects [currentActiveObjects.Length - 1] = turretParent.gameObject;
+		currentActiveObjects [currentActiveObjects.Length - 1] = enemyParent.gameObject;
 	}
 
 	private void RemoveCurrentLevel() {

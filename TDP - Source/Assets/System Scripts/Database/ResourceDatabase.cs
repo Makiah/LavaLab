@@ -55,7 +55,7 @@ public class ResourceDatabase : MonoBehaviour {
 
 	public static ResourceReference GetItemByParameter(string specifiedName) {
 		for (int i = 0; i < masterItemList.Count; i++) {
-			if (masterItemList[i].itemScreenName == specifiedName) 
+			if (masterItemList[i].itemScreenName.Equals(specifiedName)) 
 				return masterItemList[i];
 		}
 		

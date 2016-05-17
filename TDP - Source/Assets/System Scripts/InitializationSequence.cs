@@ -32,10 +32,6 @@ public class InitializationSequence : MonoBehaviour {
 	public static event BaseInitialization InitializePlayer; //Use for initializing CostumeManager and PlayerAction, as well as the PlayerHealthController.  
 	public static event BaseInitialization InitializeCostume;
 
-	//Camera
-	public static event BaseInitialization InitializeCameraFunctions;
-	//public static event BaseInitialization InitializeCameras;
-
 	//Enemies
 	public static event BaseInitialization InitializeEnemies;
 

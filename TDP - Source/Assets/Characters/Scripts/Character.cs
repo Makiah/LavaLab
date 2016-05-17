@@ -64,19 +64,24 @@ public abstract class Character : MonoBehaviour {
 	//Can be called from anywhere in order to initialize the player.  
 	public void Initialize() {
 		//Get required components
-		characterSpriteObject = transform.FindChild("FlippingItem").FindChild("Character");
-		anim = characterSpriteObject.GetComponent <Animator> ();
-		rb2d = GetComponent <Rigidbody2D> ();
-		groundChecks = GetAllGroundChecks ();
+		if (!(this is Turret)) {
+			characterSpriteObject = transform.FindChild ("FlippingItem").FindChild ("Character");
 
-		maxSpeedInitial = maxSpeed;
+			anim = characterSpriteObject.GetComponent <Animator> ();
+			rb2d = GetComponent <Rigidbody2D> ();
+			groundChecks = GetAllGroundChecks ();
+
+			maxSpeedInitial = maxSpeed;
+		}
 
 		//All child classes should have this method.  
 		InitializeCharacter ();
 
-		//This changes based on the override methods.  
-		characterPhysicsCoroutine = CheckCharacterPhysics ();
-		StartCoroutine (CheckCharacterPhysics());
+		if (!(this is Turret)) {
+			//This changes based on the override methods.  
+			characterPhysicsCoroutine = CheckCharacterPhysics ();
+			StartCoroutine (CheckCharacterPhysics ());
+		}
 
 	}
 
