@@ -19,9 +19,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Collider2D))]
 
 //Although the NPCs don't actually need the rerouting (since they aren't attacking), it would be way too difficult to link the ICombatant interface to a whole new 
 //system, so I'll stick with this.  
@@ -114,10 +112,10 @@ public abstract class Character : MonoBehaviour {
 			//Check the required conditions to set the animation state as grounded (idle or walking).  
 			if (grounded && jumpInEffect != 0) {
 				jumpInEffect = 0;
-				anim.SetInteger ("JumpInEffect", 0);
+				anim.SetInteger ("Jump", 0);
 			} else if (!grounded && jumpInEffect == 0) {
 				jumpInEffect = 1;
-				anim.SetInteger ("JumpInEffect", 1);
+				anim.SetInteger ("Jump", 1);
 			}
 			
 			yield return new WaitForFixedUpdate();
@@ -180,7 +178,7 @@ public abstract class Character : MonoBehaviour {
 	
 	//Used to stop the character.  
 	protected void Stop() {
-		anim.SetFloat("Speed", 0);
+		anim.SetBool("Running", false);
 		rb2d.velocity = new Vector3(0, rb2d.velocity.y, 0);
 	}
 	

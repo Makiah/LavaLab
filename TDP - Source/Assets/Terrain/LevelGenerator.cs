@@ -112,7 +112,7 @@ public class LevelGenerator : MonoBehaviour {
 	}
 
 	//Make the player define the turret objects.  
-	[SerializeField] private GameObject rotatingTurret = null, fixedTurret = null;
+	[SerializeField] private GameObject rotatingTurret = null, fixedTurret = null, roboGuard = null;
 
 	//Goes through the whole level and adds turrets equally spread through the level in a random config.  
 	private void PlaceEnemies() {
@@ -138,14 +138,15 @@ public class LevelGenerator : MonoBehaviour {
 			//Instantiate the turrets through the level using the Turret.Create method.  
 			xComponent = posOffset + (Mathf.Abs (currentActiveObjects[0].transform.position.x - currentActiveObjects[currentActiveObjects.Length - 1].transform.position.x) / (desiredTurrets)) * i;
 
-			Debug.Log ("xComponent is " + xComponent);
-
 			//Choose the enemy to instantiate at the given point.  
 			toInstantiate = null;
-			if (Random.Range (0, 2) == 0)
+			int rand = Random.Range (0, 3);
+			if (rand == 0)
 				toInstantiate = fixedTurret;
-			else
+			else if (rand == 1)
 				toInstantiate = rotatingTurret;
+			else if (rand == 2)
+				toInstantiate = roboGuard;
 
 			if (toInstantiate != null) {
 				GameObject createdEnemy = (GameObject)(Instantiate (toInstantiate, new Vector3 (xComponent, 0, 0), Quaternion.identity));

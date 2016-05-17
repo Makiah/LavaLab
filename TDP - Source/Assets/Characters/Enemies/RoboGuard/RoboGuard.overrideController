@@ -7,4 +7,20 @@ AnimatorOverrideController:
   m_PrefabInternal: {fileID: 0}
   m_Name: RoboGuard
   m_Controller: {fileID: 9100000, guid: 8c34955c99eddbf47953b178009b7341, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: a12f821eff071db4990e463dbe09d389, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f73cb22142796492da6deb15bbab8152, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: b7bb10ccf377667428d6134a616c25b1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b7bb10ccf377667428d6134a616c25b1, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: c29ffcc49c7756745a43d5f5775962ac, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c29ffcc49c7756745a43d5f5775962ac, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e82edc2f417ee4c4bab252125084dec6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e82edc2f417ee4c4bab252125084dec6, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: bbf36c97eeea54f19a0ca3621f24adfc, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: bbf36c97eeea54f19a0ca3621f24adfc, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ae50a13976efb477484e365ffce4119b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ae50a13976efb477484e365ffce4119b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 7c127552b86644a63ac15f5684671f46, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7c127552b86644a63ac15f5684671f46, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 06ecc8c44ee93429f9a05c6a1b915c61, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 06ecc8c44ee93429f9a05c6a1b915c61, type: 2}

@@ -82,7 +82,7 @@ public abstract class Enemy : Character, ICombatant {
 					FlipToFacePlayer();
 					//Attack if the y values between the enemy and the player are close enough.  
 					if (Mathf.Abs(player.transform.position.y - transform.position.y) <= maxYValueSeparation) {
-						anim.SetTrigger("Attack");
+						//anim.SetTrigger("Attack");
 						Attack ();
 					}
 					yield return new WaitForSeconds(1.5f);
@@ -116,7 +116,7 @@ public abstract class Enemy : Character, ICombatant {
 					}
 
 					//Start moving toward the target safe zone (we have already flipped to the position
-					anim.SetFloat("Speed", 1);
+					anim.SetBool("Running", true);
 					//Yield returning a coroutine makes it wait until the coroutine is completed.  
 					yield return StartCoroutine(MaintainAConstantXVelocity(0.3f));
 
@@ -127,7 +127,7 @@ public abstract class Enemy : Character, ICombatant {
 						//At some point, consider calculating the time at which the jump is at it's highest point and then resuming, as opposed to some constant.  
 						yield return new WaitForSeconds(0.3f);
 						//Start moving forward again (mid-air).  
-						anim.SetFloat("Speed", 1);
+						anim.SetBool("Running", true);
 						yield return StartCoroutine(MaintainAConstantXVelocity(0.3f));
 					}
 
